@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.async.CheckLogin;
 import com.classes.DataHolder;
 import com.classes.Family;
+import com.classes.JSonReader;
+import com.classes.JSonWriter;
 
 public class LoginActivity extends Activity {
 
@@ -34,6 +36,9 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 
 		DataHolder dataHolder = new DataHolder();
+		JSonReader JSonReader = new JSonReader();
+		JSonWriter jSonWriter = new JSonWriter();
+		
 		username = (EditText) findViewById(R.id.userNameEditText);
 		password = (EditText) findViewById(R.id.passwordEditText);
 

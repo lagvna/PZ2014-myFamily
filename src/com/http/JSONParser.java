@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.classes.Family;
+import com.classes.MyEvent;
 
 public class JSONParser {
 
@@ -96,5 +97,49 @@ public class JSONParser {
 		String message = jSonObject.getString("message");
 
 		return errorCode + ":" + message;
+	}
+	
+	public ArrayList getEventsResult() throws JSONException {
+		ArrayList<MyEvent> eventsList = new ArrayList<MyEvent>();
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+		int n = jSonArray.length();
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		String errorCode = jSonObject.getString("success");
+		String message = jSonObject.getString("message");
+
+		JSONArray tasks;
+
+		try {
+			if (!errorCode.equals("0")) { // sukces
+
+				tasks = (JSONArray) jSonObject.get("events");
+				for (int i = 0; i < tasks.length(); i++) {
+					JSONObject object = tasks.getJSONObject(i);
+					eventsList.add(new MyEvent(object.getString("name"), object.
+							getString("note"), object.
+							getString("date"), object.
+							getString("Id"),object.
+							getString("color")));
+				}
+				resultArray.add(eventsList);
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
+				resultArray.add(stringArray);
+				return resultArray;
+
+			} else {
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
+				resultArray.clear();
+				resultArray.add(stringArray);
+				return resultArray;
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return resultArray;
 	}
 }

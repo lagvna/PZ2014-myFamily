@@ -23,6 +23,12 @@ public class RemoveSth extends AsyncTask<Void, Void, Void> {
 		this.id = id;
 		this.action = action;
 		this.callingActivity = callingActivity;
+		
+	}
+	
+	public RemoveSth(String id,String action) {
+		this.id = id;
+		this.action = action;
 	}
 
 	@Override

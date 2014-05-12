@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+ 	<item android:id="@+id/showEvent"
+          android:icon="@drawable/eye"
+          android:title="pokaż"
+          android:showAsAction="ifRoom" />
+
+	<item android:id="@+id/addEvent"
+          android:icon="@drawable/addevent"
+          android:title="dodaj"
+          android:showAsAction="ifRoom" />
+  
+  <item android:id="@+id/removeEvent"
+          android:icon="@drawable/removeevent"
+          android:title="usun"
+          android:showAsAction="ifRoom" />
+
+</menu>

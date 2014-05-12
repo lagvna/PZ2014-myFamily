@@ -162,5 +162,43 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
+	
+	public String postDataAddEvent() throws IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("name", dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("note", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("date", dataArray[2]));
+		nameValuePairs.add(new BasicNameValuePair("color", dataArray[3]));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+
+	}
+	
+	public String postDataGetEvents() throws IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+
+	}
 
 }

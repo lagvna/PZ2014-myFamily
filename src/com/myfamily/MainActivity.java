@@ -23,9 +23,11 @@ public class MainActivity extends ListActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 
-		menuItems = new String[2];
+		menuItems = new String[4];
 		menuItems[0] = "Notatki";
 		menuItems[1] = "Dodaj użytkownika";
+		menuItems[2] = "Zakupy";
+		menuItems[3] = "Wydarzenia";
 
 		
 		//komentarz
@@ -44,9 +46,17 @@ public class MainActivity extends ListActivity {
 					Intent i = new Intent(MainActivity.this,
 							NotesActivity.class);
 					MainActivity.this.startActivity(i);
-				} else {
+				} else if (position == 1){
 					Intent i = new Intent(MainActivity.this,
 							AddUserActivity.class);
+					MainActivity.this.startActivity(i);
+				} else if (position == 2){
+					/*Intent i = new Intent(MainActivity.this,
+							CalendarActivity.class);
+					MainActivity.this.startActivity(i);*/
+				} else if (position == 3){
+					Intent i = new Intent(MainActivity.this,
+							CalendarActivity.class);
 					MainActivity.this.startActivity(i);
 				}
 

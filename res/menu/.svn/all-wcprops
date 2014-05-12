@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/projekt/!svn/ver/36/aplikacja/res/menu
+END
+main.xml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/main.xml
+END
+add_user.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/add_user.xml
+END
+login.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/login.xml
+END
+notes.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/notes.xml
+END
+add_family.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/add_family.xml
+END
+add_family_users.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/add_family_users.xml
+END
+splash.xml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/splash.xml
+END
+family_list.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/family_list.xml
+END
+user_register.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projekt/!svn/ver/36/aplikacja/res/menu/user_register.xml
+END

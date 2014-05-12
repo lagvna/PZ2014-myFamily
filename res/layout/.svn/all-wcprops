@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/projekt/!svn/ver/36/aplikacja/res/layout
+END
+activity_main.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_main.xml
+END
+element_cat.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/element_cat.xml
+END
+activity_add_user.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_add_user.xml
+END
+activity_login.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_login.xml
+END
+activity_notes.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_notes.xml
+END
+activity_add_family.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_add_family.xml
+END
+activity_add_family_users.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_add_family_users.xml
+END
+activity_splash.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_splash.xml
+END
+activity_family_list.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_family_list.xml
+END
+family_row.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/family_row.xml
+END
+fragment_notes.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/fragment_notes.xml
+END
+list_shape.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/list_shape.xml
+END
+activity_user_register.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projekt/!svn/ver/36/aplikacja/res/layout/activity_user_register.xml
+END

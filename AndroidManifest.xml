@@ -7,10 +7,9 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
 
     <application
         android:allowBackup="true"
@@ -57,6 +56,14 @@
         <activity
             android:name="com.myfamily.UserRegisterActivity"
             android:label="@string/title_activity_user_register" >
+        </activity>
+        <activity
+            android:name="com.myfamily.ShoppingActivity"
+            android:label="@string/title_activity_shopping" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddProductActivity"
+            android:label="@string/title_activity_add_product" >
         </activity>
     </application>
 

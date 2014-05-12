@@ -20,7 +20,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import com.async.AddNote;
 import com.async.GetNotes;
-import com.async.RemoveSth;
+import com.async.RemoveNote;
 import com.classes.Note;
 
 public class NotesActivity extends Activity {
@@ -83,7 +83,7 @@ public class NotesActivity extends Activity {
 
 		if (current >= 0) {
 			// current--;
-			new RemoveSth("" + notes.get(current).getId(), "Notatka", this)
+			new RemoveNote("" + notes.get(current).getId(), "Notatka", this)
 					.execute();
 		}
 	}

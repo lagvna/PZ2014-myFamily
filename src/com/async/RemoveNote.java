@@ -11,7 +11,7 @@ import com.http.HttpHandler;
 import com.http.JSONParser2;
 import com.myfamily.NotesActivity;
 
-public class RemoveSth extends AsyncTask<Void, Void, Void> {
+public class RemoveNote extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";
 	private String action = "";
@@ -19,7 +19,7 @@ public class RemoveSth extends AsyncTask<Void, Void, Void> {
 	private String responseText;
 	private String data[];
 
-	public RemoveSth(String id, String action, NotesActivity callingActivity) {
+	public RemoveNote(String id, String action, NotesActivity callingActivity) {
 		this.id = id;
 		this.action = action;
 		this.callingActivity = callingActivity;

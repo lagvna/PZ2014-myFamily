@@ -9,17 +9,18 @@ import android.widget.Toast;
 
 import com.http.HttpHandler;
 import com.http.JSONParser2;
-import com.myfamily.NotesActivity;
+import com.myfamily.ShoppingActivity;
 
-public class RemoveSth extends AsyncTask<Void, Void, Void> {
+public class RemoveShopping extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";
 	private String action = "";
-	private NotesActivity callingActivity;
+	private ShoppingActivity callingActivity;
 	private String responseText;
 	private String data[];
 
-	public RemoveSth(String id, String action, NotesActivity callingActivity) {
+	public RemoveShopping(String id, String action,
+			ShoppingActivity callingActivity) {
 		this.id = id;
 		this.action = action;
 		this.callingActivity = callingActivity;
@@ -54,7 +55,7 @@ public class RemoveSth extends AsyncTask<Void, Void, Void> {
 			data = jp.getRemoveSthResult();
 
 			if (data[0].equals("1")) {
-				callingActivity.delete();
+				callingActivity.delete(1);
 			}
 			callingActivity.runOnUiThread(new Runnable() {
 				public void run() {

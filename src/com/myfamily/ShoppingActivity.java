@@ -15,7 +15,6 @@ import org.json.JSONException;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,7 +36,8 @@ import com.http.JSONParser2;
 
 public class ShoppingActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-	private String f1 = Environment.getExternalStorageDirectory().getAbsolutePath()+"/currShoppingList.dat";
+	private String f1 = Environment.getExternalStorageDirectory()
+			.getAbsolutePath() + "/currShoppingList.dat";
 	private ViewPager viewPager;
 	public TabsPagerAdapter mAdapter;
 	private String[] tabs = { "Archiwum", "Lista zakupów", "Produkty" };
@@ -55,7 +55,7 @@ public class ShoppingActivity extends FragmentActivity implements
 		activity = this;
 
 		// date = sdf.format(new Date());
-		// format datyFrom: 2014-05-12 20:08:34 
+		// format datyFrom: 2014-05-12 20:08:34
 		// 0 pobiera wszystko
 		new GetShoppingData("0").execute();
 
@@ -115,7 +115,7 @@ public class ShoppingActivity extends FragmentActivity implements
 			Toast.makeText(this, "Lista jest pusta!", Toast.LENGTH_SHORT)
 					.show();
 		}
-		
+
 		deleteFile();
 	}
 
@@ -194,7 +194,6 @@ public class ShoppingActivity extends FragmentActivity implements
 	}
 
 	private void initializeFragments() {
-		
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -229,14 +228,6 @@ public class ShoppingActivity extends FragmentActivity implements
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-		
-		File f = new File(f1);
-		System.out.println(f.getAbsolutePath());
-		if(f.exists())	{
-			readFromFile();
-			mAdapter.slf.listAdapter.notifyDataSetChanged();
-			mAdapter.slf.createList();
-		}
 	}
 
 	@Override
@@ -262,8 +253,8 @@ public class ShoppingActivity extends FragmentActivity implements
 			fos = new FileOutputStream(f);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
 			os.writeInt(shoppingList.size());
-			for(Product p:shoppingList)
-			    os.writeObject(p);
+			for (Product p : shoppingList)
+				os.writeObject(p);
 			os.close();
 			fos.close();
 			System.out.println(f.getAbsolutePath());
@@ -273,7 +264,7 @@ public class ShoppingActivity extends FragmentActivity implements
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void deleteFile() {
@@ -289,7 +280,7 @@ public class ShoppingActivity extends FragmentActivity implements
 			ObjectInputStream is = new ObjectInputStream(fis);
 			int count = is.readInt();
 			for (int c = 0; c < count; c++)
-			    shoppingList.add((Product) is.readObject());
+				shoppingList.add((Product) is.readObject());
 			is.close();
 			fis.close();
 			System.out.println("Odczytałem!");
@@ -303,11 +294,11 @@ public class ShoppingActivity extends FragmentActivity implements
 			e.printStackTrace();
 		}
 	}
-	
-	public void onBackPressed(){
+
+	public void onBackPressed() {
 		writeToFile();
 		ShoppingActivity.this.finish();
-		//overridePendingTransition(R.anim.in_left, R.anim.out_right);
+		// overridePendingTransition(R.anim.in_left, R.anim.out_right);
 	}
 
 	public class GetShoppingData extends AsyncTask<Void, Void, Void> {
@@ -348,6 +339,12 @@ public class ShoppingActivity extends FragmentActivity implements
 		@Override
 		protected void onPostExecute(Void result) {
 
+			File f = new File(activity.f1);
+			System.out.println(f.getAbsolutePath());
+			if (f.exists()) {
+				readFromFile();
+			}
+		
 			JSONParser2 jp = new JSONParser2(responseShoppingLists);
 
 			try {

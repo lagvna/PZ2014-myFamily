@@ -11,6 +11,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.classes.DataHolder;
+import com.classes.JSonReader;
+import com.classes.JSonWriter;
+
 public class MainActivity extends ListActivity {
 
 	private String[] menuItems;
@@ -23,14 +27,27 @@ public class MainActivity extends ListActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 
+		DataHolder dataHolder = new DataHolder();
+		JSonReader JSonReader = new JSonReader();
+		JSonWriter jSonWriter = new JSonWriter();
+		// JSonWriter.getInstance().deleteFile("events",
+		// this.getApplicationContext());
+		if (!JSonWriter.getInstance().ifExist("events",
+				this.getApplicationContext())) {
+			JSonWriter.getInstance().appendToFile("events",
+					"0000-00-00 00:00:00" + "{\"events\":[]}", 0,
+					this.getApplicationContext());
+			System.out.println("pliczek nie istnieje:)");
+		}
+		System.out.println(JSonReader.getInstance().readFile("events",
+				this.getApplicationContext()));
 		menuItems = new String[4];
 		menuItems[0] = "Notatki";
 		menuItems[1] = "Dodaj użytkownika";
 		menuItems[2] = "Zakupy";
 		menuItems[3] = "Wydarzenia";
 
-		
-		//komentarz
+		// komentarz
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.element_cat, R.id.Row, menuItems);
 
@@ -46,15 +63,15 @@ public class MainActivity extends ListActivity {
 					Intent i = new Intent(MainActivity.this,
 							NotesActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 1){
+				} else if (position == 1) {
 					Intent i = new Intent(MainActivity.this,
 							AddUserActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 2){
+				} else if (position == 2) {
 					Intent i = new Intent(MainActivity.this,
 							ShoppingActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 3){
+				} else if (position == 3) {
 					Intent i = new Intent(MainActivity.this,
 							CalendarActivity.class);
 					MainActivity.this.startActivity(i);

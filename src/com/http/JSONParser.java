@@ -1,12 +1,18 @@
 package com.http;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.classes.Family;
+import com.classes.JSonReader;
+import com.classes.JSonWriter;
 import com.classes.MyEvent;
 
 public class JSONParser {
@@ -16,6 +22,7 @@ public class JSONParser {
 	private ArrayList<Family> familyList = new ArrayList<Family>();
 	private ArrayList<ArrayList> resultArray = new ArrayList<ArrayList>();
 	private ArrayList<String> stringArray = new ArrayList<String>();
+
 	public JSONParser(String inputStream) {
 
 		this.inputStream = inputStream;
@@ -85,8 +92,6 @@ public class JSONParser {
 
 		return errorCode + ":" + message;
 	}
-	
-	
 
 	public String getAddFamilyResult() throws JSONException {
 
@@ -98,48 +103,191 @@ public class JSONParser {
 
 		return errorCode + ":" + message;
 	}
-	
-	public ArrayList getEventsResult() throws JSONException {
+
+	public String getAddEventResult() throws JSONException {
+
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		String errorCode = jSonObject.getString("success");
+		String message = jSonObject.getString("message");
+		JSONArray event = (JSONArray) jSonObject.get("created_event");
+		JSONObject object = event.getJSONObject(0);
+		String id = object.getString("Id");
+
+		return errorCode + ":" + message + ":" + id;
+	}
+
+	public ArrayList getEventsResult(Context context) throws JSONException {
 		ArrayList<MyEvent> eventsList = new ArrayList<MyEvent>();
+		ArrayList<String> deletedEventsId = new ArrayList<String>();
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		int n = jSonArray.length();
 
 		JSONObject jSonObject = jSonArray.getJSONObject(0);
 		String errorCode = jSonObject.getString("success");
 		String message = jSonObject.getString("message");
+		String newEventCode;
+		String deletedEventCode;
 
-		JSONArray tasks;
+		JSONArray events;
+		JSONArray deletedEvents;
+		JSONObject object;
 
 		try {
 			if (!errorCode.equals("0")) { // sukces
 
-				tasks = (JSONArray) jSonObject.get("events");
-				for (int i = 0; i < tasks.length(); i++) {
-					JSONObject object = tasks.getJSONObject(i);
-					eventsList.add(new MyEvent(object.getString("name"), object.
-							getString("note"), object.
-							getString("date"), object.
-							getString("Id"),object.
-							getString("color")));
+				newEventCode = jSonObject.getString("new_events_success");
+				deletedEventCode = jSonObject
+						.getString("deleted_events_success");
+
+				if (!newEventCode.equals("0")) { // jesli sa nowe wydarzenia
+													// doddania
+
+					events = (JSONArray) jSonObject.get("new_events");
+					for (int i = 0; i < events.length(); i++) {
+						object = events.getJSONObject(i);
+						eventsList.add(new MyEvent(object.getString("name"),
+								object.getString("note"), object
+										.getString("date"), object
+										.getString("Id"), object
+										.getString("color")));
+					}
+
+					resultArray.add(eventsList);
+				} else {
+
+					String oldJson = JSonReader.getInstance().readFile(
+							"events", context);
+					jSonArray = new JSONArray("[" + oldJson.substring(19) + "]");
+					jSonObject = jSonArray.getJSONObject(0);
+					events = (JSONArray) jSonObject.get("events");
+
+					for (int i = 0; i < events.length(); i++) {
+						object = events.getJSONObject(i);
+						eventsList.add(new MyEvent(object.getString("name"),
+								object.getString("note"), object
+										.getString("date"), object
+										.getString("Id"), object
+										.getString("color")));
+					}
+					resultArray.add(eventsList);
 				}
-				resultArray.add(eventsList);
+
+				if (!deletedEventCode.equals("0")) { // jesli sa jakies zadanie
+														// do usuniecia z pliku
+
+					deletedEvents = (JSONArray) jSonObject
+							.get("deleted_events");
+					for (int i = 0; i < deletedEvents.length(); i++) {
+						object = deletedEvents.getJSONObject(i);
+						deletedEventsId.add(object.getString("Id"));
+					}
+					resultArray.add(deletedEventsId);
+				}
+
+				// makeEventsJSon(eventsList);
 				stringArray.add(new String(errorCode));
 				stringArray.add(new String(message));
+				stringArray.add(newEventCode);
+				stringArray.add(deletedEventCode);
 				resultArray.add(stringArray);
 				return resultArray;
 
 			} else {
 				stringArray.add(new String(errorCode));
 				stringArray.add(new String(message));
+
 				resultArray.clear();
 				resultArray.add(stringArray);
 				return resultArray;
 			}
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
 		return resultArray;
 	}
+
+	public void makeEventsJSon(ArrayList<MyEvent> eventsList, Context context,
+			int type) throws JSONException {
+
+		String oldJson = JSonReader.getInstance().readFile("events", context);
+		JSONArray jSonArray;
+		if (type == 0) {
+			jSonArray = new JSONArray("[" + "{\"events\":[]}" + "]");
+		} else {
+			jSonArray = new JSONArray("[" + oldJson.substring(19) + "]");
+		}
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		JSONArray events = (JSONArray) jSonObject.get("events");
+
+		MyEvent myEvent;
+		JSONObject JSonEvent;
+		// JSONArray jsonArray = new JSONArray();
+		JSONObject eventsObj = new JSONObject();
+
+		for (int i = 0; i < eventsList.size(); i++) {
+			myEvent = eventsList.get(i);
+			JSonEvent = new JSONObject();
+			try {
+				JSonEvent.put("name", myEvent.getName());
+				JSonEvent.put("note", myEvent.getNote());
+				JSonEvent.put("date", myEvent.getDate());
+				JSonEvent.put("Id", myEvent.getId());
+				JSonEvent.put("color", myEvent.getColor());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			events.put(JSonEvent);
+		}
+
+		try {
+			eventsObj.put("events", events);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentDateandTime = sdf.format(new Date());
+
+		String jsonStr = eventsObj.toString();
+		// System.out.println(currentDateandTime + jsonStr);
+		JSonWriter.getInstance().appendToFile("events",
+				currentDateandTime + jsonStr, 0, context);
+		System.out
+				.println(JSonReader.getInstance().readFile("events", context));
+
+	}
+
+	public void removeEventFromJson(ArrayList<String> deletedEvents,
+			Context context) throws JSONException {
+
+		String oldJson = JSonReader.getInstance().readFile("events", context);
+		JSONArray jSonArray = new JSONArray("[" + oldJson.substring(19) + "]");
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		JSONArray events = (JSONArray) jSonObject.get("events");
+		JSONObject object;
+		ArrayList<MyEvent> eventsList = new ArrayList<MyEvent>();
+
+		for (int i = 0; i < events.length(); i++) {
+			object = events.getJSONObject(i);
+			eventsList.add(new MyEvent(object.getString("name"), object
+					.getString("note"), object.getString("date"), object
+					.getString("Id"), object.getString("color")));
+		}
+		MyEvent myEvent;
+		for (int i = 0; i < eventsList.size(); i++) {
+			myEvent = eventsList.get(i);
+			if (deletedEvents.contains(myEvent.getId())) {
+				eventsList.remove(i);
+			}
+		}
+
+		makeEventsJSon(eventsList, context, 0);
+	}
+
 }

@@ -9,10 +9,5 @@
           android:icon="@drawable/addevent"
           android:title="dodaj"
           android:showAsAction="ifRoom" />
-  
-  <item android:id="@+id/removeEvent"
-          android:icon="@drawable/removeevent"
-          android:title="usun"
-          android:showAsAction="ifRoom" />
 
 </menu>

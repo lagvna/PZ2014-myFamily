@@ -162,7 +162,7 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-	
+
 	public String postDataAddEvent() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
@@ -183,20 +183,20 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-	
+
 	public String postDataGetEvents() throws IOException {
 		HttpPost post = new HttpPost(url);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("date_from", dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
 		response = client.execute(post);
 		entity = response.getEntity();
-
 		return EntityUtils.toString(entity);
 
 	}

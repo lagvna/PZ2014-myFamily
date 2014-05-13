@@ -9,21 +9,18 @@ import java.io.InputStreamReader;
 import android.content.Context;
 import android.util.Log;
 
-
-
-
 public class JSonReader {
 
 	public static JSonReader jSonReader = new JSonReader();
-	
+
 	public static JSonReader getInstance() {
 		return jSonReader;
 	}
-	
-	public String readFile(String fileName, Context context) {
-		
-		String ret = "";
 
+	public String readFile(String fileName, Context context) {
+
+		String ret = "";
+		// File file = new File(context.getFilesDir(),fileName);
 		try {
 			InputStream inputStream = context.openFileInput(fileName);
 
@@ -47,9 +44,8 @@ public class JSonReader {
 		} catch (IOException e) {
 			Log.e("login activity", "Can not read file: " + e.toString());
 		}
-		
-		
+
 		return ret;
 	}
-	
+
 }

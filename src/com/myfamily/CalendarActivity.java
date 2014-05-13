@@ -31,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.classes.JSonReader;
 import com.classes.MyEvent;
 import com.http.HttpHandler;
 import com.http.JSONParser;
@@ -53,7 +54,9 @@ public class CalendarActivity extends Activity {
 	private Intent startIntent;
 	private ArrayList<MyEvent> events;
 	private static ExtendedCalendarView calendar;
-	ArrayList<MyEvent> myDayEventList= new ArrayList<MyEvent>();
+	String eventNeme;
+	String eventNote;
+	ArrayList<MyEvent> myDayEventList = new ArrayList<MyEvent>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +64,11 @@ public class CalendarActivity extends Activity {
 		setContentView(R.layout.activity_calendar);
 		removeAllEvents();
 		context = this;
+
 		new GetEvents().execute();
+		// new GetEventsFromFile().execute();
 	}
-	
+
 	public static void repaintCalendar() {
 		calendar.refreshCalendar();
 		calendar.refreshDrawableState();
@@ -90,18 +95,21 @@ public class CalendarActivity extends Activity {
 				int n = day.getEvents().size();
 				for (int i = 0; i < n; i++) {
 					Event e = day.getEvents().get(i);
-					myDayEventList.add(new MyEvent(e.getTitle(), e.getDescription(),e.getStartDate("dd:MM:yyyy"),e.getLocation(),"0"));
+					myDayEventList.add(new MyEvent(e.getTitle(), e
+							.getDescription(), e.getStartDate("dd:MM:yyyy"), e
+							.getLocation(), "0"));
 				}
 				calendar.refreshDrawableState();
-				
+
 			}
 		});
 	}
-	
+
 	private void removeEvent(String id) {
-		
-		getContentResolver().delete(CalendarProvider.CONTENT_URI,CalendarProvider.LOCATION+"=?",new String[]{id});
-		
+
+		getContentResolver().delete(CalendarProvider.CONTENT_URI,
+				CalendarProvider.LOCATION + "=?", new String[] { id });
+
 	}
 
 	@Override
@@ -120,12 +128,9 @@ public class CalendarActivity extends Activity {
 			// showPopUp(getStringDate(dayy, month, year));
 			customPopUp(getStringDate(dayy, month, year));
 			return true;
-		case R.id.removeEvent:
-			//removeEvent(id)
-			return true;
 		case R.id.showEvent:
 			Bundle args = new Bundle();
-			Intent eventView = new Intent(this,EventViewActivity.class);
+			Intent eventView = new Intent(this, EventViewActivity.class);
 			eventView.putExtra("events", myDayEventList);
 			startActivity(eventView);
 			return true;
@@ -133,8 +138,6 @@ public class CalendarActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
 
 	public void customPopUp(String data) {
 
@@ -178,12 +181,12 @@ public class CalendarActivity extends Activity {
 		dialogOkButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String eventNeme = eventNameEditText.getText().toString();
-				String eventNote = eventNoteEditText.getText().toString();
-				new AddEvent(eventNeme, eventNote,color).execute();
-				addEvent(eventNeme, eventNote,color,Integer.parseInt(year),month-1,Integer.parseInt(dayy),"");
-				calendar.refreshCalendar();
-				calendar.refreshDrawableState();
+				eventNeme = eventNameEditText.getText().toString();
+				eventNote = eventNoteEditText.getText().toString();
+				new AddEvent(eventNeme, eventNote, color).execute();
+				// addEvent(eventNeme,
+				// eventNote,color,Integer.parseInt(year),month-1,Integer.parseInt(dayy),"",0);
+
 				dialog.dismiss();
 			}
 		});
@@ -208,7 +211,7 @@ public class CalendarActivity extends Activity {
 	}
 
 	public void addEvent(String name, String note, int color, int year,
-			int month, int day,String id) {
+			int month, int day, String id, int type) {
 
 		ContentValues values = new ContentValues();
 
@@ -248,7 +251,13 @@ public class CalendarActivity extends Activity {
 
 		Uri uri = getContentResolver().insert(CalendarProvider.CONTENT_URI,
 				values);
-		
+
+		if (type == 1) {
+			showToast("dodalem do kle");
+			calendar.refreshCalendar();
+			calendar.refreshDrawableState();
+		}
+
 		/*
 		 * int a =
 		 * getContentResolver().delete(CalendarProvider.CONTENT_URI,CalendarProvider
@@ -258,7 +267,7 @@ public class CalendarActivity extends Activity {
 
 	private void removeAllEvents() {
 		getContentResolver().delete(CalendarProvider.CONTENT_URI,
-				CalendarProvider.COLOR + "!=?", new String[] { "6"});
+				CalendarProvider.COLOR + "!=?", new String[] { "6" });
 	}
 
 	private void recreateActivity() {
@@ -313,7 +322,7 @@ public class CalendarActivity extends Activity {
 		private String responseText = null;
 		private String dataArray[];
 
-		public AddEvent(String eventName, String eventNote,int color) {
+		public AddEvent(String eventName, String eventNote, int color) {
 			dataArray = new String[4];
 			dataArray[0] = eventName;
 			dataArray[1] = eventNote;
@@ -343,10 +352,19 @@ public class CalendarActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
+			showToast(responseText);
 			JSONParser jp = new JSONParser(responseText);
+
 			try {
-				if (false) {
-					throw new JSONException("sadas");
+				String addEventResult = jp.getAddEventResult();
+				if (addEventResult.split(":")[0].equals("1")) {
+					showToast(addEventResult.split(":")[1]);
+					addEvent(eventNeme, eventNote, color,
+							Integer.parseInt(year), month - 1,
+							Integer.parseInt(dayy),
+							addEventResult.split(":")[2], 1);
+				} else {
+					showToast(addEventResult.split(":")[1]);
 				}
 
 			} catch (JSONException e) {
@@ -362,9 +380,20 @@ public class CalendarActivity extends Activity {
 
 		private String responseText = null;
 		private String dataArray[];
+		ArrayList<String> deletedEventsId = new ArrayList<String>();
 
 		public GetEvents() {
-			dataArray = new String[3];
+			dataArray = new String[1];
+			String str = JSonReader.getInstance().readFile("events", context);
+			String temp = str.substring(0, 19);
+			if (temp.equals("0000-00-00 00:00:00")) {
+				dataArray[0] = "0";
+			} else {
+				dataArray[0] = temp;
+			}
+
+			// System.out.println(dataArray[0]);
+			// tutaj nalezy pobrac date z pliku
 		}
 
 		@Override
@@ -381,38 +410,131 @@ public class CalendarActivity extends Activity {
 						.postDataGetEvents();
 			} catch (IOException e) {
 				e.printStackTrace();
+				showToast(e.toString());
 			}
 			return null;
-
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
-			JSONParser jp = new JSONParser(responseText);
+
+			JSONParser jp;
+			jp = new JSONParser(responseText);
+
 			try {
-				ArrayList eventResult = jp.getEventsResult();
+				ArrayList eventResult = jp.getEventsResult(context);
 				MyEvent tempEvent;
+				/*
+				 * ArrayList <String> cc = new ArrayList<String>(); cc.add("2");
+				 * jp.removeEventFromJson(cc,context);
+				 */
+				// events.add
+				// jp.makeEventsJSon(, context);
 				if (eventResult.size() == 1) {
+					if (((ArrayList<String>) eventResult.get(0)).get(0).equals(
+							0)) {
+						showToast("Coś poszło nie tak:"
+								+ ((ArrayList<String>) eventResult.get(0))
+										.get(1));
+					} else {
+						showToast("Coś poszło nie tak:" + "brak nowych");
+					}
+
 				} else if (eventResult.size() == 2) {
 					events = (ArrayList<MyEvent>) eventResult.get(0);
 					for (int i = 0; i < events.size(); i++) {
 						tempEvent = ((MyEvent) events.get(i));
-						addEvent(tempEvent.getName(), tempEvent.getNote(), tempEvent.getColor(),
-								tempEvent.getYear(), tempEvent.getMonth()-1,
-								tempEvent.getDay(),tempEvent.getId());
+						addEvent(tempEvent.getName(), tempEvent.getNote(),
+								tempEvent.getColor(), tempEvent.getYear(),
+								tempEvent.getMonth() - 1, tempEvent.getDay(),
+								tempEvent.getId(), 0);
 					}
+
+					if (((ArrayList<String>) eventResult.get(1)).get(2).equals(
+							"1")) {
+						jp.makeEventsJSon(events, context, 1);
+					}
+
+				} else if (eventResult.size() == 3) {
+					events = (ArrayList<MyEvent>) eventResult.get(0);
+					for (int i = 0; i < events.size(); i++) {
+						tempEvent = ((MyEvent) events.get(i));
+						addEvent(tempEvent.getName(), tempEvent.getNote(),
+								tempEvent.getColor(), tempEvent.getYear(),
+								tempEvent.getMonth() - 1, tempEvent.getDay(),
+								tempEvent.getId(), 0);
+					}
+
+					deletedEventsId = (ArrayList<String>) eventResult.get(1);
+
+					jp.removeEventFromJson(deletedEventsId, context);
+					jp.makeEventsJSon(events, context, 1);
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				showToast(e.toString());
 			}
 			createCalendar();
 
 		}
 	}
-	
-	
-	
+
+	public class GetEventsFromFile extends AsyncTask<Void, Void, Void> {
+
+		private String responseText = null;
+		private String dataArray[];
+
+		public GetEventsFromFile() {
+			dataArray = new String[1];
+		}
+
+		@Override
+		protected void onPreExecute() {
+			showProgressDial();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+
+			responseText = JSonReader.getInstance().readFile("events", context);
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			hideProgressDial();
+			showToast(responseText);
+			JSONParser jp = new JSONParser(responseText);
+
+			try {
+				ArrayList eventResult = jp.getEventsResult(context);
+				showToast(eventResult.size() + "");
+				MyEvent tempEvent;
+
+				if (eventResult.size() == 1) {
+					showToast("Coś poszło nie tak:" + eventResult.get(2));
+				} else if (eventResult.size() == 2) {
+					events = (ArrayList<MyEvent>) eventResult.get(0);
+					for (int i = 0; i < events.size(); i++) {
+						tempEvent = ((MyEvent) events.get(i));
+						addEvent(tempEvent.getName(), tempEvent.getNote(),
+								tempEvent.getColor(), tempEvent.getYear(),
+								tempEvent.getMonth() - 1, tempEvent.getDay(),
+								tempEvent.getId(), 0);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				showToast(e.toString());
+			}
+			createCalendar();
+
+		}
+	}
 
 }

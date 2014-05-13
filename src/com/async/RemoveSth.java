@@ -5,35 +5,25 @@ import java.io.IOException;
 import org.json.JSONException;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.http.HttpHandler;
 import com.http.JSONParser2;
-import com.myfamily.NotesActivity;
 
 public class RemoveSth extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";
 	private String action = "";
-	private NotesActivity callingActivity;
 	private String responseText;
 	private String data[];
 
-	public RemoveSth(String id, String action, NotesActivity callingActivity) {
-		this.id = id;
-		this.action = action;
-		this.callingActivity = callingActivity;
-		
-	}
-	
-	public RemoveSth(String id,String action) {
+	public RemoveSth(String id, String action) {
 		this.id = id;
 		this.action = action;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		callingActivity.showProgressDial();
+		// callingActivity.showProgressDial();
 		super.onPreExecute();
 	}
 
@@ -53,21 +43,20 @@ public class RemoveSth extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void result) {
-		callingActivity.hideProgressDial();
+		// callingActivity.hideProgressDial();
 
 		JSONParser2 jp = new JSONParser2(responseText);
 		try {
 			data = jp.getRemoveSthResult();
 
 			if (data[0].equals("1")) {
-				callingActivity.delete();
+				// callingActivity.delete();
 			}
-			callingActivity.runOnUiThread(new Runnable() {
-				public void run() {
-					Toast.makeText(callingActivity, data[1], Toast.LENGTH_SHORT)
-							.show();
-				}
-			});
+			/*
+			 * callingActivity.runOnUiThread(new Runnable() { public void run()
+			 * { Toast.makeText(callingActivity, data[1],
+			 * Toast.LENGTH_SHORT).show(); } });
+			 */
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

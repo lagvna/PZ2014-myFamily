@@ -17,9 +17,11 @@ public class GetShoppingLists extends AsyncTask<Void, Void, Void> {
 
 	private ShoppingActivity callingActivity;
 	private String responseText;
+	private String dateFrom;
 
-	public GetShoppingLists(ShoppingActivity callingActivity) {
+	public GetShoppingLists(ShoppingActivity callingActivity, String dateFrom) {
 		this.callingActivity = callingActivity;
+		this.dateFrom = dateFrom;
 	}
 
 	@Override
@@ -31,8 +33,10 @@ public class GetShoppingLists extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... arg0) {
 		try {
+			String data[] = new String[1];
+			data[0] = dateFrom;
 			responseText = new HttpHandler2(
-					"http://malinowepi.no-ip.org/get_shopping_lists.php", null)
+					"http://malinowepi.no-ip.org/get_shopping_lists.php", data)
 					.postDataGetShoppingLists();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -43,7 +47,6 @@ public class GetShoppingLists extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void result) {
-		callingActivity.hideProgressDial();
 
 		JSONParser2 jp = new JSONParser2(responseText);
 
@@ -73,5 +76,7 @@ public class GetShoppingLists extends AsyncTask<Void, Void, Void> {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+		callingActivity.hideProgressDial();
 	}
 }

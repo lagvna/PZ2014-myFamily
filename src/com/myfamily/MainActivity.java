@@ -51,9 +51,9 @@ public class MainActivity extends ListActivity {
 							AddUserActivity.class);
 					MainActivity.this.startActivity(i);
 				} else if (position == 2){
-					/*Intent i = new Intent(MainActivity.this,
-							CalendarActivity.class);
-					MainActivity.this.startActivity(i);*/
+					Intent i = new Intent(MainActivity.this,
+							ShoppingActivity.class);
+					MainActivity.this.startActivity(i);
 				} else if (position == 3){
 					Intent i = new Intent(MainActivity.this,
 							CalendarActivity.class);

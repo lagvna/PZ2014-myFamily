@@ -104,7 +104,9 @@ public class JSONParser2 {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
 		String errorCode = jo.getString("success");
-
+		String msg = jo.getString("message");
+		System.out.println(msg);
+		
 		if (!errorCode.equals("0")) {
 			JSONObject jo2 = (JSONObject) jo.get("shopping_list");
 
@@ -137,10 +139,11 @@ public class JSONParser2 {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
 		String errorCode = jo.getString("success");
-
+		String msg = jo.getString("message");
+		System.out.println(msg);
 		if (!errorCode.equals("0")) {
 			shoppingListArray = new ArrayList<ShoppingList>();
-			JSONArray lists = (JSONArray) jo.get("shopping_lists");
+			JSONArray lists = (JSONArray) jo.get("new_shopping_lists");
 			for (int i = 0; i < lists.length(); i++) {
 				JSONObject object = lists.getJSONObject(i);
 				shoppingListArray.add(new ShoppingList(object.getInt("Id"),
@@ -161,7 +164,7 @@ public class JSONParser2 {
 
 		if (!errorCode.equals("0")) {
 			productsArray = new ArrayList<Product>();
-			JSONArray products = (JSONArray) jo.get("products");
+			JSONArray products = (JSONArray) jo.get("new_products");
 			for (int i = 0; i < products.length(); i++) {
 				JSONObject object = products.getJSONObject(i);
 				productsArray.add(new Product(object.getInt("Id"), object

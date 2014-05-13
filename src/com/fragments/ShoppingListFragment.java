@@ -7,11 +7,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +46,8 @@ public class ShoppingListFragment extends Fragment {
 				container, false);
 
 		sa = (ShoppingActivity) getActivity();
+		
+		registerForContextMenu(rootView.findViewById(R.id.list));
 
 		listName = "";
 		editShopping = (Button) rootView.findViewById(R.id.editPrice);
@@ -83,7 +90,33 @@ public class ShoppingListFragment extends Fragment {
 
 		return rootView;
 	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(Menu.NONE, R.id.a_item, Menu.NONE, "Usuń");
+	}
 
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item
+				.getMenuInfo();
+		switch (item.getItemId()) {
+
+		case R.id.a_item:
+			deleteItem((int) menuInfo.position);
+			return true;
+		}
+		return super.onContextItemSelected(item);
+	}
+
+	private void deleteItem(int id) {
+		sa.shoppingList.remove(id);
+		listAdapter.notifyDataSetChanged();
+		createList();
+	}
+	
 	private void endShoppingList() {
 		AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -141,9 +174,15 @@ public class ShoppingListFragment extends Fragment {
 
 		for (int i = 0; i < len; i++) {
 			String name = sa.shoppingList.get(i).getName();
-			String price = sa.shoppingList.get(i).getPrice();
-			tmpSum += Float.parseFloat(price);
-
+			String price = null;
+			try	{
+				price = sa.shoppingList.get(i).getPrice();
+				tmpSum += Float.parseFloat(price);
+			} catch(Exception e)	{
+				price = "0.00";
+				tmpSum += Float.parseFloat(price);
+			}
+			
 			CustomRow_data.add(new CustomRow(R.drawable.lvsel, name, price
 					+ " zł"));
 		}

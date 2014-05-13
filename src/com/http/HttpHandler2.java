@@ -123,6 +123,7 @@ public class HttpHandler2 {
 				.getInstance().getSession()));
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("date_from", dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
@@ -175,6 +176,7 @@ public class HttpHandler2 {
 				.getInstance().getSession()));
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("date_from", dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();

@@ -1,23 +1,27 @@
 package com.myfamily;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+
+import org.json.JSONException;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.adapters.TabsPagerAdapter;
@@ -28,15 +32,17 @@ import com.async.GetShoppingLists;
 import com.async.RemoveShopping;
 import com.classes.Product;
 import com.classes.ShoppingList;
+import com.http.HttpHandler2;
+import com.http.JSONParser2;
 
 public class ShoppingActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-
+	private String f1 = Environment.getExternalStorageDirectory().getAbsolutePath()+"/currShoppingList.dat";
 	private ViewPager viewPager;
 	public TabsPagerAdapter mAdapter;
-	private ActionBar actionBar;
 	private String[] tabs = { "Archiwum", "Lista zakupów", "Produkty" };
 	private ProgressDialog progressDialog;
+	private ShoppingActivity activity;
 
 	public ArrayList<Product> products;
 	public ArrayList<Product> shoppingList;
@@ -46,45 +52,16 @@ public class ShoppingActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping);
+		activity = this;
+
+		// date = sdf.format(new Date());
+		// format datyFrom: 2014-05-12 20:08:34 
+		// 0 pobiera wszystko
+		new GetShoppingData("0").execute();
 
 		products = new ArrayList<Product>();
 		shoppingList = new ArrayList<Product>();
 		shoppingLists = new ArrayList<ShoppingList>();
-
-		getProducts();
-
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar = getActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayUseLogoEnabled(false);
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-
-		viewPager.setAdapter(mAdapter);
-		actionBar.setHomeButtonEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
-
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
-
 	}
 
 	public void getShoppingList(int id) {
@@ -138,18 +115,20 @@ public class ShoppingActivity extends FragmentActivity implements
 			Toast.makeText(this, "Lista jest pusta!", Toast.LENGTH_SHORT)
 					.show();
 		}
+		
+		deleteFile();
 	}
 
 	public void showPopup(ShoppingList sl) {
 		mAdapter.af.preShowPopup(sl);
 	}
-	
-	public void delete(int what)	{
-		
+
+	public void delete(int what) {
+
 	}
 
 	public void getProducts() {
-		new GetProducts(ShoppingActivity.this).execute();
+		new GetProducts(ShoppingActivity.this, "0").execute();
 	}
 
 	public void deleteProduct(String id) {
@@ -164,7 +143,7 @@ public class ShoppingActivity extends FragmentActivity implements
 	}
 
 	public void getShoppingLists() {
-		new GetShoppingLists(ShoppingActivity.this).execute();
+		new GetShoppingLists(ShoppingActivity.this, "0").execute();
 	}
 
 	@Override
@@ -192,7 +171,6 @@ public class ShoppingActivity extends FragmentActivity implements
 			products.add(new Product(p.get(i).getId(), p.get(i).getName(), p
 					.get(i).getCategory(), p.get(i).getPrice()));
 		}
-		getShoppingLists();
 	}
 
 	public void showProgressDial() {
@@ -215,6 +193,52 @@ public class ShoppingActivity extends FragmentActivity implements
 		System.err.println(responseText);
 	}
 
+	private void initializeFragments() {
+		
+
+		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayUseLogoEnabled(false);
+		actionBar.setHomeButtonEnabled(false);
+
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(mAdapter);
+
+		for (String tab_name : tabs) {
+			actionBar.addTab(actionBar.newTab().setText(tab_name)
+					.setTabListener(this));
+		}
+
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+			}
+		});
+		
+		File f = new File(f1);
+		System.out.println(f.getAbsolutePath());
+		if(f.exists())	{
+			readFromFile();
+			mAdapter.slf.listAdapter.notifyDataSetChanged();
+			mAdapter.slf.createList();
+		}
+	}
+
 	@Override
 	public void onTabReselected(Tab arg0, android.app.FragmentTransaction arg1) {
 
@@ -231,50 +255,156 @@ public class ShoppingActivity extends FragmentActivity implements
 
 	}
 
-	private void writeToFile(String data) {
+	private void writeToFile() {
+		FileOutputStream fos;
+		File f = new File(f1);
 		try {
-			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
-					openFileOutput("shopping_list.txt", Context.MODE_PRIVATE));
-			outputStreamWriter.write(data);
-			outputStreamWriter.close();
+			fos = new FileOutputStream(f);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+			os.writeInt(shoppingList.size());
+			for(Product p:shoppingList)
+			    os.writeObject(p);
+			os.close();
+			fos.close();
+			System.out.println(f.getAbsolutePath());
+			System.out.println("Zapisałem!");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("Exception", "File write failed: " + e.toString());
+			e.printStackTrace();
 		}
+		
 	}
 
 	private void deleteFile() {
-		File file = new File("shopping_list.txt");
+		File file = new File(f1);
 		file.delete();
 	}
 
-	private String readFromFile() {
-
-		String ret = "";
-
+	private void readFromFile() {
+		FileInputStream fis;
 		try {
-			InputStream inputStream = openFileInput("shopping_list.txt");
-
-			if (inputStream != null) {
-				InputStreamReader inputStreamReader = new InputStreamReader(
-						inputStream);
-				BufferedReader bufferedReader = new BufferedReader(
-						inputStreamReader);
-				String receiveString = "";
-				StringBuilder stringBuilder = new StringBuilder();
-
-				while ((receiveString = bufferedReader.readLine()) != null) {
-					stringBuilder.append(receiveString);
-				}
-
-				inputStream.close();
-				ret = stringBuilder.toString();
-			}
+			File f = new File(f1);
+			fis = new FileInputStream(f);
+			ObjectInputStream is = new ObjectInputStream(fis);
+			int count = is.readInt();
+			for (int c = 0; c < count; c++)
+			    shoppingList.add((Product) is.readObject());
+			is.close();
+			fis.close();
+			System.out.println("Odczytałem!");
 		} catch (FileNotFoundException e) {
-			Log.e("login activity", "File not found: " + e.toString());
+			e.printStackTrace();
+		} catch (StreamCorruptedException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("login activity", "Can not read file: " + e.toString());
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onBackPressed(){
+		writeToFile();
+		ShoppingActivity.this.finish();
+		//overridePendingTransition(R.anim.in_left, R.anim.out_right);
+	}
+
+	public class GetShoppingData extends AsyncTask<Void, Void, Void> {
+
+		private String responseShoppingLists;
+		private String responseProducts;
+		private String dateFrom;
+
+		public GetShoppingData(String dateFrom) {
+			this.dateFrom = dateFrom;
 		}
 
-		return ret;
+		@Override
+		protected void onPreExecute() {
+			showProgressDial();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			try {
+				String data[] = new String[1];
+				data[0] = dateFrom;
+				responseShoppingLists = new HttpHandler2(
+						"http://malinowepi.no-ip.org/get_shopping_lists.php",
+						data).postDataGetShoppingLists();
+
+				responseProducts = new HttpHandler2(
+						"http://malinowepi.no-ip.org/get_products.php", data)
+						.postDataGetProducts();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+
+			JSONParser2 jp = new JSONParser2(responseShoppingLists);
+
+			try {
+				ArrayList<ShoppingList> sl = jp.getGetShoppingListsResult();
+
+				if (sl == null) {
+					activity.runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(activity,
+									"NIEPOWODZENIE! Pobieranie list zakupów",
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+				} else {
+					activity.shoppingLists.addAll(sl);
+					System.out.println(shoppingLists.get(0).getName());
+					activity.runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(activity,
+									"Pobrano wszystkie listy zakupów",
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			JSONParser2 jp2 = new JSONParser2(responseProducts);
+
+			try {
+				ArrayList<Product> p = jp2.getGetProductsResult();
+
+				if (products == null) {
+					activity.runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(activity,
+									"NIEPOWODZENIE! Pobieranie produktów",
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+				} else {
+					activity.products.addAll(p);
+					System.out.println(products.get(0).getName());
+					activity.runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(activity,
+									"Pobrano wszystkie produkty",
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			initializeFragments();
+			hideProgressDial();
+		}
 	}
 }

@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <permission android:name="READ_DATABASE" android:label="read"       android:protectionLevel="normal"></permission>
 	<permission android:name="WRITE_DATABASE" android:label="write" android:protectionLevel="normal"></permission>
 
@@ -66,6 +67,7 @@
         </activity>
         <activity
             android:name="com.myfamily.ShoppingActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_shopping" >
         </activity>
         <activity

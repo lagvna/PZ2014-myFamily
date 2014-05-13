@@ -84,7 +84,7 @@ public class ArchiveFragment extends Fragment {
 
 		return rootView;
 	}
-
+	
 	private int findList(String name) {
 
 		for (int i = 0; i < sa.shoppingLists.size(); i++) {

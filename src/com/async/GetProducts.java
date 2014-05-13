@@ -17,9 +17,11 @@ public class GetProducts extends AsyncTask<Void, Void, Void> {
 
 	private ShoppingActivity callingActivity;
 	private String responseText;
+	private String dateFrom;
 
-	public GetProducts(ShoppingActivity callingActivity) {
+	public GetProducts(ShoppingActivity callingActivity, String dateFrom) {
 		this.callingActivity = callingActivity;
+		this.dateFrom = dateFrom;
 	}
 
 	@Override
@@ -31,8 +33,10 @@ public class GetProducts extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... arg0) {
 		try {
+			String data[] = new String[1];
+			data[0] = dateFrom;
 			responseText = new HttpHandler2(
-					"http://malinowepi.no-ip.org/get_products.php", null)
+					"http://malinowepi.no-ip.org/get_products.php", data)
 					.postDataGetProducts();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -68,7 +72,7 @@ public class GetProducts extends AsyncTask<Void, Void, Void> {
 					}
 				});
 			}
-		} catch (JSONException e) { // TODO Auto-generated catch block
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}

@@ -68,7 +68,8 @@
         <activity
             android:name="com.myfamily.ShoppingActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/title_activity_shopping" >
+            android:label="@string/title_activity_shopping"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.myfamily.AddProductActivity"

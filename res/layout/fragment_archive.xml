@@ -16,10 +16,4 @@
         android:padding="5dp" >
 
     </ListView>
-    <Button
-        android:id="@+id/getArchives"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:background="@drawable/oval_button_selector"
-        android:text="Pobierz archiwalne listy"/>
 </LinearLayout>

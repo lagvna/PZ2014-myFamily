@@ -38,8 +38,8 @@ import com.shopping.ListViewAdapter;
 public class ArchiveFragment extends Fragment {
 	private ArrayList<CustomRow> CustomRow_data;
 	private ShoppingActivity sa;
-	private Button getArchives;
 	public ListViewAdapter listAdapter;
+	public ListView lv;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,17 +50,11 @@ public class ArchiveFragment extends Fragment {
 
 		sa = (ShoppingActivity) getActivity();
 
-		CustomRow_data = new ArrayList<CustomRow>();
-		createList();
-
-		getArchives = (Button) rootView.findViewById(R.id.getArchives);
-		ListView lv = (ListView) rootView.findViewById(R.id.listArchive);
-		listAdapter = new ListViewAdapter(getActivity(), R.layout.element,
-				CustomRow_data);
-		lv.setAdapter(listAdapter);
-
+		lv = (ListView) rootView.findViewById(R.id.listArchive);
 		registerForContextMenu(rootView.findViewById(R.id.listArchive));
-
+		
+		createList();
+		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -75,16 +69,33 @@ public class ArchiveFragment extends Fragment {
 			}
 		});
 
-		getArchives.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sa.getShoppingLists();
-			}
-		});
-
 		return rootView;
 	}
+
+	public void createList() {
+		
+		
+		
+		
+		int len = sa.shoppingLists.size();
+		
+		
+		CustomRow_data = new ArrayList<CustomRow>();
+
+		for (int i = 0; i < len; i++) {
+			String name = sa.shoppingLists.get(i).getName();
+			String date = sa.shoppingLists.get(i).getOwner() + " "
+					+ sa.shoppingLists.get(i).getDate();
+			System.out.println(name);
+			System.out.println(date);
+			CustomRow_data.add(new CustomRow(R.drawable.lvsel, name, date));
+		}
+		listAdapter = new ListViewAdapter(getActivity(), R.layout.element,
+				CustomRow_data);
+		lv.setAdapter(listAdapter);
+		}
 	
+
 	private int findList(String name) {
 
 		for (int i = 0; i < sa.shoppingLists.size(); i++) {
@@ -144,21 +155,6 @@ public class ArchiveFragment extends Fragment {
 		}
 
 		sa.deleteShoppingList(toDel);
-	}
-
-	public void createList() {
-		int len = sa.shoppingLists.size();
-
-		CustomRow_data.clear();
-
-		for (int i = 0; i < len; i++) {
-			String name = sa.shoppingLists.get(i).getName();
-			String date = sa.shoppingLists.get(i).getOwner() + " "
-					+ sa.shoppingLists.get(i).getDate();
-			System.out.println(name);
-			System.out.println(date);
-			CustomRow_data.add(new CustomRow(R.drawable.lvsel, name, date));
-		}
 	}
 
 	public void showPopup(View anchorView, String name, String products,

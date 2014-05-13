@@ -55,7 +55,7 @@ public class ShoppingListFragment extends Fragment {
 		sumUser = (TextView) rootView.findViewById(R.id.sumUserList);
 		sumList = (TextView) rootView.findViewById(R.id.sumFromList);
 		CustomRow_data = new ArrayList<CustomRow>();
-		createList();
+				
 
 		editShopping.setOnClickListener(new OnClickListener() {
 
@@ -87,6 +87,9 @@ public class ShoppingListFragment extends Fragment {
 				// TODO zaznaczanie ze kupione
 			}
 		});
+		
+		listAdapter.notifyDataSetChanged();
+		createList();
 
 		return rootView;
 	}
@@ -167,6 +170,7 @@ public class ShoppingListFragment extends Fragment {
 	}
 
 	public void createList() {
+		
 		int len = sa.shoppingList.size();
 
 		CustomRow_data.clear();

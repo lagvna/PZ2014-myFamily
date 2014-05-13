@@ -16,6 +16,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -62,6 +63,25 @@ public class ShoppingActivity extends FragmentActivity implements
 		products = new ArrayList<Product>();
 		shoppingList = new ArrayList<Product>();
 		shoppingLists = new ArrayList<ShoppingList>();
+	}
+	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+ 
+        // Checks the orientation of the screen for landscape and portrait
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
+	
+	@Override
+	protected void onRestart() {
+	    super.onRestart();
+	    System.out.println("JESTEM W ON RESTART");
+		recreate();
 	}
 
 	public void getShoppingList(int id) {

@@ -10,9 +10,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <permission android:name="READ_DATABASE" android:label="read"       android:protectionLevel="normal"></permission>
-	<permission android:name="WRITE_DATABASE" android:label="write" android:protectionLevel="normal"></permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="READ_DATABASE"
+        android:label="read"
+        android:protectionLevel="normal" >
+    </permission>
+    <permission
+        android:name="WRITE_DATABASE"
+        android:label="write"
+        android:protectionLevel="normal" >
+    </permission>
 
     <application
         android:allowBackup="true"
@@ -23,7 +32,7 @@
             android:name="com.tyczj.extendedcalendarview.CalendarProvider"
             android:authorities="com.tyczj.extendedcalendarview.calendarprovider"
             android:permission="signature" />
-        
+
         <activity
             android:name="com.myfamily.SplashActivity"
             android:label="@string/app_name" >
@@ -74,14 +83,34 @@
         <activity
             android:name="com.myfamily.AddProductActivity"
             android:label="@string/title_activity_add_product" >
-		</activity>
-		<activity
+        </activity>
+        <activity
             android:name="com.myfamily.CalendarActivity"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
             android:name="com.myfamily.EventViewActivity"
             android:label="@string/title_activity_event_view" >
+        </activity>
+        <activity
+            android:name="com.myfamily.PrizesActivity"
+            android:label="@string/title_activity_prizes" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentMyPrize"
+            android:label="@string/title_activity_fragment_my_prize" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentPrize"
+            android:label="@string/title_activity_fragment_prize" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentAddPrize"
+            android:label="@string/title_activity_fragment_add_prize" >
+        </activity>
+        <activity
+            android:name="com.myfamily.PrizeActivity"
+            android:label="@string/title_activity_prize" >
         </activity>
     </application>
 

@@ -37,15 +37,23 @@ public class MainActivity extends ListActivity {
 			JSonWriter.getInstance().appendToFile("events",
 					"0000-00-00 00:00:00" + "{\"events\":[]}", 0,
 					this.getApplicationContext());
-			System.out.println("pliczek nie istnieje:)");
 		}
+		
+		if (!JSonWriter.getInstance().ifExist("prizes",
+				this.getApplicationContext())) {
+			JSonWriter.getInstance().appendToFile("prizes",
+					"0000-00-00 00:00:00" + "{\"prizes\":[]}", 0,
+					this.getApplicationContext());
+		}
+		
 		System.out.println(JSonReader.getInstance().readFile("events",
 				this.getApplicationContext()));
-		menuItems = new String[4];
+		menuItems = new String[5];
 		menuItems[0] = "Notatki";
 		menuItems[1] = "Dodaj użytkownika";
 		menuItems[2] = "Zakupy";
 		menuItems[3] = "Wydarzenia";
+		menuItems[4] = "Nagrody";
 
 		// komentarz
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -74,6 +82,10 @@ public class MainActivity extends ListActivity {
 				} else if (position == 3) {
 					Intent i = new Intent(MainActivity.this,
 							CalendarActivity.class);
+					MainActivity.this.startActivity(i);
+				} else if (position == 4) {
+					Intent i = new Intent(MainActivity.this,
+							PrizeActivity.class);
 					MainActivity.this.startActivity(i);
 				}
 

@@ -17,13 +17,19 @@
     <color name="black">#000000</color>
     <color name="green">#55CC44</color>
     <color name="yellow">#FFFF80</color>
-    
+
     <string-array name="colors">
         <item>czerwony</item>
         <item>niebieski</item>
         <item>zielony</item>
         <item>purpurowy</item>
         <item>żółty</item>
+    </string-array>
+    
+    <string-array name="categories">
+        <item>Sprzątanie</item>
+        <item>Gotowanie</item>
+        <item>Zakupy</item>
     </string-array>
 
     <string name="title_activity_notes">NotesActivity</string>
@@ -72,11 +78,14 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_add_product">AddProductActivity</string>
     <string name="title_activity_family_list">FamilyListActivity</string>
-    
 
     <string-array name="users_type">
         <item>rodzic</item>
         <item>dziecko</item>
     </string-array>
+
+    <string name="title_activity_fragment_prize">FragmentPrize</string>
+    <string name="title_activity_fragment_add_prize">FragmentAddPrize</string>
+    <string name="title_activity_prize">PrizeActivity</string>
 
 </resources>

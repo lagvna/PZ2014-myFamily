@@ -14,6 +14,8 @@ import com.classes.Family;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
 import com.classes.MyEvent;
+import com.classes.Prize;
+import com.classes.User;
 
 public class JSONParser {
 
@@ -22,6 +24,9 @@ public class JSONParser {
 	private ArrayList<Family> familyList = new ArrayList<Family>();
 	private ArrayList<ArrayList> resultArray = new ArrayList<ArrayList>();
 	private ArrayList<String> stringArray = new ArrayList<String>();
+	private ArrayList<Prize> allPrizesList = new ArrayList<Prize>();
+	private ArrayList<Prize> gainedPrizesList = new ArrayList<Prize>();
+	private ArrayList<User> userList = new ArrayList<User>();
 
 	public JSONParser(String inputStream) {
 
@@ -262,6 +267,60 @@ public class JSONParser {
 				.println(JSonReader.getInstance().readFile("events", context));
 
 	}
+	
+	public void makePrizesJSon(ArrayList<Prize> prizesList, Context context,
+			int type) throws JSONException {
+
+		String oldJson = JSonReader.getInstance().readFile("prizes", context);
+		JSONArray jSonArray;
+		if (type == 0) { // towrzenie nowej listy
+			jSonArray = new JSONArray("[" + "{\"prizes\":[]}" + "]");
+		} else { // dopisywanie do instniejacych 
+			jSonArray = new JSONArray("[" + oldJson.substring(19) + "]");
+		}
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		JSONArray events = (JSONArray) jSonObject.get("prizes");
+
+		Prize myPrize;
+		JSONObject JSonEvent;
+		// JSONArray jsonArray = new JSONArray();
+		JSONObject eventsObj = new JSONObject();
+
+		for (int i = 0; i < prizesList.size(); i++) {
+			myPrize = prizesList.get(i);
+			JSonEvent = new JSONObject();
+			try {
+				JSonEvent.put("Id", myPrize.getId());
+				JSonEvent.put("name", myPrize.getName());
+				JSonEvent.put("user", myPrize.getWhos());
+				JSonEvent.put("receiving_date", myPrize.getGained_date());
+				JSonEvent.put("category", myPrize.getCategory());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			events.put(JSonEvent);
+		}
+
+		try {
+			eventsObj.put("prizes", events);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentDateandTime = sdf.format(new Date());
+
+		String jsonStr = eventsObj.toString();
+		// System.out.println(currentDateandTime + jsonStr);
+		JSonWriter.getInstance().appendToFile("prizes",
+				currentDateandTime + jsonStr, 0, context);
+		System.out
+				.println(JSonReader.getInstance().readFile("prizes", context));
+
+	}
+	
 
 	public void removeEventFromJson(ArrayList<String> deletedEvents,
 			Context context) throws JSONException {
@@ -289,5 +348,90 @@ public class JSONParser {
 
 		makeEventsJSon(eventsList, context, 0);
 	}
+	
+	
+	public String getAddPrizeResult() throws JSONException {
+
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		String errorCode = jSonObject.getString("success");
+		String message = jSonObject.getString("message");
+		String id = jSonObject.getString("Id");
+
+		return errorCode + ":" + message + ":" + id;
+	}
+
+	public ArrayList getGainedPrizesResult() throws JSONException {
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+		int n = jSonArray.length();
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		//String points = jSonObject.getString("points");
+		String points = "-1";
+		String errorCode = jSonObject.getString("success");
+		String message = jSonObject.getString("message");
+		
+		JSONArray prizes;
+
+		try {
+			if (!errorCode.equals("0")) { // sukces
+
+				prizes = (JSONArray) jSonObject.get("prizes");
+				for (int i = 0; i < prizes.length(); i++) {
+					JSONObject object = prizes.getJSONObject(i);
+					gainedPrizesList.add(new Prize(
+							
+							object.getString("name"), 
+							object.getString("Id"),
+							object.getString("user"),
+							object.getString("receiving_date"),
+							object.getString("category")));
+					points = object.getString("points");
+				}
+				if (prizes.length()==0 ) {
+					points = jSonObject.getString("points");
+				}
+				resultArray.add(gainedPrizesList);
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
+				stringArray.add(new String(points));
+				resultArray.add(stringArray);
+				return resultArray;
+			} else {
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
+				stringArray.add(new String(points));
+				resultArray.clear();
+				resultArray.add(stringArray);
+				return resultArray;
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return resultArray;
+	}
+	
+	public ArrayList<User> getUsersResult() throws JSONException {
+
+		JSONObject jsonObj = new JSONObject(inputStream);
+		users = jsonObj.getJSONArray("users");
+
+		for (int i = 0; i < users.length(); i++) {
+			JSONObject c = users.getJSONObject(i);
+
+			String name = c.getString("name");
+			String role = c.getString("role");
+
+			// tmp hashmap for single contact
+			userList.add(new User(name, role));
+		}
+
+		return userList;
+	}
+	
+	
 
 }

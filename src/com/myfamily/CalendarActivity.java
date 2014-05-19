@@ -251,18 +251,11 @@ public class CalendarActivity extends Activity {
 
 		Uri uri = getContentResolver().insert(CalendarProvider.CONTENT_URI,
 				values);
-
 		if (type == 1) {
 			showToast("dodalem do kle");
 			calendar.refreshCalendar();
 			calendar.refreshDrawableState();
 		}
-
-		/*
-		 * int a =
-		 * getContentResolver().delete(CalendarProvider.CONTENT_URI,CalendarProvider
-		 * .LOCATION+"=?",new String[]{"0"});
-		 */
 	}
 
 	private void removeAllEvents() {
@@ -280,7 +273,6 @@ public class CalendarActivity extends Activity {
 		String months[] = { "stycznia", "lutego", "marca", "kwietnia", "maja",
 				"czerwca", "lipca", "sierpnia", "września", "października",
 				"listopada", "grudnia" };
-
 		return day + " " + months[month - 1] + " " + year;
 	}
 
@@ -310,9 +302,6 @@ public class CalendarActivity extends Activity {
 		progressDialog.show();
 	}
 
-	/**
-	 * method which hide Progress dialog
-	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
@@ -368,12 +357,9 @@ public class CalendarActivity extends Activity {
 				}
 
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	public class GetEvents extends AsyncTask<Void, Void, Void> {
@@ -391,9 +377,6 @@ public class CalendarActivity extends Activity {
 			} else {
 				dataArray[0] = temp;
 			}
-
-			// System.out.println(dataArray[0]);
-			// tutaj nalezy pobrac date z pliku
 		}
 
 		@Override
@@ -425,12 +408,6 @@ public class CalendarActivity extends Activity {
 			try {
 				ArrayList eventResult = jp.getEventsResult(context);
 				MyEvent tempEvent;
-				/*
-				 * ArrayList <String> cc = new ArrayList<String>(); cc.add("2");
-				 * jp.removeEventFromJson(cc,context);
-				 */
-				// events.add
-				// jp.makeEventsJSon(, context);
 				if (eventResult.size() == 1) {
 					if (((ArrayList<String>) eventResult.get(0)).get(0).equals(
 							0)) {
@@ -438,7 +415,6 @@ public class CalendarActivity extends Activity {
 								+ ((ArrayList<String>) eventResult.get(0))
 										.get(1));
 					} 
-
 				} else if (eventResult.size() == 2) {
 					events = (ArrayList<MyEvent>) eventResult.get(0);
 					for (int i = 0; i < events.size(); i++) {

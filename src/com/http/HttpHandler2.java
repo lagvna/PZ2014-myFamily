@@ -19,7 +19,6 @@ import com.classes.DataHolder;
 
 public class HttpHandler2 {
 
-
 	private String url = null;
 	private String dataArray[] = null;
 	private HttpClient client;
@@ -37,7 +36,48 @@ public class HttpHandler2 {
 		this.url = url;
 		this.dataArray = dataArray;
 	}
-		
+
+	public String postDataGetExpenses() throws ClientProtocolException,
+			IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("from_date", dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("to_date", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("whos_expenses_login",
+				dataArray[2]));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+	}
+
+	public String postDataAddExpense() throws ClientProtocolException,
+			IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("name", dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("price", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("note", dataArray[2]));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+	}
+
 	public String postDataAddNote() throws ClientProtocolException, IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
@@ -103,7 +143,7 @@ public class HttpHandler2 {
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
 		nameValuePairs.add(new BasicNameValuePair("total_cost", dataArray[0]));
-		System.out.println("WCHUJWAZNE: "+dataArray[0]);
+		System.out.println("WCHUJWAZNE: " + dataArray[0]);
 		nameValuePairs.add(new BasicNameValuePair("name", dataArray[1]));
 		nameValuePairs.add(new BasicNameValuePair("products", dataArray[2]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -141,7 +181,8 @@ public class HttpHandler2 {
 				.getInstance().getSession()));
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("shopping_list_Id", dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("shopping_list_Id",
+				dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
@@ -185,7 +226,5 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-	
-	
 
 }

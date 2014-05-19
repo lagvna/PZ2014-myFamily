@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.classes.Expense;
 import com.classes.Note;
 import com.classes.Product;
 import com.classes.ShoppingList;
@@ -16,13 +17,13 @@ public class JSONParser2 {
 	private ArrayList<Note> notesArray = null;
 	private ArrayList<Product> productsArray = null;
 	private ArrayList<ShoppingList> shoppingListArray = null;
+	private ArrayList<Expense> expensesArray = null;
 	private ShoppingList sl = null;
 
 	public JSONParser2(String inputStream) {
 		this.inputStream = inputStream;
 	}
 
-	
 	public String[] getRemoveSthResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -30,10 +31,31 @@ public class JSONParser2 {
 		JSONObject jo = jSonArray.getJSONObject(0);
 		data[0] = jo.getString("success");
 		data[1] = jo.getString("message");
-		
+
 		return data;
 	}
-	
+
+	public ArrayList<Expense> getGetExpensesResult() throws JSONException {
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+		JSONObject jo = jSonArray.getJSONObject(0);
+		String errorCode = jo.getString("success");
+
+		if (!errorCode.equals("0")) {
+			expensesArray = new ArrayList<Expense>();
+			JSONArray exp = (JSONArray) jo.get("expenses");
+			for (int i = 0; i < exp.length(); i++) {
+				JSONObject object = exp.getJSONObject(i);
+				expensesArray.add(new Expense(object.getInt("Id"), object
+						.getString("name"), object.getString("note"), object
+						.getString("whos_expenses"), object.getString("price"),
+						object.getString("creation_date")));
+				System.out.println(expensesArray.get(i).getName());
+			}
+		}
+
+		return expensesArray;
+	}
+
 	public String getAddShoppingListResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -106,7 +128,7 @@ public class JSONParser2 {
 		String errorCode = jo.getString("success");
 		String msg = jo.getString("message");
 		System.out.println(msg);
-		
+
 		if (!errorCode.equals("0")) {
 			JSONObject jo2 = (JSONObject) jo.get("shopping_list");
 

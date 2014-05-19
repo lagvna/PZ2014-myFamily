@@ -112,6 +112,12 @@
             android:name="com.myfamily.PrizeActivity"
             android:label="@string/title_activity_prize" >
         </activity>
+        <activity
+            android:name="com.myfamily.ExpenseActivity"
+            android:label="@string/title_activity_expense"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
     </application>
 
 </manifest>

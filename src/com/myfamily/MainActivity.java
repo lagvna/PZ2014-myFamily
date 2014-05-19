@@ -48,12 +48,13 @@ public class MainActivity extends ListActivity {
 		
 		System.out.println(JSonReader.getInstance().readFile("events",
 				this.getApplicationContext()));
-		menuItems = new String[5];
+		menuItems = new String[6];
 		menuItems[0] = "Notatki";
 		menuItems[1] = "Dodaj użytkownika";
 		menuItems[2] = "Zakupy";
 		menuItems[3] = "Wydarzenia";
 		menuItems[4] = "Nagrody";
+		menuItems[5] = "Wydatki";
 
 		// komentarz
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -86,6 +87,10 @@ public class MainActivity extends ListActivity {
 				} else if (position == 4) {
 					Intent i = new Intent(MainActivity.this,
 							PrizeActivity.class);
+					MainActivity.this.startActivity(i);
+				} else if (position == 5)	{
+					Intent i = new Intent(MainActivity.this,
+							ExpenseActivity.class);
 					MainActivity.this.startActivity(i);
 				}
 

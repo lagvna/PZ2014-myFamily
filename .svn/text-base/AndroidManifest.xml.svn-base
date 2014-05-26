@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.myfamily"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="READ_DATABASE"
+        android:label="read"
+        android:protectionLevel="normal" >
+    </permission>
+    <permission
+        android:name="WRITE_DATABASE"
+        android:label="write"
+        android:protectionLevel="normal" >
+    </permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <provider
+            android:name="com.tyczj.extendedcalendarview.CalendarProvider"
+            android:authorities="com.tyczj.extendedcalendarview.calendarprovider"
+            android:permission="signature" />
+
+        <activity
+            android:name="com.myfamily.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.myfamily.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddFamilyActivity"
+            android:label="@string/title_activity_add_family" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddFamilyUsersActivity"
+            android:label="@string/title_activity_add_family_users" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddUserActivity"
+            android:label="@string/title_activity_add_user" >
+        </activity>
+        <activity
+            android:name="com.myfamily.FamilyListActivity"
+            android:label="@string/title_activity_family_list" >
+        </activity>
+        <activity
+            android:name="com.myfamily.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.myfamily.NotesActivity"
+            android:label="@string/title_activity_notes" >
+        </activity>
+        <activity
+            android:name="com.myfamily.UserRegisterActivity"
+            android:label="@string/title_activity_user_register" >
+        </activity>
+        <activity
+            android:name="com.myfamily.ShoppingActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_shopping"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddProductActivity"
+            android:label="@string/title_activity_add_product" >
+        </activity>
+        <activity
+            android:name="com.myfamily.CalendarActivity"
+            android:label="@string/title_activity_calendar" >
+        </activity>
+        <activity
+            android:name="com.myfamily.EventViewActivity"
+            android:label="@string/title_activity_event_view" >
+        </activity>
+        <activity
+            android:name="com.myfamily.PrizesActivity"
+            android:label="@string/title_activity_prizes" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentMyPrize"
+            android:label="@string/title_activity_fragment_my_prize" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentPrize"
+            android:label="@string/title_activity_fragment_prize" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentAddPrize"
+            android:label="@string/title_activity_fragment_add_prize" >
+        </activity>
+        <activity
+            android:name="com.myfamily.PrizeActivity"
+            android:label="@string/title_activity_prize" >
+        </activity>
+        <activity
+            android:name="com.myfamily.ExpenseActivity"
+            android:label="@string/title_activity_expense"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+    </application>
+
+</manifest>

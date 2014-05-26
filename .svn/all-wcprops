@@ -3,3 +3,39 @@ svn:wc:ra_dav:version-url
 V 40
 /svn/projekt/!svn/ver/45/PZ2014-myFamily
 END
+ic_launcher-web.png
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/ic_launcher-web.png
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/README.md
+END
+project.properties
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/project.properties
+END
+lint.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/lint.xml
+END
+proguard-project.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/proguard-project.txt
+END
+AndroidManifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/projekt/!svn/ver/49/PZ2014-myFamily/AndroidManifest.xml
+END

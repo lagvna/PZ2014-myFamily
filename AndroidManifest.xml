@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <permission
         android:name="READ_DATABASE"
@@ -30,7 +33,7 @@
         android:theme="@style/AppTheme" >
         <provider
             android:name="com.tyczj.extendedcalendarview.CalendarProvider"
-            android:authorities="com.tyczj.extendedcalendarview.calendarprovider"
+            android:authorities="com.tyczj.extendedcalendarview.calendarprovider1"
             android:permission="signature" />
 
         <activity
@@ -117,6 +120,38 @@
             android:label="@string/title_activity_expense"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.myfamily.TasksActivity"
+            android:label="@string/title_activity_taks" >
+        </activity>
+        <activity
+            android:name="com.fragments.FragmentCurrentTasks"
+            android:label="@string/title_activity_fragment_current_tasks" >
+        </activity>
+        <activity
+            android:name="com.myfamily.AddTaskActivity"
+            android:label="@string/title_activity_add_task" >
+        </activity>
+        <activity
+            android:name="com.myfamily.FragmentOldTask"
+            android:label="@string/title_activity_fragment_old_task" >
+        </activity>
+        <activity
+            android:name="com.myfamily.PictureActivity"
+            android:label="@string/title_activity_picture" >
+        </activity>
+        <activity
+            android:name="com.myfamily.GaleryActivity"
+            android:label="@string/title_activity_galery" >
+        </activity>
+        <activity
+            android:name="com.myfamily.UtilsActivity"
+            android:label="@string/title_activity_utils" >
+        </activity>
+        <activity
+            android:name="com.myfamily.GalleryActivity"
+            android:label="@string/title_activity_gallery" >
         </activity>
     </application>
 

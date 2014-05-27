@@ -256,4 +256,66 @@ public class HttpHandler {
 
 	}
 	
+	public String postDataAddTask() throws IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("task_to", dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("name", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("what_to_do", dataArray[2]));
+		nameValuePairs.add(new BasicNameValuePair("points", dataArray[3]));
+		nameValuePairs.add(new BasicNameValuePair("deadline", dataArray[4]));
+		nameValuePairs.add(new BasicNameValuePair("category", dataArray[5]));
+		//category
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+
+	}
+	
+	public String postDataVoteTask() throws IOException {
+		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("done","1"));
+		nameValuePairs.add(new BasicNameValuePair("task_Id",dataArray[0]));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+
+	}
+	
+	public String postDataGetTasks() throws IOException {
+		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+				.getInstance().getStringFamilyId()));
+		nameValuePairs.add(new BasicNameValuePair("direction","all"));
+		nameValuePairs.add(new BasicNameValuePair("type","5"));
+		nameValuePairs.add(new BasicNameValuePair("date_from","0"));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+
+	}
 }

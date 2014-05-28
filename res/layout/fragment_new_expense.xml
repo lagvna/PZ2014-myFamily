@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#fa6a6a" >
+    android:background="#fa6a6a"
+    android:orientation="vertical" >
+
     <LinearLayout
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	android:background="@color/black" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/titleTxt"
@@ -17,144 +18,149 @@
             android:gravity="center_horizontal"
             android:text="Dodaj wydatek"
             android:textColor="@color/white" />
-    	
-	</LinearLayout>
-	<ScrollView
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:background="#fa6a6a">
-	<LinearLayout
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical">
-		<RelativeLayout 
-		    android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical"
-    		android:background="@drawable/list_shape"
-    		android:layout_margin="10dp"
-    		android:padding="5dp">
-    		
-    		<RelativeLayout 
-    		    android:id="@+id/titleLayout"
-	    		android:layout_width="match_parent"	
-	    		android:layout_height="wrap_content">
-				<TextView
-		     		android:id="@+id/titleExp"
-     				android:text="Tytuł:"
-     				android:textColor="@color/black"
-        			android:layout_height="wrap_content"
-        			android:paddingBottom="15dp"
-        			android:layout_width="wrap_content"
-        			android:paddingLeft="5dp"
-    	    		android:paddingRight="5dp"
-    	    		android:paddingTop="3dp"/>
-				<EditText
-		        	android:id="@+id/title_desc"
-		    		android:layout_below="@id/titleExp"
-     				android:textColor="@color/black"
-     				android:gravity="center"
-     				android:textAlignment="center"
-     				android:layout_margin="10dp"
-     				android:textAppearance="@android:style/TextAppearance.Medium"
-        			android:layout_height="wrap_content"
-        			android:layout_width="match_parent"
-        			android:paddingBottom="7dp"/>
+    </LinearLayout>
 
-			</RelativeLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fa6a6a" >
 
-		</RelativeLayout>
-		
-		<RelativeLayout 
-		    android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical"
-    		android:background="@drawable/list_shape"
-    		android:layout_margin="10dp"
-    		android:padding="5dp">
-    		
-    		<RelativeLayout 
-    		    android:id="@+id/descLayout"
-	    		android:layout_width="match_parent"	
-	    		android:layout_height="wrap_content">
-				<TextView
-		     		android:id="@+id/descExp"
-     				android:text="Opis:"
-     				android:textColor="@color/black"
-        			android:layout_height="wrap_content"
-        			android:paddingBottom="15dp"
-        			android:layout_width="wrap_content"
-        			android:paddingLeft="5dp"
-    	    		android:paddingRight="5dp"
-    	    		android:paddingTop="3dp"/>
-				<EditText
-		        	android:id="@+id/desc_desc"
-		    		android:layout_below="@id/descExp"
-     				android:textColor="@color/black"
-     				android:gravity="center"
-     				android:layout_margin="10dp"
-     				android:textAppearance="@android:style/TextAppearance.Medium"
-        			android:layout_height="wrap_content"
-        			android:layout_width="match_parent"
-        			android:paddingBottom="7dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-			</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/list_shape"
+                android:orientation="vertical"
+                android:padding="5dp" >
 
-		</RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/titleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
 
-		
-		<RelativeLayout 
-		    android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical"
-    		android:background="@drawable/list_shape"
-    		android:layout_margin="10dp"
-    		android:padding="5dp">
-    		
-    		<RelativeLayout 
-    		    android:id="@+id/costLayout"
-	    		android:layout_width="match_parent"	
-	    		android:layout_height="wrap_content">
-				<TextView
-		     		android:id="@+id/costExp"
-     				android:text="Koszt:"
-     				android:textColor="@color/black"
-        			android:layout_height="wrap_content"
-        			android:paddingBottom="15dp"
-        			android:layout_width="wrap_content"
-        			android:paddingLeft="5dp"
-    	    		android:paddingRight="5dp"
-    	    		android:paddingTop="3dp"/>
-				<EditText
-		        	android:id="@+id/cost_desc"
-		    		android:layout_below="@id/costExp"
-     				android:textColor="@color/black"
-     				android:gravity="center"
-     				android:layout_margin="10dp"
-     				android:textAppearance="@android:style/TextAppearance.Medium"
-        			android:layout_height="wrap_content"
-        			android:layout_width="match_parent"
-        			android:inputType="number" 
-        			android:paddingBottom="7dp"/>
-			</RelativeLayout>
-			<RelativeLayout 
-    		    android:id="@+id/buttonLayout"
-	    		android:layout_width="match_parent"
-	    		android:layout_below="@+id/costLayout"
-	    		android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/titleExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        android:text="Tytuł:"
+                        android:textColor="@color/black" />
 
-				<Button
-				    android:id="@+id/acceptButton"
-				    style="?android:attr/buttonStyleSmall"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:layout_alignParentBottom="true"
-				    android:layout_alignParentRight="true"
-				    android:background="@drawable/oval_button_selector"
-				    android:text="Zatwierdź nowy wydatek" />
+                    <EditText
+                        android:id="@+id/title_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/titleExp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:paddingBottom="7dp"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </RelativeLayout>
 
-			</RelativeLayout>
-		</RelativeLayout>
-	</LinearLayout>
-	</ScrollView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/list_shape"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <RelativeLayout
+                    android:id="@+id/descLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/descExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        android:text="Opis:"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/desc_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/descExp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:paddingBottom="7dp"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/list_shape"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <RelativeLayout
+                    android:id="@+id/costLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/costExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        android:text="Koszt:"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/cost_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/costExp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:paddingBottom="7dp"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/buttonLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/costLayout" >
+
+                    <Button
+                        android:id="@+id/acceptButton"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/sign_button_shape"
+                        android:padding="5dp"
+                        android:text="Zatwierdź nowy wydatek" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

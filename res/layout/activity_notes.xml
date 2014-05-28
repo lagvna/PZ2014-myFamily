@@ -2,87 +2,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
     <LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/black"
-		android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal" >
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Dodaj"        
+            android:layout_margin="10dp"
             android:layout_weight="1.0"
-            android:onClick="addNote"/>
+            android:background="@drawable/sign_button_shape"
+            android:onClick="addNote"
+            android:padding="5dp"
+            android:text="Dodaj"
+            android:textColor="@color/white" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/sign_button_shape"
+            android:onClick="deleteNote"
+            android:padding="5dp"
             android:text="Usuń"
-            android:layout_weight="1.0"
-            android:onClick="deleteNote"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
-    <ScrollView android:id="@+id/scroll" 
-        android:layout_height="0dip"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:background="@color/yellow"
-        android:layout_weight="1.0">
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:background="@color/yellow" >
 
-		<TextSwitcher
+        <TextSwitcher
             android:id="@+id/noteArea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
         </TextSwitcher>
+    </ScrollView>
 
-	</ScrollView>
-	
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/black"
-		android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Autor"        
             android:layout_weight="1.0"
-            android:onClick="addNote"/>
+            android:onClick="addNote"
+            android:text="Autor"
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Data"
             android:layout_weight="1.0"
-            android:onClick="deleteNote"/>
+            android:onClick="deleteNote"
+            android:text="Data"
+            android:textColor="@color/white" />
     </LinearLayout>
- 
+
     <LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/black"
-		android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal" >
+
         <Button
             android:id="@+id/prev"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Poprzedni"
+            android:layout_margin="10dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/sign_button_shape"
             android:onClick="previousNote"
-            android:layout_weight="1.0"/>
+            android:padding="5dp"
+            android:text="Poprzedni"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Następny"
+            android:layout_margin="10dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/sign_button_shape"
             android:onClick="nextNote"
-            android:layout_weight="1.0"/>
+            android:padding="5dp"
+            android:text="Następny"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

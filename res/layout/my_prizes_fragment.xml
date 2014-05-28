@@ -2,68 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
-	
-	    
-	    <LinearLayout
-	        android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:orientation="vertical" 
-        	>
-	    	<TextView
-	    		android:id="@+id/myPrizesUserTextView"
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:text="Użytkownik:" />
+    android:background="@drawable/background"
+    android:orientation="vertical" >
 
-    		<Spinner
-	    	    android:id="@+id/myPrizesUserSpinner"
-        		android:layout_width="match_parent"
-        		android:layout_height="wrap_content" />
-    		<LinearLayout
-        		android:layout_width="match_parent"
-        		android:layout_height="wrap_content"
-        		android:orientation="horizontal" >
-		
-		        <TextView
-            		android:id="@+id/textView1"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_weight="1.0"/>
-		
-		        <Button
-            		android:id="@+id/myPrizesAcceptButton"
-            		style="?android:attr/buttonStyleSmall"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:padding="10sp"
-            		android:background="@drawable/oval_button_selector"
-            		android:text="Zatwierdź" />
-		        
-    		</LinearLayout>
-    		
-		
-    	</LinearLayout>
-	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-	<ListView
-	    android:id="@+id/myPrizesListView"
-	    android:layout_width="fill_parent"
-	    android:layout_marginLeft="@dimen/activity_vertical_margin"
+        <TextView
+            android:id="@+id/myPrizesUserTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Użytkownik:" />
+
+        <Spinner
+            android:id="@+id/myPrizesUserSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0" />
+
+            <Button
+                android:id="@+id/myPrizesAcceptButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/sign_button_shape"
+                android:padding="10sp"
+                android:text="Zatwierdź" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/myPrizesListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-	    android:layout_height="wrap_content"
-	    android:background="@layout/list_shape"
-	    android:layout_weight="1.0" >
-	</ListView>
+        android:layout_weight="1.0"
+        android:background="@layout/list_shape" >
+    </ListView>
 
-	<TextView
-	    android:id="@+id/myPrizesGainedPointsTextView"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Zdobyte punkty: " />
+    <TextView
+        android:id="@+id/myPrizesGainedPointsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zdobyte punkty: " />
 
 </LinearLayout>
-

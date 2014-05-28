@@ -17,6 +17,8 @@
     <color name="black">#000000</color>
     <color name="green">#55CC44</color>
     <color name="yellow">#FFFF80</color>
+    <color name="darkGreen">#44A436</color>
+    <color name="very_light_gray">#C3C3C3</color>
 
     <string-array name="colors">
         <item>czerwony</item>
@@ -25,7 +27,6 @@
         <item>purpurowy</item>
         <item>żółty</item>
     </string-array>
-    
     <string-array name="categories">
         <item>Sprzątanie</item>
         <item>Gotowanie</item>

@@ -137,8 +137,8 @@
                         android:layout_margin="10dp"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0"
                         android:paddingBottom="7dp"
+                        android:text="0"
                         android:textAppearance="@android:style/TextAppearance.Medium"
                         android:textColor="@color/black" />
                 </RelativeLayout>
@@ -155,10 +155,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:background="@drawable/oval_button_selector"
                         android:layout_alignParentRight="true"
-                        android:text="Dodaj produkt" 
-                        android:onClick="addProduct"/>
+                        
+                        android:background="@drawable/sign_button_shape"
+                        android:onClick="addProduct"
+                        android:padding="5dp"
+                        android:text="Dodaj produkt" />
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

@@ -47,8 +47,10 @@
         android:id="@+id/copyList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/oval_button_selector"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/sign_button_shape"
+        android:padding="5dp"
         android:text="Skopiuj" />
 
 </RelativeLayout>

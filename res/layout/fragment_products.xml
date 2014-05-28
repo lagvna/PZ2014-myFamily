@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/green">
+    android:background="@color/green"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/addproduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/oval_button_selector"
+        android:layout_margin="10dp"
+        android:background="@drawable/sign_button_shape"
+        android:padding="5dp"
         android:text="Dodaj produkt" />
 
     <GridView

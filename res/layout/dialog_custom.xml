@@ -14,24 +14,23 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-         <EditText
+        <EditText
             android:id="@+id/dialogEventNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="nazwa wydarzenia"
-            android:ems="10" >
+            android:ems="10"
+            android:hint="nazwa wydarzenia" >
 
             <requestFocus />
         </EditText>
-        
-        
+
         <EditText
             android:id="@+id/dialogEventNoteEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-             android:hint="notatka do wydarzenia"
-            android:ems="10" >
+            android:ems="10"
+            android:hint="notatka do wydarzenia"
+            android:padding="20dp" >
 
             <requestFocus />
         </EditText>
@@ -50,18 +49,22 @@
                 android:id="@+id/dialogCancelButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/sign_button_shape"
+                android:padding="5dp"
                 android:text="Anuluj" />
 
             <Button
                 android:id="@+id/dialogOkButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/sign_button_shape"
+                android:padding="5dp"
                 android:text="Ok" />
-
         </LinearLayout>
-
     </LinearLayout>
- 
+
 </RelativeLayout>

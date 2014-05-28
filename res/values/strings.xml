@@ -88,5 +88,11 @@
     <string name="title_activity_fragment_prize">FragmentPrize</string>
     <string name="title_activity_fragment_add_prize">FragmentAddPrize</string>
     <string name="title_activity_prize">PrizeActivity</string>
+    <string name="title_activity_taks">TaksActivity</string>
+    <string name="title_activity_fragment_old_task">FragmentOldTask</string>
+    <string name="title_activity_picture">PictureActivity</string>
+    <string name="title_activity_galery">GaleryActivity</string>
+    <string name="title_activity_utils">UtilsActivity</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
 
 </resources>

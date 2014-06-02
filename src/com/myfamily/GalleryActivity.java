@@ -49,7 +49,8 @@ public class GalleryActivity extends Activity {
 
 		registerForContextMenu(findViewById(R.id.imageView1));
 		//registerForContextMenu(findViewById(R.id.imageView1));
-		//initialize();
+		//new GetPicture(null,this).execute();
+		initialize();
 		//System.out.println("ROZMIAR LISTY!!!::::"+imagePaths.size());
 		/*if(!imagePaths.isEmpty()) {
 			Bitmap image = decodeFile(imagePaths.get(0));
@@ -74,11 +75,7 @@ public class GalleryActivity extends Activity {
 		gallery.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				/*Toast.makeText(GalleryActivity.this,
-						"Your selected position = " + position,
-						Toast.LENGTH_SHORT).show();*/
-				// show the selected Image
-				// selectedImage.setImageResource(mImageIds[position]);
+
 				Bitmap image = decodeFile(imagePaths.get(position));
 				Matrix matrix = new Matrix();
 				matrix.postRotate(90);

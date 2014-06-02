@@ -1,16 +1,22 @@
 package com.myfamily;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,17 +26,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.async.RemoveSth;
-import com.async.VoteTask;
 import com.classes.DataHolder;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
-import com.fragments.FragmentOldTasks;
+import com.classes.Utils;
 
 public class MainActivity extends ListActivity {
 
@@ -39,6 +41,7 @@ public class MainActivity extends ListActivity {
 	private Uri fileUri;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
+	private String lastFile = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +62,21 @@ public class MainActivity extends ListActivity {
 					"0000-00-00 00:00:00" + "{\"events\":[]}", 0,
 					this.getApplicationContext());
 		}
-		
+
 		if (!JSonWriter.getInstance().ifExist("prizes",
 				this.getApplicationContext())) {
 			JSonWriter.getInstance().appendToFile("prizes",
 					"0000-00-00 00:00:00" + "{\"prizes\":[]}", 0,
 					this.getApplicationContext());
 		}
-		
+
 		if (!JSonWriter.getInstance().ifExist("tasks",
 				this.getApplicationContext())) {
 			JSonWriter.getInstance().appendToFile("tasks",
 					"0000-00-00 00:00:00" + "{\"tasks\":[]}", 0,
 					this.getApplicationContext());
 		}
-		
+
 		System.out.println(JSonReader.getInstance().readFile("events",
 				this.getApplicationContext()));
 		menuItems = new String[9];
@@ -119,89 +122,105 @@ public class MainActivity extends ListActivity {
 					Intent i = new Intent(MainActivity.this,
 							PrizeActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 5)	{
+				} else if (position == 5) {
 					Intent i = new Intent(MainActivity.this,
 							ExpenseActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 6)	{
+				} else if (position == 6) {
 					Intent i = new Intent(MainActivity.this,
 							TasksActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 7)	{
+				} else if (position == 7) {
 					Intent i = new Intent(MainActivity.this,
 							GalleryActivity.class);
 					MainActivity.this.startActivity(i);
-				} else if (position == 8)	{
+				} else if (position == 8) {
 					fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 					startActivityForResult(new Intent(
-							
-							MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
+
+					MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
 							MediaStore.EXTRA_OUTPUT, fileUri),
 							CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-					
+
 				}
 
-
-				
-				
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    // Check which request we're responding to
-	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-	        // Make sure the request was successful
-	        if (resultCode == RESULT_OK) {
-	            System.out.println("WROCILEM Z APARATU");
-	        }
-	    }
+		// Check which request we're responding to
+		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+			// Make sure the request was successful
+			if (resultCode == RESULT_OK) {
+				ArrayList<String> list = new Utils(this).getFilePaths();
+				File file = new File(list.get(0));
+				Date last = new Date(file.lastModified());
+				int j =0;
+				for(int i=1;i<list.size();i++) {
+					file = new File(list.get(i));
+					
+					if(last.getTime()< new Date(file.lastModified()).getTime()) {
+						last = new Date(file.lastModified());
+						j = i;
+					}
+				}
+				
+				file = new File(list.get(j));
+				lastFile = file.getAbsolutePath();
+				showDialog("Wprowadz nazwa zdjecia");
+				//System.out.println("IMAGE PATH" + file.getAbsolutePath());
+			}
+		}
 	}
-	
-	
-	void showDialog(String title,String note) {
-		
-		
-		final Dialog dialog = new Dialog(this.getApplicationContext());
-		dialog.setContentView(R.layout.custom_dialog_task);
+
+
+	void showDialog(String title) {
+
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.picture_name_dialog);
 		dialog.setTitle(title);
 
 		// set the custom dialog components - text, image and button
-		TextView text = (TextView) dialog.findViewById(R.id.taskNoteTextView);
-		text.setText(note);
-		
-		
-		
-		
-		
+		final EditText textField = (EditText) dialog
+				.findViewById(R.id.pictureNameEditText);
+
 		Button dialogOkButton = (Button) dialog
-				.findViewById(R.id.taskdialogOkButton);
-		
+				.findViewById(R.id.photodialogOkButton);
+
 		dialogOkButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				
-				
+
+				File dir = new File(android.os.Environment
+						.getExternalStorageDirectory()
+						+ File.separator
+						+ DataHolder.PHOTO_ALBUM);
+				if (dir.exists()) {
+					File from = new File(lastFile);
+					File to = new File(dir, textField.getText() + ".jpg");
+					if (from.exists())
+						from.renameTo(to);
+				}
+				dialog.dismiss();
 			}
 		});
 
 		Button dialogCancelButton = (Button) dialog
-				.findViewById(R.id.taskdialogCancelButton);
+				.findViewById(R.id.photodialogCancelButton);
 		// if button is clicked, close the custom dialog
 		dialogCancelButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+
 				dialog.dismiss();
 			}
 		});
-		
-		
+
 		dialog.show();
 	}
-	
+
 	private static Uri getOutputMediaFileUri(int type) {
 		return Uri.fromFile(getOutputMediaFile(type));
 	}
@@ -242,6 +261,5 @@ public class MainActivity extends ListActivity {
 
 		return mediaFile;
 	}
-
 
 }

@@ -49,24 +49,8 @@ public class PhotosManagementActivity extends Activity {
 		context = this;
 		photosListView = (ListView) findViewById(R.id.photosList);
 		registerForContextMenu(findViewById(R.id.photosList));
-		photosListView.setOnItemLongClickListener(new OnItemLongClickListener() {
         	
-       	 public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                    int pos, long id) {
-                // TODO Auto-generated method stub
-
-       		
-                Log.v("long clicked","pos: " + pos);
-                selectedPhoto = adapter.getItem(pos);
-                if(!selectedPhoto.getName().equals(noPhotosString)){
-               	 Toast.makeText(context,selectedPhoto.getName(),1000).show();
-                }
-                
-                
-                return true;
-            }
        	
-		});
 		new GetPhotos().execute();
 	}
 	@Override

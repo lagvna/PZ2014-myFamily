@@ -1,5 +1,7 @@
 package com.http;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import com.classes.DataHolder;
@@ -206,10 +213,11 @@ public class HttpHandler {
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
 		nameValuePairs.add(new BasicNameValuePair("name", dataArray[0]));
-		nameValuePairs.add(new BasicNameValuePair("points_to_gain", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("points_to_gain",
+				dataArray[1]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		client = new DefaultHttpClient();
 		response = client.execute(post);
@@ -217,13 +225,13 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-	
+
 	public String postDataGetUsers() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -234,17 +242,19 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-	
+
 	public String postDataGetPrizes() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/get_prizes.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("whos_prizes_login", dataArray[0]));
-		nameValuePairs.add(new BasicNameValuePair("gained_or_all", dataArray[1]));
-		nameValuePairs.add(new BasicNameValuePair("category",dataArray[2]));
+		nameValuePairs.add(new BasicNameValuePair("whos_prizes_login",
+				dataArray[0]));
+		nameValuePairs
+				.add(new BasicNameValuePair("gained_or_all", dataArray[1]));
+		nameValuePairs.add(new BasicNameValuePair("category", dataArray[2]));
 		nameValuePairs.add(new BasicNameValuePair("date_from", "0"));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -255,7 +265,7 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-	
+
 	public String postDataAddTask() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
@@ -269,7 +279,7 @@ public class HttpHandler {
 		nameValuePairs.add(new BasicNameValuePair("points", dataArray[3]));
 		nameValuePairs.add(new BasicNameValuePair("deadline", dataArray[4]));
 		nameValuePairs.add(new BasicNameValuePair("category", dataArray[5]));
-		//category
+		// category
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
@@ -279,16 +289,16 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-	
+
 	public String postDataVoteTask() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("done","1"));
-		nameValuePairs.add(new BasicNameValuePair("task_Id",dataArray[0]));
+		nameValuePairs.add(new BasicNameValuePair("done", "1"));
+		nameValuePairs.add(new BasicNameValuePair("task_Id", dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
@@ -298,17 +308,17 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-	
+
 	public String postDataGetTasks() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
 				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id",DataHolder
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("direction","all"));
-		nameValuePairs.add(new BasicNameValuePair("type","5"));
-		nameValuePairs.add(new BasicNameValuePair("date_from","0"));
+		nameValuePairs.add(new BasicNameValuePair("direction", "all"));
+		nameValuePairs.add(new BasicNameValuePair("type", "5"));
+		nameValuePairs.add(new BasicNameValuePair("date_from", "0"));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		client = new DefaultHttpClient();
@@ -318,4 +328,32 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
+
+	public String postPicureSend() throws IOException {
+
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpContext localContext = new BasicHttpContext();
+		HttpPost httpPost = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+		String fileName = dataArray[0];
+		try {
+			MultipartEntity entity = new MultipartEntity(
+					HttpMultipartMode.BROWSER_COMPATIBLE);
+
+			entity.addPart("file", new FileBody(new File(dataArray[0])));
+
+			httpPost.setEntity(entity);
+
+			HttpResponse response = httpClient.execute(httpPost, localContext);
+
+			ByteArrayOutputStream outstream = new ByteArrayOutputStream();
+			response.getEntity().writeTo(outstream);
+			return outstream.toString();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "jakis blad z serwerem chyba";
+	}
+
 }

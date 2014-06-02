@@ -93,6 +93,7 @@ public class PictureActivity extends Activity {
 		// Create a media file name
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
 				.format(new Date());
+		System.out.println("MOJ ZNACZNIK CZASU JEST TUTAJ::::"+timeStamp);
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator

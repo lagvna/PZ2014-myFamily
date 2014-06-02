@@ -40,6 +40,7 @@ public class GalleryImageAdapter extends BaseAdapter
     }
 
     public int getCount() {
+    	imagePaths = utils.getFilePaths();
         return imagePaths.size();
     }
 
@@ -55,10 +56,16 @@ public class GalleryImageAdapter extends BaseAdapter
     // Override this method according to your need
     public View getView(int index, View view, ViewGroup viewGroup) 
     {
+    	 
         // TODO Auto-generated method stub
         ImageView i = new ImageView(mContext);
-        
-        Bitmap image = decodeFile(imagePaths.get(index));
+        Bitmap image;
+        if(index == imagePaths.size()) {
+        	image = decodeFile(imagePaths.get(index-1));
+        } else {
+        	image = decodeFile(imagePaths.get(index));
+        }
+       
 		Matrix matrix = new Matrix();
 		matrix.postRotate(90);
 		Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0, 0,

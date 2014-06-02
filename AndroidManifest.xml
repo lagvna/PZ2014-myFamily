@@ -154,6 +154,10 @@
             android:name="com.myfamily.GalleryActivity"
             android:label="@string/title_activity_gallery" >
         </activity>
+        <activity
+            android:name="com.myfamily.PhotosManagementActivity"
+            android:label="@string/title_activity_photos_management" >
+        </activity>
     </application>
 
 </manifest>

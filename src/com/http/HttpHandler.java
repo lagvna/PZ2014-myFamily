@@ -349,7 +349,9 @@ public class HttpHandler {
 			ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 			response.getEntity().writeTo(outstream);
 			return outstream.toString();
-
+     
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

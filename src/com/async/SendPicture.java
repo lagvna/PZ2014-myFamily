@@ -41,6 +41,8 @@ public class SendPicture extends AsyncTask<Void, Void, Void>{
 		}
 		return null;
 
+		
+		
 	}
 
 	@Override

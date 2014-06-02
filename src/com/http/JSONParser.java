@@ -14,6 +14,7 @@ import com.classes.Family;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
 import com.classes.MyEvent;
+import com.classes.Photo;
 import com.classes.Prize;
 import com.classes.Task;
 import com.classes.User;
@@ -28,6 +29,7 @@ public class JSONParser {
 	private ArrayList<Task> tasksList = new ArrayList<Task>();
 	private ArrayList<Prize> allPrizesList = new ArrayList<Prize>();
 	private ArrayList<Prize> gainedPrizesList = new ArrayList<Prize>();
+	private ArrayList<Photo> photosList = new ArrayList<Photo>();
 	private ArrayList<User> userList = new ArrayList<User>();
 
 	public JSONParser(String inputStream) {
@@ -404,6 +406,48 @@ public class JSONParser {
 				stringArray.add(new String(errorCode));
 				stringArray.add(new String(message));
 				stringArray.add(new String(points));
+				resultArray.clear();
+				resultArray.add(stringArray);
+				return resultArray;
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return resultArray;
+	}
+	public ArrayList getPhotosResult() throws JSONException {
+		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+		int n = jSonArray.length();
+
+		JSONObject jSonObject = jSonArray.getJSONObject(0);
+		//String points = jSonObject.getString("points");
+		String errorCode = jSonObject.getString("success");
+		String message = jSonObject.getString("message");
+		
+		JSONArray photos;
+
+		try {
+			if (!errorCode.equals("0")) { // sukces
+
+				photos = (JSONArray) jSonObject.get("photos");
+				for (int i = 0; i < photos.length(); i++) {
+					JSONObject object = photos.getJSONObject(i);
+					photosList.add(new Photo(
+							
+							object.getString("Id"), 
+							object.getString("name"),
+							object.getString("date")));
+				}
+				resultArray.add(photosList);
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
+				resultArray.add(stringArray);
+				return resultArray;
+			} else {
+				stringArray.add(new String(errorCode));
+				stringArray.add(new String(message));
 				resultArray.clear();
 				resultArray.add(stringArray);
 				return resultArray;

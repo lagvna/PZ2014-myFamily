@@ -49,7 +49,6 @@ public class GalleryActivity extends Activity {
 
 		registerForContextMenu(findViewById(R.id.imageView1));
 		//registerForContextMenu(findViewById(R.id.imageView1));
-		new GetPicture(null,this).execute();
 		//initialize();
 		//System.out.println("ROZMIAR LISTY!!!::::"+imagePaths.size());
 		/*if(!imagePaths.isEmpty()) {

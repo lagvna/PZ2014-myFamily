@@ -76,7 +76,7 @@ public class MainActivity extends ListActivity {
 		
 		System.out.println(JSonReader.getInstance().readFile("events",
 				this.getApplicationContext()));
-		menuItems = new String[9];
+		menuItems = new String[10];
 		menuItems[0] = "Notatki";
 		menuItems[1] = "Dodaj użytkownika";
 		menuItems[2] = "Zakupy";
@@ -86,6 +86,7 @@ public class MainActivity extends ListActivity {
 		menuItems[6] = "Zadania";
 		menuItems[7] = "Zdjecia";
 		menuItems[8] = "Zrob zdjecie";
+		menuItems[9] = "Zdjecia na serwerze";
 
 		// komentarz
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -139,6 +140,10 @@ public class MainActivity extends ListActivity {
 							MediaStore.EXTRA_OUTPUT, fileUri),
 							CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 					
+				} else if (position == 9)	{
+					Intent i = new Intent(MainActivity.this,
+							PhotosManagementActivity.class);
+					MainActivity.this.startActivity(i);
 				}
 
 

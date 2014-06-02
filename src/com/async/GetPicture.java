@@ -11,15 +11,16 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.AddFamilyActivity;
 import com.myfamily.GalleryActivity;
+import com.myfamily.PhotosManagementActivity;
 
 public class GetPicture extends AsyncTask<Void, Void, Void>{
 
-	private GalleryActivity callingActivity;
+	private PhotosManagementActivity callingActivity;
 	private String responseText = null;
 	private String dataArray[];
 	 
 	
-	public GetPicture(String dataArray[],GalleryActivity callingActivity) {
+	public GetPicture(String dataArray[],PhotosManagementActivity callingActivity) {
 		this.callingActivity = callingActivity;
 		this.dataArray = dataArray;
 	}
@@ -49,7 +50,6 @@ public class GetPicture extends AsyncTask<Void, Void, Void>{
 	protected void onPostExecute(Void result) {
 		callingActivity.hideProgressDial();
 		callingActivity.showToast(responseText);
-		callingActivity.initialize();
 		//callingActivity.showToast(DataHolder.getInstance().getSession());
 		//JSONParser jp = new JSONParser(responseText);
 		/*try {

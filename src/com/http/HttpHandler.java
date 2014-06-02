@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,6 +248,20 @@ public class HttpHandler {
 
 	}
 
+	public String postDataGetPhotos() throws IOException {
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
+				.getInstance().getSession()));
+		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
+				.getInstance().getStringFamilyId()));
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		client = new DefaultHttpClient();
+		response = client.execute(post);
+		entity = response.getEntity();
+
+		return EntityUtils.toString(entity);
+	}
 	public String postDataGetPrizes() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/get_prizes.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
@@ -429,5 +444,6 @@ public class HttpHandler {
 
 		return "GOWNO";
 	}
+
 
 }

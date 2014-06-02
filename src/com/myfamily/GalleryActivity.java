@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.adapters.GalleryImageAdapter;
+import com.async.GetPicture;
 import com.async.SendPicture;
 import com.classes.Utils;
 
@@ -48,16 +49,19 @@ public class GalleryActivity extends Activity {
 
 		registerForContextMenu(findViewById(R.id.imageView1));
 		//registerForContextMenu(findViewById(R.id.imageView1));
+		new GetPicture(null,this).execute();
+		//initialize();
+		//System.out.println("ROZMIAR LISTY!!!::::"+imagePaths.size());
+		/*if(!imagePaths.isEmpty()) {
+			Bitmap image = decodeFile(imagePaths.get(0));
+			Matrix matrix = new Matrix();
+			matrix.postRotate(90);
+			Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0, 0,
+					image.getWidth(), image.getHeight(),
+					matrix, true);
+			selectedImage.setImageBitmap(rotatedBitmap);
+		}*/
 		
-		initialize();
-
-		Bitmap image = decodeFile(imagePaths.get(0));
-		Matrix matrix = new Matrix();
-		matrix.postRotate(90);
-		Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0, 0,
-				image.getWidth(), image.getHeight(),
-				matrix, true);
-		selectedImage.setImageBitmap(rotatedBitmap);
 		
 	}
 	
@@ -110,7 +114,7 @@ public class GalleryActivity extends Activity {
 	private void removePicture(int index) {
 		
 		String path = imagePaths.get(position);
-		imagePaths.remove(0);
+		//imagePaths.remove(0);
 		new SendPicture(new String[]{path},this).execute();
 		System.out.println("TUTAJ JEST MOJA SCIAZKA::"+path);
 		//File file = new File(path);

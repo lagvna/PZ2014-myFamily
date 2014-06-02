@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,16 +13,24 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.async.RemoveSth;
+import com.async.VoteTask;
 import com.classes.DataHolder;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
+import com.fragments.FragmentOldTasks;
 
 public class MainActivity extends ListActivity {
 
@@ -129,6 +138,7 @@ public class MainActivity extends ListActivity {
 							MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
 							MediaStore.EXTRA_OUTPUT, fileUri),
 							CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+					
 				}
 
 
@@ -138,7 +148,59 @@ public class MainActivity extends ListActivity {
 		});
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    // Check which request we're responding to
+	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+	        // Make sure the request was successful
+	        if (resultCode == RESULT_OK) {
+	            System.out.println("WROCILEM Z APARATU");
+	        }
+	    }
+	}
 	
+	
+	void showDialog(String title,String note) {
+		
+		
+		final Dialog dialog = new Dialog(this.getApplicationContext());
+		dialog.setContentView(R.layout.custom_dialog_task);
+		dialog.setTitle(title);
+
+		// set the custom dialog components - text, image and button
+		TextView text = (TextView) dialog.findViewById(R.id.taskNoteTextView);
+		text.setText(note);
+		
+		
+		
+		
+		
+		Button dialogOkButton = (Button) dialog
+				.findViewById(R.id.taskdialogOkButton);
+		
+		dialogOkButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				
+				
+			}
+		});
+
+		Button dialogCancelButton = (Button) dialog
+				.findViewById(R.id.taskdialogCancelButton);
+		// if button is clicked, close the custom dialog
+		dialogCancelButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				dialog.dismiss();
+			}
+		});
+		
+		
+		dialog.show();
+	}
 	
 	private static Uri getOutputMediaFileUri(int type) {
 		return Uri.fromFile(getOutputMediaFile(type));

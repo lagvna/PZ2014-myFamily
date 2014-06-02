@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
     tools:context=".LoginActivity" >
 
     <LinearLayout
@@ -18,36 +18,33 @@
         android:orientation="vertical" >
 
         <EditText
-		   android:id="@+id/userNameEditText"
-		   android:layout_width="fill_parent"
-		   android:layout_height="wrap_content"
-		   android:background="@drawable/oval_edit_text"
-		   android:layout_margin="10dp"
-		   android:hint="@string/userName"
-		   android:padding="10dp"
-		/>
-        
+            android:id="@+id/userNameEditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/oval_edit_text"
+            android:hint="@string/userName"
+            android:padding="10dp" />
+
         <EditText
-		   android:id="@+id/passwordEditText"
-		   android:layout_width="fill_parent"
-		   android:layout_height="wrap_content"
-		   android:inputType="textPassword"
-		   android:layout_margin="10dp"
-		   android:padding="10dp"
-		   android:hint="@string/userPass"
-		   android:background="@drawable/oval_edit_text"
-		/>
+            android:id="@+id/passwordEditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/oval_edit_text"
+            android:hint="@string/userPass"
+            android:inputType="textPassword"
+            android:padding="10dp" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/oval_button_selector"
-            android:layout_margin="15dp"
-            android:onClick="login"
             android:layout_gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/sign_button_shape"
+            android:onClick="login"
+            android:padding="5dp"
             android:text="@string/loginText" />
 
         <TextView
@@ -56,10 +53,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:clickable="true"
-            android:textColor="@drawable/text_color"
             android:onClick="createAccount"
-            android:text="@string/createAccount" />
-        
+            android:text="@string/createAccount"
+            android:textColor="@drawable/text_color" />
     </LinearLayout>
 
 </RelativeLayout>

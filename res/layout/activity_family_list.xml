@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical"
-              android:background="@drawable/background">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/familiList" />
 
-  		<ListView
-               android:id="@+id/familyListView"
-               android:layout_width="fill_parent"
-               android:layout_height="0dip"
-               android:layout_weight="1"
-               android:layout_marginLeft="@dimen/activity_vertical_margin"
-               android:layout_marginRight="@dimen/activity_vertical_margin"
-               android:layout_marginTop="@dimen/activity_vertical_margin"
-               android:background="@layout/list_shape"
-               android:fastScrollEnabled="true">
-       </ListView>
-
+    <ListView
+        android:id="@+id/familyListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
+        android:background="@layout/list_shape"
+        android:fastScrollEnabled="true" >
+    </ListView>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/addFamilyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/oval_button_selector"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:background="@drawable/sign_button_shape"
+            android:padding="5dp"
             android:text="@string/addUser" />
-            
     </LinearLayout>
+
 </LinearLayout>

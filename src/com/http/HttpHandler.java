@@ -379,7 +379,7 @@ public class HttpHandler {
 		return "jakis blad z serwerem chyba";
 	}
 
-	public String postGetPicture() throws IOException {
+	/*public String postGetPicture() throws IOException {
 		long filesize;
 		int len;
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
@@ -409,7 +409,7 @@ public class HttpHandler {
 			fileOutput = new FileOutputStream(new File(path,
 					"file_copyformserver.jpg"));
 
-			/*while ((len = content.read(buffer, 0, 1024)) > 0)*/ 
+			while ((len = content.read(buffer, 0, 1024)) > 0) 
 			
 			while (filesize>0){
 				filesize -= len = content.read(buffer, 0, 200000);
@@ -427,7 +427,7 @@ public class HttpHandler {
 
 
 		return "cos nie tak";
-	}
+	}*/
 
 
 }

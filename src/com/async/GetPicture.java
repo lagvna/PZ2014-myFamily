@@ -3,7 +3,6 @@ package com.async;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,12 +77,7 @@ public class GetPicture extends AsyncTask<HttpResponse, Integer, String>{
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
 		nameValuePairs.add(new BasicNameValuePair("file_Id", dataArray[0]));
-		try {
-			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		try {
 			HttpResponse execute = client.execute(post,localContext);

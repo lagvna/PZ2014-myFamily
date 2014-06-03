@@ -14,9 +14,11 @@ import com.classes.ShoppingList;
 public class JSONParser2 {
 
 	private String inputStream;
+	private ArrayList<ArrayList> resultArray = new ArrayList<ArrayList>();
 	private ArrayList<Note> notesArray = null;
 	private ArrayList<Product> productsArray = null;
 	private ArrayList<ShoppingList> shoppingListArray = null;
+	private ArrayList<String> stringArray = new ArrayList<String>();
 	private ArrayList<Expense> expensesArray = null;
 	private ShoppingList sl = null;
 
@@ -101,18 +103,21 @@ public class JSONParser2 {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		Product product;
 
+		System.out.println("Input: " + inputStream);
+
 		JSONObject jo = jSonArray.getJSONObject(0);
 		String errorCode = jo.getString("success");
 		String message = jo.getString("message");
 		System.out.println(message);
 
 		if (!errorCode.equals("0")) {
-			JSONObject jo2 = jo.getJSONObject("created_product");
+			JSONArray jo2 = jo.getJSONArray("created_product");
+			JSONObject jo3 = jo2.getJSONObject(0);
 
-			int id = jo2.getInt("Id");
-			String category = jo2.getString("category");
-			String name = jo2.getString("name");
-			String price = jo2.getString("price");
+			int id = jo3.getInt("Id");
+			String category = jo3.getString("category");
+			String name = jo3.getString("name");
+			String price = jo3.getString("price");
 
 			product = new Product(id, name, category, price);
 		} else {
@@ -156,9 +161,9 @@ public class JSONParser2 {
 		return sl;
 	}
 
-	public ArrayList<ShoppingList> getGetShoppingListsResult()
-			throws JSONException {
+	public ArrayList getGetShoppingListsResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
+		System.out.println("SHOPPING LISTS: " + inputStream);
 		JSONObject jo = jSonArray.getJSONObject(0);
 		String errorCode = jo.getString("success");
 		String msg = jo.getString("message");
@@ -177,12 +182,82 @@ public class JSONParser2 {
 		}
 
 		return shoppingListArray;
+
+		/*
+		 * ArrayList<ShoppingList> shoppingLists = new
+		 * ArrayList<ShoppingList>(); ArrayList<String> deletedShoppingListsId =
+		 * new ArrayList<String>(); JSONArray jSonArray = new JSONArray("[" +
+		 * inputStream + "]"); int n = jSonArray.length();
+		 * 
+		 * JSONObject jSonObject = jSonArray.getJSONObject(0); String errorCode
+		 * = jSonObject.getString("success"); String message =
+		 * jSonObject.getString("message"); String newEventCode; String
+		 * deletedEventCode;
+		 * 
+		 * JSONArray shoppingLists; JSONArray deletedSL; JSONObject object;
+		 * 
+		 * try { if (!errorCode.equals("0")) { // sukces
+		 * 
+		 * newEventCode = jSonObject .getString("new_shopping_list_success");
+		 * deletedEventCode = jSonObject
+		 * .getString("deleted_shopping_lists_success");
+		 * 
+		 * if (!newEventCode.equals("0")) { // jesli sa nowe wydarzenia //
+		 * doddania
+		 * 
+		 * shoppingLists = (JSONArray) jSonObject.get("new_shopping_lists"); for
+		 * (int i = 0; i < shoppingLists.length(); i++) { object =
+		 * shoppingLists.getJSONObject(i); shoppingLists.add(new
+		 * ShoppingList(object.getInt("id"), object.getString("owner"), object
+		 * .getString("name"), object .getString("total_cost"), object
+		 * .getString("creation_date"))); }
+		 * 
+		 * resultArray.add(shoppingLists); } else {
+		 * 
+		 * String oldJson = JSonReader.getInstance().readFile( "shoppinglists",
+		 * context); jSonArray = new JSONArray("[" + oldJson.substring(19) +
+		 * "]"); jSonObject = jSonArray.getJSONObject(0); events = (JSONArray)
+		 * jSonObject.get("events");
+		 * 
+		 * for (int i = 0; i < events.length(); i++) { object =
+		 * events.getJSONObject(i); shoppingLists.add(new
+		 * ShoppingList(object.getInt("id"), object.getString("owner"), object
+		 * .getString("name"), object .getString("total_cost"), object
+		 * .getString("creation_date"))); } resultArray.add(shoppingLists); }
+		 * 
+		 * if (!deletedEventCode.equals("0")) { // jesli sa jakies zadanie // do
+		 * usuniecia z pliku
+		 * 
+		 * deletedEvents = (JSONArray) jSonObject .get("deleted_events"); for
+		 * (int i = 0; i < deletedEvents.length(); i++) { object =
+		 * deletedEvents.getJSONObject(i);
+		 * deletedEventsId.add(object.getString("Id")); }
+		 * resultArray.add(deletedEventsId); }
+		 * 
+		 * // makeEventsJSon(eventsList); stringArray.add(new
+		 * String(errorCode)); stringArray.add(new String(message));
+		 * stringArray.add(newEventCode); stringArray.add(deletedEventCode);
+		 * resultArray.add(stringArray); return resultArray;
+		 * 
+		 * } else { stringArray.add(new String(errorCode)); stringArray.add(new
+		 * String(message));
+		 * 
+		 * resultArray.clear(); resultArray.add(stringArray); return
+		 * resultArray; }
+		 * 
+		 * } catch (JSONException e) { e.printStackTrace(); }
+		 * 
+		 * return resultArray;
+		 */
+
 	}
 
 	public ArrayList<Product> getGetProductsResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
 		String errorCode = jo.getString("success");
+
+		System.out.println("PRODUCTS: " + inputStream);
 
 		if (!errorCode.equals("0")) {
 			productsArray = new ArrayList<Product>();

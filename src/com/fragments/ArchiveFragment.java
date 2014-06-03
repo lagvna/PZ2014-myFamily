@@ -52,9 +52,9 @@ public class ArchiveFragment extends Fragment {
 
 		lv = (ListView) rootView.findViewById(R.id.listArchive);
 		registerForContextMenu(rootView.findViewById(R.id.listArchive));
-		
+
 		createList();
-		
+
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -73,13 +73,9 @@ public class ArchiveFragment extends Fragment {
 	}
 
 	public void createList() {
-		
-		
-		
-		
+
 		int len = sa.shoppingLists.size();
-		
-		
+
 		CustomRow_data = new ArrayList<CustomRow>();
 
 		for (int i = 0; i < len; i++) {
@@ -93,8 +89,7 @@ public class ArchiveFragment extends Fragment {
 		listAdapter = new ListViewAdapter(getActivity(), R.layout.element,
 				CustomRow_data);
 		lv.setAdapter(listAdapter);
-		}
-	
+	}
 
 	private int findList(String name) {
 

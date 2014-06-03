@@ -1,6 +1,5 @@
 package com.myfamily;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,15 +7,11 @@ import java.util.Date;
 
 import android.app.Dialog;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -142,8 +137,8 @@ public class MainActivity extends ListActivity {
 					MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
 							MediaStore.EXTRA_OUTPUT, fileUri),
 							CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-					
-				} else if (position == 9)	{
+
+				} else if (position == 9) {
 					Intent i = new Intent(MainActivity.this,
 							PhotosManagementActivity.class);
 					MainActivity.this.startActivity(i);
@@ -162,24 +157,24 @@ public class MainActivity extends ListActivity {
 				ArrayList<String> list = new Utils(this).getFilePaths();
 				File file = new File(list.get(0));
 				Date last = new Date(file.lastModified());
-				int j =0;
-				for(int i=1;i<list.size();i++) {
+				int j = 0;
+				for (int i = 1; i < list.size(); i++) {
 					file = new File(list.get(i));
-					
-					if(last.getTime()< new Date(file.lastModified()).getTime()) {
+
+					if (last.getTime() < new Date(file.lastModified())
+							.getTime()) {
 						last = new Date(file.lastModified());
 						j = i;
 					}
 				}
-				
+
 				file = new File(list.get(j));
 				lastFile = file.getAbsolutePath();
 				showDialog("Wprowadz nazwa zdjecia");
-				//System.out.println("IMAGE PATH" + file.getAbsolutePath());
+				// System.out.println("IMAGE PATH" + file.getAbsolutePath());
 			}
 		}
 	}
-
 
 	void showDialog(String title) {
 

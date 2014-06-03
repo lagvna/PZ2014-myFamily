@@ -142,6 +142,8 @@ public class ProductsFragment extends Fragment {
 		sa.products.remove(p);
 
 		sa.deleteProduct(toDel);
+		ia = new ImageAdapter(getActivity(), sa.products);
+		gv.setAdapter(ia);
 	}
 
 	public void showProgressDial() {

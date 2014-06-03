@@ -71,6 +71,7 @@ public class GetProducts extends AsyncTask<Void, Void, Void> {
 								Toast.LENGTH_SHORT).show();
 					}
 				});
+
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

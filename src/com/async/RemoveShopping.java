@@ -54,9 +54,9 @@ public class RemoveShopping extends AsyncTask<Void, Void, Void> {
 		try {
 			data = jp.getRemoveSthResult();
 
-			if (data[0].equals("1")) {
+			/*if (data[0].equals("1")) {
 				callingActivity.delete(1);
-			}
+			}*/
 			callingActivity.runOnUiThread(new Runnable() {
 				public void run() {
 					Toast.makeText(callingActivity, data[1], Toast.LENGTH_SHORT)

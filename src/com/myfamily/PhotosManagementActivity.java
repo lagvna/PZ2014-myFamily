@@ -10,7 +10,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -18,9 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,6 +36,7 @@ public class PhotosManagementActivity extends Activity {
 	private PhotosAdapter adapter;
 	private Photo selectedPhoto;
 	private String noPhotosString = "Brak zdjęć!";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,10 +47,10 @@ public class PhotosManagementActivity extends Activity {
 		context = this;
 		photosListView = (ListView) findViewById(R.id.photosList);
 		registerForContextMenu(findViewById(R.id.photosList));
-        	
-       	
+
 		new GetPhotos().execute();
 	}
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
@@ -67,8 +65,9 @@ public class PhotosManagementActivity extends Activity {
 		switch (item.getItemId()) {
 
 		case R.id.b_item:
-			//deleteList((int) menuInfo.position);
-			new GetPicture(new String[]{photosList.get((int) menuInfo.position).getId()},this).execute();
+			// deleteList((int) menuInfo.position);
+			new GetPicture(new String[] { photosList.get(
+					(int) menuInfo.position).getId() }, this).execute();
 			return true;
 		}
 		return super.onContextItemSelected(item);
@@ -81,6 +80,7 @@ public class PhotosManagementActivity extends Activity {
 		getMenuInflater().inflate(R.menu.photos_management, menu);
 		return true;
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -92,30 +92,31 @@ public class PhotosManagementActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	private void initializeList() {
-		if(photosList != null && !photosList.isEmpty()) {
+		if (photosList != null && !photosList.isEmpty()) {
 			adapter = new PhotosAdapter(context, photosList);
 		} else {
 			ArrayList<Photo> tempList = new ArrayList<Photo>();
-			tempList.add(new Photo(noPhotosString ,"",""));
+			tempList.add(new Photo(noPhotosString, "", ""));
 			adapter = new PhotosAdapter(context, tempList);
 		}
 		photosListView.setAdapter(adapter);
 	}
+
 	class GetPhotos extends AsyncTask<Void, Void, Void> {
 
 		private String responseText;
 		private String[] dataArray;
 
 		public GetPhotos() {
-			
-			/*String str = JSonReader.getInstance().readFile("prizes", context);
-			String temp = str.substring(0, 19);
-			if (temp.equals("0000-00-00 00:00:00")) {
-				dataArray[3] = "0";
-			} else {
-				dataArray[3] = temp;
-			}*/
+
+			/*
+			 * String str = JSonReader.getInstance().readFile("prizes",
+			 * context); String temp = str.substring(0, 19); if
+			 * (temp.equals("0000-00-00 00:00:00")) { dataArray[3] = "0"; } else
+			 * { dataArray[3] = temp; }
+			 */
 		}
 
 		@Override
@@ -146,12 +147,11 @@ public class PhotosManagementActivity extends Activity {
 				ArrayList resultSet = jp.getPhotosResult();
 				if (resultSet.size() == 2) {
 					photosList = (ArrayList<Photo>) resultSet.get(0);
-					//jp.makePrizesJSon(myPrizesList,context,1);
+					// jp.makePrizesJSon(myPrizesList,context,1);
 				} else if (resultSet.size() == 1) {
 					showToast((String) ((ArrayList) resultSet.get(0)).get(1));
 				}
-				
-				
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -172,6 +172,7 @@ public class PhotosManagementActivity extends Activity {
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
+
 	/**
 	 * @param responseText
 	 */

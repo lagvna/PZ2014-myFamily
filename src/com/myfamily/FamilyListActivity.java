@@ -72,9 +72,13 @@ public class FamilyListActivity extends Activity {
 						// "FamilyID: " + familyList.get(position).getId(),
 						// Toast.LENGTH_LONG)
 						// .show();
-						DataHolder.getInstance().setFamilyId(
-								familyList.get(position).getId());
-						startActivity(new Intent(context, MainActivity.class));
+						if(!familyList.get(0).getFamilyName().equals("Nie należysz do żadnej rodziny")) {
+							
+							DataHolder.getInstance().setFamilyId(
+									familyList.get(position).getId());
+							startActivity(new Intent(context, MainActivity.class));
+						}
+						
 					}
 				});
 		initializedList();

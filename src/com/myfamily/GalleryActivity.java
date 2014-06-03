@@ -278,7 +278,7 @@ public class GalleryActivity extends Activity {
 
 		protected void onPostExecute(String result) {
 			mProgressDialog.dismiss();
-			callingActivity.showToast(responseText);
+			callingActivity.showToast(responseText+"testpwy");
 		}
 
 	}

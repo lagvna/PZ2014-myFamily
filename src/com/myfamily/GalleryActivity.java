@@ -38,7 +38,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.adapters.GalleryImageAdapter;
-import com.async.SendPicture1;
 import com.classes.CountingMultipartEntity;
 import com.classes.DataHolder;
 import com.classes.Utils;
@@ -46,13 +45,13 @@ import com.classes.Utils;
 public class GalleryActivity extends Activity {
 
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
-
+	private int pos = 0;
 	private Utils utils;
 	private ImageView selectedImage;
 	private Integer[] mImageIds = { R.drawable.actionremove,
 			R.drawable.addevent, R.drawable.eye, R.drawable.background, };
 	private ArrayList<String> imagePaths = new ArrayList<String>();
-	private int position = 0;
+
 	private ProgressDialog progressDialog;
 	private ProgressBar progresBar;
 	public ProgressDialog mProgressDialog;
@@ -101,13 +100,14 @@ public class GalleryActivity extends Activity {
 		gallery.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-
+				
 				Bitmap image = decodeFile(imagePaths.get(position));
 				Matrix matrix = new Matrix();
 				matrix.postRotate(90);
 				Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0, 0,
 						image.getWidth(), image.getHeight(), matrix, true);
 				selectedImage.setImageBitmap(rotatedBitmap);
+				pos = position;
 			}
 		});
 
@@ -128,7 +128,7 @@ public class GalleryActivity extends Activity {
 		switch (item.getItemId()) {
 
 		case R.id.c_item:
-			removePicture(0);
+			removePicture();
 			return true;
 
 		case R.id.b_item:
@@ -139,9 +139,9 @@ public class GalleryActivity extends Activity {
 		return super.onContextItemSelected(item);
 	}
 
-	private void removePicture(int index) {
+	private void removePicture() {
 
-		String path = imagePaths.get(position);
+		String path = imagePaths.get(pos);
 		imagePaths.remove(0);
 		// new SendPicture(new String[]{path},this).execute();
 		// System.out.println("TUTAJ JEST MOJA SCIAZKA::"+path);
@@ -152,7 +152,8 @@ public class GalleryActivity extends Activity {
 	}
 
 	private void sendPicture() {
-		String path = imagePaths.get(position);
+		System.out.println("POZYCJA WYBRANA::"+pos);
+		String path = imagePaths.get(pos);
 		new SendPicture(new String[] { path }, this).execute();
 	}
 

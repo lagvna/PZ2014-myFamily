@@ -40,14 +40,7 @@ public class AddFamilyActivity extends Activity {
 
 		acceptButton = (Button) findViewById(R.id.acceptBatton);
 
-		/*
-		 * ArrayAdapter<CharSequence> adapter =
-		 * ArrayAdapter.createFromResource(this, R.array.users_type,
-		 * android.R.layout.simple_spinner_item);
-		 * adapter.setDropDownViewResource
-		 * (android.R.layout.simple_spinner_dropdown_item);
-		 * spinner.setAdapter(adapter);
-		 */
+
 
 		acceptButton.setOnClickListener(new OnClickListener() {
 

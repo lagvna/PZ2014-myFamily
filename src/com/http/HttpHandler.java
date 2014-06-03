@@ -397,7 +397,7 @@ public class HttpHandler {
 				.getInstance().getSession()));
 		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
 				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("file_Id", 28 + ""));
+		nameValuePairs.add(new BasicNameValuePair("file_Id", dataArray[0]));
 		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 		try {
@@ -419,30 +419,14 @@ public class HttpHandler {
 			
 			fileOutput.close();
 			entity = execute.getEntity();
-			return "JAZDA";//EntityUtils.toString(entity);
+			return "ok";//EntityUtils.toString(entity);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		/*HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
-		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
-				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
-				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("file_Id", "27"));
-		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-		client = new DefaultHttpClient();
-		response = client.execute(post);
-		entity = response.getEntity();
 
-		return EntityUtils.toString(entity);*/
-		
-	
-
-		return "GOWNO";
+		return "cos nie tak";
 	}
 
 

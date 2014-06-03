@@ -2,24 +2,21 @@ package com.async;
 
 import java.io.IOException;
 
-import org.json.JSONException;
-
 import android.os.AsyncTask;
 
-import com.classes.DataHolder;
 import com.http.HttpHandler;
-import com.http.JSONParser;
-import com.myfamily.AddFamilyActivity;
 import com.myfamily.GalleryActivity;
 
-public class SendPicture extends AsyncTask<Void, Void, Void>{
+public class SendPicture1 extends AsyncTask<String, Integer, String>{
 
+	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
+	
 	private GalleryActivity callingActivity;
 	private String responseText = null;
 	private String dataArray[];
 	
 	
-	public SendPicture(String dataArray[],GalleryActivity callingActivity) {
+	public SendPicture1(String dataArray[],GalleryActivity callingActivity) {
 		this.callingActivity = callingActivity;
 		this.dataArray = dataArray;
 	}
@@ -27,15 +24,17 @@ public class SendPicture extends AsyncTask<Void, Void, Void>{
 	@Override
 	protected void onPreExecute() {
 		callingActivity.showProgressDial();
+		callingActivity.showDialog(DIALOG_DOWNLOAD_PROGRESS);
 		super.onPreExecute();
 	}
 
 	@Override
-	protected Void doInBackground(Void... arg0) {
+	protected String doInBackground(String... arg0) {
 		try {
 			responseText = new HttpHandler(
 					"http://malinowepi.no-ip.org/upload_file.php", dataArray)
 					.postPicureSend();
+			//publishProgress(callingActivity.progress);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,9 +43,12 @@ public class SendPicture extends AsyncTask<Void, Void, Void>{
 		
 		
 	}
+	
+	protected void onProgressUpdate(String... progress) {        
+	    callingActivity.mProgressDialog.setProgress(Integer.parseInt(progress[0]));
+	}
 
-	@Override
-	protected void onPostExecute(Void result) {
+	protected void onPostExecute(String result) {
 		callingActivity.hideProgressDial();
 		callingActivity.showToast(responseText);
 		//callingActivity.showToast(DataHolder.getInstance().getSession());

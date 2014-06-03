@@ -101,8 +101,9 @@ public class AddUserActivity extends Activity {
 	}
 
 	public void userListShow() {
+		finish();
 		startActivity(new Intent(this.getApplicationContext(),
-				AddFamilyUsersActivity.class));
+				MainActivity.class));
 	}
 
 }

@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.adapters.PhotosAdapter;
@@ -37,6 +38,7 @@ public class PhotosManagementActivity extends Activity {
 	private Photo selectedPhoto;
 	private String noPhotosString = "Brak zdjęć!";
 
+	public ProgressDialog mProgressDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

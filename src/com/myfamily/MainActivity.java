@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,21 +17,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.classes.DataHolder;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
 import com.classes.Utils;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
-	private String[] menuItems;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private Uri fileUri;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -74,78 +69,59 @@ public class MainActivity extends ListActivity {
 
 		System.out.println(JSonReader.getInstance().readFile("events",
 				this.getApplicationContext()));
-		menuItems = new String[10];
-		menuItems[0] = "Notatki";
-		menuItems[1] = "Dodaj użytkownika";
-		menuItems[2] = "Zakupy";
-		menuItems[3] = "Wydarzenia";
-		menuItems[4] = "Nagrody";
-		menuItems[5] = "Wydatki";
-		menuItems[6] = "Zadania";
-		menuItems[7] = "Zdjecia";
-		menuItems[8] = "Zrob zdjecie";
-		menuItems[9] = "Zdjecia na serwerze";
+	}
 
-		// komentarz
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.element_cat, R.id.Row, menuItems);
+	public void notesButton(View v) {
+		Intent i = new Intent(MainActivity.this, NotesActivity.class);
+		MainActivity.this.startActivity(i);
+	}
 
-		setListAdapter(adapter);
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
+	public void addUserButton(View v) {
+		Intent i = new Intent(MainActivity.this, AddUserActivity.class);
+		MainActivity.this.startActivity(i);
+	}
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if (position == 0) {
-					Intent i = new Intent(MainActivity.this,
-							NotesActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 1) {
-					Intent i = new Intent(MainActivity.this,
-							AddUserActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 2) {
-					Intent i = new Intent(MainActivity.this,
-							ShoppingActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 3) {
-					Intent i = new Intent(MainActivity.this,
-							CalendarActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 4) {
-					Intent i = new Intent(MainActivity.this,
-							PrizeActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 5) {
-					Intent i = new Intent(MainActivity.this,
-							ExpenseActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 6) {
-					Intent i = new Intent(MainActivity.this,
-							TasksActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 7) {
-					Intent i = new Intent(MainActivity.this,
-							GalleryActivity.class);
-					MainActivity.this.startActivity(i);
-				} else if (position == 8) {
-					fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-					startActivityForResult(new Intent(
+	public void shoppingButton(View v) {
+		Intent i = new Intent(MainActivity.this, ShoppingActivity.class);
+		MainActivity.this.startActivity(i);
+	}
 
-					MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
-							MediaStore.EXTRA_OUTPUT, fileUri),
-							CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	public void calendarButton(View v) {
+		Intent i = new Intent(MainActivity.this, CalendarActivity.class);
+		MainActivity.this.startActivity(i);
+	}
 
-				} else if (position == 9) {
-					Intent i = new Intent(MainActivity.this,
-							PhotosManagementActivity.class);
-					MainActivity.this.startActivity(i);
-				}
+	public void prizesButton(View v) {
+		Intent i = new Intent(MainActivity.this, PrizeActivity.class);
+		MainActivity.this.startActivity(i);
+	}
 
-			}
-		});
+	public void expensesButton(View v) {
+		Intent i = new Intent(MainActivity.this, ExpenseActivity.class);
+		MainActivity.this.startActivity(i);
+	}
+
+	public void tasksButton(View v) {
+		Intent i = new Intent(MainActivity.this, TasksActivity.class);
+		MainActivity.this.startActivity(i);
+	}
+
+	public void galleryButton(View v) {
+		Intent i = new Intent(MainActivity.this, GalleryActivity.class);
+		MainActivity.this.startActivity(i);
+	}
+
+	public void takePhotoButton(View v) {
+		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+		startActivityForResult(new Intent(
+
+		MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT,
+				fileUri), CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+
+	public void photosOnServerButton(View v) {
+		Intent i = new Intent(MainActivity.this, PhotosManagementActivity.class);
+		MainActivity.this.startActivity(i);
 	}
 
 	@Override

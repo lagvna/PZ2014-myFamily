@@ -414,7 +414,7 @@ public class CalendarActivity extends Activity {
 						showToast("Coś poszło nie tak:"
 								+ ((ArrayList<String>) eventResult.get(0))
 										.get(1));
-					} 
+					}
 				} else if (eventResult.size() == 2) {
 					events = (ArrayList<MyEvent>) eventResult.get(0);
 					for (int i = 0; i < events.size(); i++) {

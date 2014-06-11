@@ -31,6 +31,10 @@ import com.classes.User;
 import com.http.HttpHandler;
 import com.http.JSONParser;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedzialna za prezetacje danych dotyczacych uzyskanych nagrud przez wybraneg uzywkownika 
+ */
 public class PrizeActivity extends Activity {
 
 	private ListView myPrizesListView;
@@ -116,6 +120,9 @@ public class PrizeActivity extends Activity {
 		new GetUsers().execute();
 	}
 
+	/**
+	 * Metoda odpwiedzilna za dodawnie sluchaczy akcji do spinerow wyswietlajacych liste uzytkownikow 
+	 */
 	public void addListenersOnSpinnersItemSelection() {
 		userSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -142,6 +149,10 @@ public class PrizeActivity extends Activity {
 		});
 	}
 
+	/**
+	 * @param points
+	 * Metoda odpowiedzialna za incjalizowanie listy z nagrodami danego uzytkownika 
+	 */
 	public void initList(String points) {
 		gainedPoints.setText("Zdobyte punkty: " + points);
 		MyPrizesAdapter adapter;
@@ -187,6 +198,10 @@ public class PrizeActivity extends Activity {
 				.show();
 	}
 
+	/**
+	 * @author kwachu
+	 *AsyncTask odpowiedzialny za pobieanie uztkownikow z serwera 
+	 */
 	class GetUsers extends AsyncTask<Void, Void, Void> {
 
 		private String responseText = null;
@@ -223,6 +238,10 @@ public class PrizeActivity extends Activity {
 
 	}
 
+	/**
+	 * @author kwachu
+	 * AyncTask odpowiedzialny za pobieranie ocenionych nagrod z serwera 
+	 */
 	class GetGainedPrizes extends AsyncTask<Void, Void, Void> {
 
 		private String responseText;

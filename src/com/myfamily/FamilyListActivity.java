@@ -24,6 +24,10 @@ import com.adapters.FamilyListAdapter;
 import com.classes.DataHolder;
 import com.classes.Family;
 
+/**
+ * @author kwachu
+ * Aktynosc, w ktorej wyswietlana jest Lista uzytkownikow danej rodziny. 
+ */
 public class FamilyListActivity extends Activity {
 
 	private ListView familyListView;
@@ -101,6 +105,9 @@ public class FamilyListActivity extends Activity {
 		}
 	}// onActivityResult
 
+	/**
+	 * metoda odpowiedzialna za inicjalizowanie listy z uzytkownikami rodziny 
+	 */
 	public void initializedList() {
 		FamilyListAdapter adapter;
 		if (!familyList.isEmpty()) {
@@ -139,6 +146,10 @@ public class FamilyListActivity extends Activity {
 
 	}
 
+	/**
+	 * @param responseText
+	 * metoda odpowiedzialna za wyswietlanie tosta ne ekrani
+	 */
 	public void showToast(String responseText) {
 
 		Toast.makeText(getApplicationContext(), responseText, Toast.LENGTH_LONG)

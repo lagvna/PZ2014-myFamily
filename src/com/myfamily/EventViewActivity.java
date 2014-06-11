@@ -24,6 +24,11 @@ import com.async.RemoveSth;
 import com.classes.MyEvent;
 import com.tyczj.extendedcalendarview.CalendarProvider;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpiwiedzialna za wyswietlanie zadan. Posiada 2 fragmenty, na ktorych 
+ * wyswietlane sa zadanie bierzace oraz zadanie juz przedawnione 
+ */
 public class EventViewActivity extends ListActivity implements OnTouchListener {
 
 	private MyCustomAdapter mAdapter;
@@ -194,6 +199,10 @@ public class EventViewActivity extends ListActivity implements OnTouchListener {
 		return false;
 	}
 
+	/**
+	 * @param responseText
+	 * metoda odpowiedzana za wyswietlanie tosta na ekranie 
+	 */
 	public void showToast(String responseText) {
 
 		Toast.makeText(getApplicationContext(), responseText, Toast.LENGTH_LONG)

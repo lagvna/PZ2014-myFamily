@@ -30,6 +30,10 @@ import com.classes.User;
 import com.http.HttpHandler;
 import com.http.JSONParser;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedzialna, ze dodawanie nowych zadan.
+ */
 public class AddTaskActivity extends Activity implements DatePickerDialog.OnDateSetListener {
 
 	private Button dataPicker;
@@ -96,10 +100,16 @@ public class AddTaskActivity extends Activity implements DatePickerDialog.OnDate
 		
 	}
 	
+	/**
+	 * inicjalizacja spinera z uzytkownikami rodziny  
+	 */
 	public void getFamilyUsersAndInitializeSpinner() {
 		new GetUsers().execute();
 	}
 	
+	/**
+	 * dodawanie listenerow do spinera z uzytownikami 
+	 */
 	public void addListenersOnSpinnersItemSelection() {
     	userSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -141,6 +151,10 @@ public class AddTaskActivity extends Activity implements DatePickerDialog.OnDate
     	
     }
 
+	/**
+	 * @param responseText
+	 * metoda odpowiedzialna za pokazywanie Tosta na ekranie 
+	 */
 	public void showToast(String responseText) {
 
 		Toast.makeText(getApplicationContext(), responseText, Toast.LENGTH_LONG)
@@ -204,6 +218,11 @@ public class AddTaskActivity extends Activity implements DatePickerDialog.OnDate
 		return tmp[2]+"."+tmp[1]+"."+tmp[0];
 	}
 	
+	/**
+	 * @author kwachu
+	 * Klasa diedziczaca po AsyncTask. Odpowidzialna za laczenie z serwerem oraz pobieraniu 
+	 * uzytkownikow danej rodziny 
+	 */
 	public class GetUsers extends AsyncTask<Void, Void, Void> {
 
 		
@@ -242,7 +261,12 @@ public class AddTaskActivity extends Activity implements DatePickerDialog.OnDate
 	}
 	
 	
-public class AddTask extends AsyncTask<Void, Void, Void> {
+	/**
+	 * @author kwachu
+	 * Klasa dziedziczaca po AsyncTaks. Pozwala na dodawanie nowych zadan do bazy 
+	 * danych na serwerze 
+	 */
+	public class AddTask extends AsyncTask<Void, Void, Void> {
 		
 		String r;
 		public AddTask() {

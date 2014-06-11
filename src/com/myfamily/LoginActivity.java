@@ -19,6 +19,10 @@ import com.classes.Family;
 import com.classes.JSonReader;
 import com.classes.JSonWriter;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedzalna za logowanie uzytkownika do systemu 
+ */
 public class LoginActivity extends Activity {
 
 	private EditText username;
@@ -61,8 +65,7 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * @param view
-	 *            reference to TextView which call this method
-	 *            (newAccountTextView)
+	 * Metoda odpowiedzialna za wywolywanie akatywnosci  UserRegisterActicity 
 	 */
 	public void createAccount(View view) {
 		startActivity(new Intent(this.getApplicationContext(),
@@ -70,7 +73,7 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * call main Activity after successful login
+	 * Metoda wywolujaca MainActivity po zalogowaniu do systemu .
 	 */
 	public void loginAccepted(ArrayList<Family> familyList,String session) {
 		setSessionId(session);
@@ -91,7 +94,7 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * Method which is call when user press login button
+	 * Metoda odpowiedzina za informowanie uzytkownika o wprowadzonych niepoprawnych danych. 
 	 * 
 	 * @param view
 	 *            - reference to button which call this method (loginButton)
@@ -110,7 +113,7 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * method which show Progress dialog when login is checking
+	 * Metoda odpowiedzialna za wyswietlanie progres bara 
 	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
@@ -119,13 +122,14 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * metoda odpowiedzialna za ukrywanie progres bara 
 	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
 
 	/**
+	 * metoda odpowiedzialna za wyswietlenie tosta na ekranie 
 	 * @param responseText
 	 */
 	public void showToast(String responseText) {
@@ -135,7 +139,7 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * this method set the response text
+	 * Metoda odpowiedzialna za ustawianie tekstu, ktory otrzymalismy od serwera 
 	 * 
 	 * @param rt
 	 *            response text
@@ -144,6 +148,10 @@ public class LoginActivity extends Activity {
 		this.responseText = rt;
 	}
 
+	/**
+	 * @param session
+	 * Metoda odpowiedzialna ze ustawianie Id sesji 
+	 */
 	public void setSessionId(String session) {
 		DataHolder.getInstance().setSession(session);
 	}

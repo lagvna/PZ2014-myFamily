@@ -24,6 +24,11 @@ import org.apache.http.util.EntityUtils;
 
 import com.classes.DataHolder;
 
+/**
+ * Klasa służąca do pobierania danych jako JSON z serwera. Adres serwera przekazywany jest w konstruktorze.
+ * @author KMACIAZE
+ *
+ */
 public class HttpHandler {
 
 	private String url = null;
@@ -33,11 +38,9 @@ public class HttpHandler {
 	private HttpEntity entity;
 
 	/**
-	 * @param url
-	 *            - url address of web server
-	 * @param dataArray
-	 *            - String array to collect all data needed to connect to the
-	 *            web server
+	 * Główny konstruktor klasy
+	 * @param url String określający adres serwera
+	 * @param dataArray tablica przechowująca parametry, która mają być wysłane w parametrze
 	 */
 	public HttpHandler(String url, String[] dataArray) {
 		this.url = url;

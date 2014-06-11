@@ -11,11 +11,18 @@ import android.widget.TextView;
 
 import com.classes.Prize;
 import com.myfamily.R;
-
+/**
+ * Klasa adapter do zarządzania listą zdobytych nagród
+ * @author KMACIAZE
+ */
 public class MyPrizesAdapter extends ArrayAdapter<Prize> {
-	Context context;
-	ArrayList<Prize> prizes;
-
+	private Context context;
+	private ArrayList<Prize> prizes;
+	/**
+	 * Główny konstruktor klasy
+	 * @param context context aktywności
+	 * @param prizes lista z nagrodami
+	 */
 	public MyPrizesAdapter(Context context, ArrayList<Prize> prizes) {
 		super(context, R.layout.my_prize_row, prizes);
 		this.context = context;

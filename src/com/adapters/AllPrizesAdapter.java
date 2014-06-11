@@ -12,9 +12,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Klasa adapter do zarządzania listą nagród
+ * @author KMACIAZE
+ */
 public class AllPrizesAdapter extends ArrayAdapter<Prize> {
-	Context context;    
-    ArrayList<Prize> prizes;
+	private Context context;    
+    private ArrayList<Prize> prizes;
+    /**
+     * Główny konstruktor metody
+     * @param context context aktywności
+     * @param prizes lista nagród
+     */
     public AllPrizesAdapter(Context context, ArrayList<Prize> prizes) {
         super(context,R.layout.family_row, prizes);
         this.context = context;

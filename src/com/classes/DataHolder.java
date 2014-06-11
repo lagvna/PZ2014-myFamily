@@ -3,6 +3,10 @@ package com.classes;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Klasa służąca do przechowywania i pobierania sesji, familyId oraz loginu 
+ * @author KMACIAZE
+ */
 public class DataHolder {
 
 	private String sessionId = "";

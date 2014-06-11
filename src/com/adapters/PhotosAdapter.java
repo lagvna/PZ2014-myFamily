@@ -12,12 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+/**
+ * Klasa adapter do zarządzania listą zdjęć
+ * @author KMACIAZE
+ */
 public class PhotosAdapter extends ArrayAdapter<Photo> {
 
 	private ArrayList<Photo> photos;
 	private Context context;
-
+	/**
+	 * Główny konstruktor klasy
+	 * @param context context aktywności
+	 * @param photos lista ze zdjęciami
+	 */
 	public PhotosAdapter(Context context, ArrayList<Photo> photos) {
 		super(context, R.layout.photo_row, photos);
 		this.context = context;

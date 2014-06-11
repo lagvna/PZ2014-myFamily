@@ -17,7 +17,10 @@ import android.widget.ImageView;
 
 import com.classes.Utils;
 import com.myfamily.R;
-
+/**
+ * Klasa adapter do zarządzania galerią zdjęć
+ * @author KMACIAZE
+ */
 public class GalleryImageAdapter extends BaseAdapter 
 {
 	
@@ -31,7 +34,10 @@ public class GalleryImageAdapter extends BaseAdapter
             R.drawable.eye,
             R.drawable.background,
     };
-
+    /**
+     * Główny konstruktor klasy
+     * @param context kontekst aktywności
+     */
     public GalleryImageAdapter(Context context) 
     {
         mContext = context;
@@ -47,7 +53,6 @@ public class GalleryImageAdapter extends BaseAdapter
     public Object getItem(int position) {
         return position;
     }
-
     public long getItemId(int position) {
         return position;
     }
@@ -80,7 +85,11 @@ public class GalleryImageAdapter extends BaseAdapter
         return i;
     }
     
-    
+    /**
+     * Metoda towrząca bitmape
+     * @param f ścieżka
+     * @return bit mapa
+     */
     public static Bitmap decodeFile(String f) {
         	try {
                 //Decode image size

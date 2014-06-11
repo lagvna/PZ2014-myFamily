@@ -11,12 +11,19 @@ import android.widget.TextView;
 
 import com.classes.Family;
 import com.myfamily.R;
-
+/**
+ * Klasa adapter do zarządzania listą rodzin
+ * @author KMACIAZE
+ */
 public class FamilyListAdapter extends ArrayAdapter<Family> {
 
-	Context context;
-	ArrayList<Family> familys;
-
+	private Context context;
+	private ArrayList<Family> familys;
+	/**
+	 * Główny konstruktor klasy
+	 * @param context context klasy
+	 * @param familys lista rodzin
+	 */
 	public FamilyListAdapter(Context context, ArrayList<Family> familys) {
 		super(context, R.layout.family_row, familys);
 		this.context = context;

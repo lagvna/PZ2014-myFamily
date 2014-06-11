@@ -1,9 +1,20 @@
 package com.classes;
 
+/**
+ * Klasa reprezentująca zdjęcie
+ * @author KMACIAZE
+ *
+ */
 public class Photo {
 	private String name;
 	private String date;
 	private String Id;
+	/**
+	 * Główny konstruktor klasy
+	 * @param Id id zdjęcia
+	 * @param name nazwa zdjęcia
+	 * @param date data stworzenia zdjęcia
+	 */
 	public Photo(String Id, String name, String date) {
 		this.setName(name);
 		this.setDate(date);

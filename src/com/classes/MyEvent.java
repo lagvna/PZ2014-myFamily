@@ -1,17 +1,28 @@
 package com.classes;
 
 import java.io.Serializable;
-
+/**
+ * Klasa reprezentująca wydarzenie
+ * @author KMACIAZE
+ *
+ */
 public class MyEvent implements Serializable {
-
-	String name = "";
-	String organizer = "";
-	String note = "";
-	String date = "";
-	String id = "";
+	
+	private String name = "";
+	private String organizer = "";
+	private String note = "";
+	private String date = "";
+	private String id = "";
 	int color = 0;
 	
-	
+	/**
+	 * Główny konstruktor klasy
+	 * @param name nazwa wydarzenia
+	 * @param note notatka do wydarzenia
+	 * @param date data wydarzenia
+	 * @param id id wydarzenia
+	 * @param color oznaczenie wydarzenia
+	 */
 	public MyEvent(String name, String note, String date,String id,String color) {
 		this.name = name;
 		this.note = note;

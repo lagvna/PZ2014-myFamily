@@ -1,7 +1,11 @@
 package com.classes;
 
 import java.io.Serializable;
-
+/**
+ * Klasa reprezentująca nagrodę
+ * @author KMACIAZE
+ *
+ */
 public class Prize implements Serializable {
 	
 	/**
@@ -14,12 +18,25 @@ public class Prize implements Serializable {
 	private String gained_date = "";
 	private String whos = "";
 	private String category = "";
-	
+	/**
+	 * Konstruktor klasy
+	 * @param name nazwa nagrody
+	 * @param pointsToGain liczba punktór do zdobycia nagrody
+	 * @param Id id nagrody
+	 */
 	public Prize(String name, String pointsToGain, String Id) {
 		this.setName(name);
 		this.setPointsToGain(pointsToGain);
 		this.setId(Id);
 	}
+	/**
+	 * Główny konstruktor klasy
+	 * @param name nazwa nagrody
+	 * @param Id id nagrody
+	 * @param whos czyja nagroda
+	 * @param gained_date data zdobycia nagrody
+	 * @param category kategoria nagrody
+	 */
 	public Prize(String name, String Id, String whos, String gained_date,String category) {
 		this.setName(name);
 		this.setId(Id);
@@ -36,7 +53,7 @@ public class Prize implements Serializable {
 	}
 
 	public String getPointsToGain() {
-		return "Wymagana ilość punktów: " + pointsToGain;
+		return "Wymagana iloÅ›Ä‡ punktÃ³w: " + pointsToGain;
 	}
 
 	public void setPointsToGain(String pointsToGain) {

@@ -9,14 +9,28 @@ import java.io.InputStreamReader;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * Klasa służąca do czytania obiektu JSON z pliku
+ * @author KMACIAZE
+ *
+ */
 public class JSonReader {
 
 	public static JSonReader jSonReader = new JSonReader();
 
+	/**
+	 * Główny konstruktor klasy
+	 * @return
+	 */
 	public static JSonReader getInstance() {
 		return jSonReader;
 	}
-
+	/**
+	 * Metoda czytająca plik
+	 * @param fileName nazwa pliku
+	 * @param context context aktywności
+	 * @return obiekt JSON jako String
+	 */
 	public String readFile(String fileName, Context context) {
 
 		String ret = "";

@@ -7,13 +7,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.fragments.ArchiveFragment;
 import com.fragments.ProductsFragment;
 import com.fragments.ShoppingListFragment;
-
+/**
+ * Klasa adapter do zarządzania listą zakładek
+ * @author KMACIAZE
+ */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-
+	/**
+	 * pole przechowujące fragment shopping list
+	 */
 	public ShoppingListFragment slf;
+	/**
+	 * pole przechowujące fragment archive
+	 */
 	public ArchiveFragment af;
+	/**
+	 * pole przechowujące fragment products
+	 */
 	public ProductsFragment pf;
-
+	/**
+	 * Główny adapter klasy
+	 * @param fm fragmentManager
+	 */
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}

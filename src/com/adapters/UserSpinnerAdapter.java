@@ -11,11 +11,19 @@ import android.widget.TextView;
 
 import com.classes.User;
 import com.myfamily.R;
-
+/**
+ * Klasa adapter do zarządzania listą użytkowników w Spinnerze
+ * @author KMACIAZE
+ */
 public class UserSpinnerAdapter extends ArrayAdapter<User> {
 	private Activity context;
-    ArrayList<User> data = null;
-
+	private ArrayList<User> data = null;
+	/**
+	 * Główny konstruktor klasy
+	 * @param context context aktywności
+	 * @param resource id
+	 * @param data lista z użytkownikami
+	 */
     public UserSpinnerAdapter(Activity context, int resource, ArrayList<User> data)
     {
         super(context, resource, data);

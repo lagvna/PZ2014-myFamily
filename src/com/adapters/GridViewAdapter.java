@@ -13,12 +13,20 @@ import android.widget.TextView;
 
 import com.classes.ImageItem;
 import com.myfamily.R;
-
+/**
+ * Klasa adapter do zarządzania listą produktów
+ * @author KMACIAZE
+ */
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
     private ArrayList<ImageItem> data = new ArrayList<ImageItem>();
- 
+    /**
+     * Główny konstruktor klasy
+     * @param context context aktywności
+     * @param layoutResourceId id 
+     * @param data lista z danymi
+     */
     public GridViewAdapter(Context context, int layoutResourceId,
             ArrayList data) {
         super(context, layoutResourceId, data);

@@ -9,6 +9,11 @@ import android.os.AsyncTask;
 import com.http.HttpHandler;
 import com.http.JSONParser2;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za uniwersalny mechanizm usuwania danych z serwera
+ * @author lagvna
+ *
+ */
 public class RemoveSth extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";

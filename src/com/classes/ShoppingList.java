@@ -3,6 +3,12 @@ package com.classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Klasa definiujaca obiekt listy zakupow w aplikacji
+ * 
+ * @author lagvna
+ * 
+ */
 public class ShoppingList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
@@ -16,6 +22,21 @@ public class ShoppingList implements Serializable {
 
 	}
 
+	/**
+	 * Pomocniczy konstruktor klasy, w ktorej niezdefiniowane sa produkty
+	 * zawarte na liscie zakupow
+	 * 
+	 * @param id
+	 *            id listy
+	 * @param owner
+	 *            autor listy
+	 * @param name
+	 *            nazwa listy
+	 * @param totalCost
+	 *            suma za liste
+	 * @param date
+	 *            data zakupow
+	 */
 	public ShoppingList(int id, String owner, String name, String totalCost,
 			String date) {
 		this.id = id;
@@ -24,7 +45,23 @@ public class ShoppingList implements Serializable {
 		this.totalCost = totalCost;
 		this.date = date;
 	}
-	
+
+	/**
+	 * Glowny konstruktor klasy
+	 * 
+	 * @param id
+	 *            id listy
+	 * @param owner
+	 *            autor listy
+	 * @param name
+	 *            nazwa listy
+	 * @param totalCost
+	 *            suma za liste
+	 * @param date
+	 *            data zakupow
+	 * @param products
+	 *            lista produktow na liscie
+	 */
 	public ShoppingList(int id, String owner, String name, String totalCost,
 			String date, ArrayList<Product> products) {
 		this.id = id;

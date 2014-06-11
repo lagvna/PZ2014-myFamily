@@ -15,6 +15,11 @@ import android.widget.TextView;
 import com.classes.Product;
 import com.myfamily.R;
 
+/**
+ * Klasa adaptera dla widoku produktow, ktory wyswietla odpowiednie ikonki produktow predefiniowanych oraz ich nazwy
+ * @author lagvna
+ *
+ */
 public class ImageAdapter extends BaseAdapter {
 	private int NumberOfItems;
 	private Bitmap[] bitmap;
@@ -115,6 +120,11 @@ public class ImageAdapter extends BaseAdapter {
 		}
 	}
 
+	/**
+	 * Metoda zwracajaca produkt na danej (kliknietej) pozycji
+	 * @param pos pozycja kliknietego produktu
+	 * @return wybrany produkt
+	 */
 	public Product getProduct(int pos) {
 		Product p = products.get(pos);
 

@@ -18,7 +18,11 @@ import com.classes.Photo;
 import com.classes.Prize;
 import com.classes.Task;
 import com.classes.User;
-
+/**
+ * Klasa służąca do parsowania obiektu JSON zapisanego w formacie String. 
+ * @author KMACIAZE
+ *
+ */
 public class JSONParser {
 
 	private String inputStream;
@@ -31,12 +35,18 @@ public class JSONParser {
 	private ArrayList<Prize> gainedPrizesList = new ArrayList<Prize>();
 	private ArrayList<Photo> photosList = new ArrayList<Photo>();
 	private ArrayList<User> userList = new ArrayList<User>();
-
+	/**
+	 * Główny konstruktor klasy.
+	 * @param inputStream obiekt JSON zapisany jako String
+	 */
 	public JSONParser(String inputStream) {
 
 		this.inputStream = inputStream;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji logowania
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getLoginResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
@@ -90,7 +100,10 @@ public class JSONParser {
 		resultArray.add(stringArray);
 		return resultArray;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania użytkownika
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String getAddUserResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
@@ -101,7 +114,10 @@ public class JSONParser {
 
 		return errorCode + ":" + message;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania rodziny
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String getAddFamilyResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
@@ -112,7 +128,10 @@ public class JSONParser {
 
 		return errorCode + ":" + message;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania wydarzenia
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String getAddEventResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
@@ -126,7 +145,10 @@ public class JSONParser {
 
 		return errorCode + ":" + message + ":" + id;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania wydarzeń
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getEventsResult(Context context) throws JSONException {
 		ArrayList<MyEvent> eventsList = new ArrayList<MyEvent>();
 		ArrayList<String> deletedEventsId = new ArrayList<String>();
@@ -218,7 +240,12 @@ public class JSONParser {
 
 		return resultArray;
 	}
-
+	/**
+	 * Metoda tworząca JSONa z odpowiednimi elementami w pliku.
+	 * @param eventsList lista z elementami
+	 * @param context context aktywności
+	 * @throws JSONException
+	 */
 	public void makeEventsJSon(ArrayList<MyEvent> eventsList, Context context,
 			int type) throws JSONException {
 
@@ -271,7 +298,12 @@ public class JSONParser {
 				.println(JSonReader.getInstance().readFile("events", context));
 
 	}
-	
+	/**
+	 * Metoda tworząca JSONa z odpowiednimi elementami w pliku.
+	 * @param eventsList lista z elementami
+	 * @param context context aktywności
+	 * @throws JSONException
+	 */
 	public void makePrizesJSon(ArrayList<Prize> prizesList, Context context,
 			int type) throws JSONException {
 
@@ -326,6 +358,12 @@ public class JSONParser {
 	}
 	
 
+	/**
+	 * Metoda usuwająca elementy z JSONa zapisanego w pliku
+	 * @param deletedEvents lista z usuniętymi elementami
+	 * @param context context aktywności
+	 * @throws JSONException
+	 */
 	public void removeEventFromJson(ArrayList<String> deletedEvents,
 			Context context) throws JSONException {
 
@@ -353,7 +391,10 @@ public class JSONParser {
 		makeEventsJSon(eventsList, context, 0);
 	}
 	
-	
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania nagród
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String getAddPrizeResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
@@ -365,7 +406,10 @@ public class JSONParser {
 
 		return errorCode + ":" + message + ":" + id;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania zdobytych nagród
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getGainedPrizesResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		int n = jSonArray.length();
@@ -417,6 +461,10 @@ public class JSONParser {
 
 		return resultArray;
 	}
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania zdjęć
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getPhotosResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		int n = jSonArray.length();
@@ -459,7 +507,10 @@ public class JSONParser {
 
 		return resultArray;
 	}
-	
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania użytkowników
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList<User> getUsersResult() throws JSONException {
 
 		JSONObject jsonObj = new JSONObject(inputStream);
@@ -477,7 +528,10 @@ public class JSONParser {
 
 		return userList;
 	}
-	
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania zadań
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getTaskResult() throws JSONException {
 
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");

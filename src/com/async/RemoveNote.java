@@ -11,6 +11,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser2;
 import com.myfamily.NotesActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za usuniecie notatki z bazy serwera 
+ * @author lagvna
+ *
+ */
 public class RemoveNote extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";

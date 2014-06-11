@@ -9,6 +9,11 @@ import com.fragments.FragmentOldTasks;
 import com.http.HttpHandler;
 import com.myfamily.AddFamilyActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za ocene zadania wykonanego przez danego uzytkownika
+ * @author lagvna
+ *
+ */
 public class VoteTask extends AsyncTask<Void, Void, Void> {
 
 	private AddFamilyActivity callingActivity;

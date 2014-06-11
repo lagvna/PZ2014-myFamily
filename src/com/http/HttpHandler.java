@@ -29,6 +29,11 @@ import org.apache.http.util.EntityUtils;
 
 import com.classes.DataHolder;
 
+/**
+ * Klasa służąca do pobierania danych jako JSON z serwera. Adres serwera przekazywany jest w konstruktorze.
+ * @author KMACIAZE
+ *
+ */
 public class HttpHandler {
 
 	private String url = null;
@@ -38,11 +43,9 @@ public class HttpHandler {
 	private HttpEntity entity;
 
 	/**
-	 * @param url
-	 *            - url address of web server
-	 * @param dataArray
-	 *            - String array to collect all data needed to connect to the
-	 *            web server
+	 * Główny konstruktor klasy
+	 * @param url String określający adres serwera
+	 * @param dataArray tablica przechowująca parametry, która mają być wysłane w parametrze
 	 */
 	public HttpHandler(String url, String[] dataArray) {
 		this.url = url;
@@ -50,11 +53,11 @@ public class HttpHandler {
 	}
 
 	/**
-	 * @return response text from web server with json objects
+	 * Metoda służąca do pobierania danych wywoływana na akcję logowania
+	 * @return Obiekt JSON 
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 * 
-	 *             Simple method to connect to server and login
 	 * 
 	 */
 	public String postDataLogin() throws ClientProtocolException, IOException {
@@ -71,7 +74,14 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję rejestrowania
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 * 
+	 * 
+	 */
 	public String postDataUserRegister() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -86,7 +96,14 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania użytkownika do rodziny
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 * 
+	 * 
+	 */
 	public String postDataAddUserToFamily() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -105,7 +122,13 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania rodziny
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 * 
+	 */
 	public String postDataAddFamily() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -121,7 +144,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję usuwania
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataRemove() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
@@ -140,8 +168,13 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
-	public String postDataAddNote() throws ClientProtocolException, IOException {
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania notatki
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
+	public String postDataAddNote() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
@@ -157,9 +190,13 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
-	public String postDataGetNotes() throws ClientProtocolException,
-			IOException {
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania notatek
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
+	public String postDataGetNotes() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
@@ -174,7 +211,12 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania wydarzenia
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataAddEvent() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
@@ -195,7 +237,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania wydarzeń
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataGetEvents() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
@@ -212,7 +259,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania nagród
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataAddPrizes() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/add_prize.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
@@ -230,7 +282,12 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania użytkowników
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataGetUsers() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -247,7 +304,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania zdjęć
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataGetPhotos() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -262,6 +324,12 @@ public class HttpHandler {
 
 		return EntityUtils.toString(entity);
 	}
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania nagród
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataGetPrizes() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/get_prizes.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
@@ -284,7 +352,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania zadania
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataAddTask() throws IOException {
 		HttpPost post = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
@@ -327,7 +400,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania zadań
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postDataGetTasks() throws IOException {
 		HttpPost post = new HttpPost(url); // http://malinowepi.no-ip.org/login.php
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
@@ -347,7 +425,12 @@ public class HttpHandler {
 		return EntityUtils.toString(entity);
 
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję wysyłania zdjęcia
+	 * @return Obiekt JSON 
+	 * @throws IOException
+	 * 
+	 */
 	public String postPicureSend() throws IOException {
 
 		HttpClient httpClient = new DefaultHttpClient();
@@ -378,56 +461,5 @@ public class HttpHandler {
 		}
 		return "jakis blad z serwerem chyba";
 	}
-
-	/*public String postGetPicture() throws IOException {
-		long filesize;
-		int len;
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
-		FileOutputStream fileOutput;
-		String path = android.os.Environment.getExternalStorageDirectory()
-				+ File.separator + DataHolder.PHOTO_ALBUM;
-		byte[] buffer = new byte[200000];
-		String url = "http://malinowepi.no-ip.org/download_file.php";
-
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpContext localContext = new BasicHttpContext();
-		HttpPost post = new HttpPost(url);
-
-		nameValuePairs.add(new BasicNameValuePair("session", DataHolder
-				.getInstance().getSession()));
-		nameValuePairs.add(new BasicNameValuePair("family_Id", DataHolder
-				.getInstance().getStringFamilyId()));
-		nameValuePairs.add(new BasicNameValuePair("file_Id", dataArray[0]));
-		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-		try {
-			HttpResponse execute = client.execute(post,localContext);
-			InputStream content = execute.getEntity().getContent();
-
-			filesize = execute.getEntity().getContentLength();
-			System.out.println("FILE SIZE"+filesize+"");
-			fileOutput = new FileOutputStream(new File(path,
-					"file_copyformserver.jpg"));
-
-			while ((len = content.read(buffer, 0, 1024)) > 0) 
-			
-			while (filesize>0){
-				filesize -= len = content.read(buffer, 0, 200000);
-				fileOutput.write(buffer, 0, len);
-				Thread.sleep(100);
-			}
-			
-			fileOutput.close();
-			entity = execute.getEntity();
-			return "ok";//EntityUtils.toString(entity);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-
-		return "cos nie tak";
-	}*/
-
 
 }

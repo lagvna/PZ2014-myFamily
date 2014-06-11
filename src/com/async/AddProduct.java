@@ -12,6 +12,11 @@ import com.http.HttpHandler2;
 import com.http.JSONParser2;
 import com.myfamily.AddProductActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za dodanie produktu do serwera
+ * @author lagvna
+ *
+ */
 public class AddProduct extends AsyncTask<Void, Void, Void> {
 
 	private AddProductActivity callingActivity;

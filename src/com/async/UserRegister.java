@@ -10,6 +10,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.UserRegisterActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za rejestracje uzytkownika na serwerze
+ * @author lagvna
+ *
+ */
 public class UserRegister extends AsyncTask<Void, Void, Void> {
 
 	private UserRegisterActivity callingActivity;

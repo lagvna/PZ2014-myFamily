@@ -12,6 +12,11 @@ import com.http.HttpHandler2;
 import com.http.JSONParser2;
 import com.myfamily.ShoppingActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za pobranie archiwalnej listy zakupow
+ * @author lagvna
+ *
+ */
 public class GetShoppingList extends AsyncTask<Void, Void, Void> {
 
 	private ShoppingActivity callingActivity;

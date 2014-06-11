@@ -13,6 +13,11 @@ import com.http.HttpHandler2;
 import com.http.JSONParser2;
 import com.myfamily.ShoppingActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za pobranie wszystkich list zakupow z bazy serwera
+ * @author lagvna
+ *
+ */
 public class GetShoppingLists extends AsyncTask<Void, Void, Void> {
 
 	private ShoppingActivity callingActivity;

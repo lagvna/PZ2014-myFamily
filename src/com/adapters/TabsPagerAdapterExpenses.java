@@ -7,13 +7,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.fragments.ChartFragment;
 import com.fragments.NewExpenseFragment;
 import com.fragments.SummaryFragment;
-
+/**
+ * Klasa adapter do zarządzania listą zakładek w wydatkach
+ * @author KMACIAZE
+ */
 public class TabsPagerAdapterExpenses extends FragmentPagerAdapter {
-
+	/**
+	 * pole przechowujące fragment summary
+	 */
 	public SummaryFragment sf;
+	/**
+	 * pole przechowujące fragment chart
+	 */
 	public ChartFragment cf;
+	/**
+	 * pole przechowujące fragment new expense
+	 */
 	public NewExpenseFragment nef;
-
+	/**
+	 * Główny konstruktor klasy
+	 * @param fm fragment manager
+	 */
 	public TabsPagerAdapterExpenses(FragmentManager fm) {
 		super(fm);
 	}

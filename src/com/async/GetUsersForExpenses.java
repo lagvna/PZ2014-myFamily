@@ -12,6 +12,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.ExpenseActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za pobranie nazw uzytkownikow z bazy serwera dla celow przegladania wydatkow
+ * @author lagvna
+ *
+ */
 public class GetUsersForExpenses extends AsyncTask<Void, Void, Void> {
 
 	private ExpenseActivity callingActivity;

@@ -28,6 +28,11 @@ import com.expenses.DatePickerFragment;
 import com.myfamily.ExpenseActivity;
 import com.myfamily.R;
 
+/**
+ * Fragment przypiety pod aktywnosc wydatkow, w ktorym wyswietlane sa szczegoly podsumowania wydatkow za okres.
+ * @author lagvna
+ *
+ */
 public class SummaryFragment extends Fragment {
 
 	private Spinner user;
@@ -189,6 +194,9 @@ public class SummaryFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * Metoda przypisujaca wydatki za okres do listy. Odswieza wykres wydatkow.
+	 */
 	public void setExpenses() {
 		current = ea.expenseList.size() - 1;
 
@@ -203,6 +211,10 @@ public class SummaryFragment extends Fragment {
 		ea.mAdapter.cf.updateGraph();
 	}
 
+	/**
+	 * Metoda wyliczajaca kwote sumy za okres.
+	 * @return zwraca sume
+	 */
 	public float countTotal() {
 		float total = 0;
 
@@ -233,7 +245,10 @@ public class SummaryFragment extends Fragment {
 	private String getToDate() {
 		return dateTo.getText().toString();
 	}
-
+	
+	/**
+	 * Metoda przypisujaca uzytkownikow pod rozwijana liste
+	 */
 	public void addItemsOnUserSpinner() {
 
 		List<String> list = new ArrayList<String>();

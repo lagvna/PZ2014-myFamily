@@ -2,6 +2,11 @@ package com.classes;
 
 import java.io.Serializable;
 
+/**
+ * Klasa definiujaca produkt jako obiekt aplikacji
+ * @author lagvna
+ *
+ */
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
@@ -13,6 +18,18 @@ public class Product implements Serializable {
 
 	}
 
+	/**
+	 * Glowny konstruktor klasy
+	 * 
+	 * @param id
+	 *            id produktu
+	 * @param name
+	 *            nazwa produktu
+	 * @param category
+	 *            kategoria produktu
+	 * @param price
+	 *            cena produktu
+	 */
 	public Product(int id, String name, String category, String price) {
 		this.setId(id);
 		this.setName(name);

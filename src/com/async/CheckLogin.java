@@ -11,6 +11,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.LoginActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za sprawdzenie loginu i hasla uzytkownika z rekordami w bazie
+ * @author lagvna
+ *
+ */
 public class CheckLogin extends AsyncTask<Void, Void, Void> {
 
 	private LoginActivity callingActivity;

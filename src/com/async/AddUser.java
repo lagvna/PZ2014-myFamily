@@ -10,6 +10,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.AddUserActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za dodanie uzytkownika do serwera
+ * @author lagvna
+ *
+ */
 public class AddUser extends AsyncTask<Void, Void, Void> {
 
 	private AddUserActivity callingActivity;

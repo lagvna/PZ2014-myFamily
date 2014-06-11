@@ -35,10 +35,21 @@ import com.myfamily.ShoppingActivity;
 import com.shopping.CustomRow;
 import com.shopping.ListViewAdapter;
 
+/**
+ * Fragment przypiety do aktywnosci dotyczacej zakupow, w ktorym wyswietlane sa archiwalne listy zakupow.
+ * @author lagvna
+ *
+ */
 public class ArchiveFragment extends Fragment {
 	private ArrayList<CustomRow> CustomRow_data;
 	private ShoppingActivity sa;
+	/**
+	 * Adapter widoku listowego
+	 */
 	public ListViewAdapter listAdapter;
+	/**
+	 * Widok listowy
+	 */
 	public ListView lv;
 
 	@Override
@@ -72,6 +83,9 @@ public class ArchiveFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * Metoda sluzaca utworzeniu listy archiwalnych zakupow
+	 */
 	public void createList() {
 
 		int len = sa.shoppingLists.size();
@@ -101,6 +115,10 @@ public class ArchiveFragment extends Fragment {
 		return -1;
 	}
 
+	/**
+	 * Metoda przygotowawcza, w ktorej wyliczane sa dane dotyczace pobieranej listy zakupow
+	 * @param sl lista zakupow, ktora chcemy pobrac
+	 */
 	public void preShowPopup(ShoppingList sl) {
 		String name = sl.getName();
 		String cost = "Suma: " + sl.getTotalCost() + " zł";
@@ -152,6 +170,14 @@ public class ArchiveFragment extends Fragment {
 		sa.deleteShoppingList(toDel);
 	}
 
+	/**
+	 * Metoda wyswietlajaca popup z danymi listy zakupow
+	 * @param anchorView widok aplikacji
+	 * @param name nazwa listy zakupow
+	 * @param products lista produktow
+	 * @param cost koszt calosciowy
+	 * @param sl lista zakupow
+	 */
 	public void showPopup(View anchorView, String name, String products,
 			String cost, final ShoppingList sl) {
 		WindowManager wm = (WindowManager) getView().getContext()

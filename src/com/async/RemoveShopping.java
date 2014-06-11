@@ -11,6 +11,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser2;
 import com.myfamily.ShoppingActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za usuniecie elementow zwiazanych z zakupami
+ * @author lagvna
+ *
+ */
 public class RemoveShopping extends AsyncTask<Void, Void, Void> {
 
 	private String id = "";

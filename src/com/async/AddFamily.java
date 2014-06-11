@@ -10,7 +10,11 @@ import com.classes.DataHolder;
 import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.AddFamilyActivity;
-
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za dodanie rodziny do serwera
+ * @author lagvna
+ *
+ */
 public class AddFamily extends AsyncTask<Void, Void, Void> {
 
 	private AddFamilyActivity callingActivity;

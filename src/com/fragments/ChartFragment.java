@@ -14,6 +14,11 @@ import com.jjoe64.graphview.LineGraphView;
 import com.myfamily.ExpenseActivity;
 import com.myfamily.R;
 
+/**
+ * Fragment podpiety do aktywnosci wydatkow, w ktorym wyswietlany jest wykres z wydatkami w stosunku dniowym
+ * @author lagvna
+ *
+ */
 public class ChartFragment extends Fragment {
 
 	private ExpenseActivity ea;
@@ -33,6 +38,9 @@ public class ChartFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * Metoda aktualizujaca  i rysujaca wykres
+	 */
 	public void updateGraph() {
 		if (!ea.expenseList.isEmpty()) {
 			num = ea.expenseList.size();

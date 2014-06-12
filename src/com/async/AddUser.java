@@ -10,6 +10,13 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.AddUserActivity;
 
+/**
+ * AsyncTask pozwalajacy na wywoalnie metody odpowiedzialnej
+ * za pobieranie danych z serwera. Wywoluje metode, ktora 
+ * pozwala dodawać użytkownikow do rodziny
+ * @author kwachu
+ *
+ */
 public class AddUser extends AsyncTask<Void, Void, Void> {
 
 	private AddUserActivity callingActivity;

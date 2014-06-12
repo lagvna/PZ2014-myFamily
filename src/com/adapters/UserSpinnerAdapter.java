@@ -12,6 +12,12 @@ import android.widget.TextView;
 import com.classes.User;
 import com.myfamily.R;
 
+/**
+ * Spiner adapter odpowiedzialny za wysietlanie 
+ * nazw uzytkownikow pobranych z serwera 
+ * @author kwachu
+ *
+ */
 public class UserSpinnerAdapter extends ArrayAdapter<User> {
 	private Activity context;
     ArrayList<User> data = null;

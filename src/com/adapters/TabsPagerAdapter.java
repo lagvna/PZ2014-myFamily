@@ -8,6 +8,12 @@ import com.fragments.ArchiveFragment;
 import com.fragments.ProductsFragment;
 import com.fragments.ShoppingListFragment;
 
+/**
+ * PageAdapter uzywany do wyswietlania fragmentow 
+ * w aktywnosci TaskActivity
+ * @author kwachu
+ *
+ */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 	public ShoppingListFragment slf;

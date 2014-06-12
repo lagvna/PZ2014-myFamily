@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Adapter listy odpowiedzialny za prawidlowe
+ * wyswietlanie listy stringow, ktore sa nazwami zdjec na serwerze 
+ * @author kwachu
+ *
+ */
 public class PhotosAdapter extends ArrayAdapter<Photo> {
 
 	private ArrayList<Photo> photos;

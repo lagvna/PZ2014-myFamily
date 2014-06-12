@@ -12,6 +12,12 @@ import android.widget.TextView;
 import com.classes.Family;
 import com.myfamily.R;
 
+/**
+ * Adapter listy odpowiedzialnej za wyswietlanie uzytkownkow
+ * wybranej przez uzytkownika rodziny. 
+ * @author kwachu
+ *
+ */
 public class FamilyListAdapter extends ArrayAdapter<Family> {
 
 	Context context;
@@ -23,7 +29,7 @@ public class FamilyListAdapter extends ArrayAdapter<Family> {
 		this.familys = familys;
 
 	}
-
+	
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View rowView = convertView;

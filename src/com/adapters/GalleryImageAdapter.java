@@ -18,6 +18,11 @@ import android.widget.ImageView;
 import com.classes.Utils;
 import com.myfamily.R;
 
+/**
+ * @author kwachu
+ * Adapter listy odpowiedzialny za prawidlowe
+ * wyswietlanie listy zdjec w galerii obrazow 
+ */
 public class GalleryImageAdapter extends BaseAdapter 
 {
 	
@@ -81,6 +86,11 @@ public class GalleryImageAdapter extends BaseAdapter
     }
     
     
+    /**
+     * Metoda odpowiedzialna za dekodowanie plikow do postaci bitmap
+     * @param f - sciezka dostepu do pliku
+     * @return odkodowany strumien bitow w postaci bitmapy
+     */
     public static Bitmap decodeFile(String f) {
         	try {
                 //Decode image size

@@ -392,14 +392,14 @@ public class TasksActivity extends FragmentActivity implements
 			
 
 			JSONParser jp = new JSONParser(responseText);
-			showToast(responseText);
+			//showToast(responseText);
 			try {
 				ArrayList resultSet = jp.getTaskResult();
 				if (resultSet.size() == 2) {
 					tasksList = (ArrayList<Task>) resultSet.get(0);
 					initializedFragments();
 				} else if (resultSet.size() == 1) {
-					showToast(((String) ((ArrayList) resultSet.get(0)).get(1)));
+					//showToast(((String) ((ArrayList) resultSet.get(0)).get(1)));
 					initializedFragments();
 				}
 

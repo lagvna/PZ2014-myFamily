@@ -170,20 +170,61 @@ public class FragmentOldTasks extends Fragment {
 				@Override
 				public void onClick(View v) {
 					if(FragmentOldTasks.this.vote&&!FragmentOldTasks.this.remove) {
-						new VoteTask(selectedTask.getId(),FragmentOldTasks.this).execute();
-						Toast.makeText(context, "Zadanie ocenione :)", Toast.LENGTH_LONG ).show();
-						int a = adapter.getPosition(selectedTask);
-						adapter.getItem(a).setVoted();
-						adapter.notifyDataSetChanged();
+						
+						if (selectedTask.getForWho().equals("0")) {
+							dialog.dismiss();
+							Toast.makeText(
+									context,
+									"Nie mozesz ocenić zadania przeznaczonego dla Ciebie!",
+									Toast.LENGTH_LONG).show();
+									//dialog.dismiss();
+						} else if (selectedTask.ifVoted()) {
+							dialog.dismiss();
+							Toast.makeText(
+									context,
+									"Nie mozesz ocenić ocenionego zadania",
+									Toast.LENGTH_LONG).show();
+						}
+						
+						else {
+							
+							new VoteTask(selectedTask.getId(),FragmentOldTasks.this).execute();
+							Toast.makeText(context, "Zadanie ocenione :)", Toast.LENGTH_LONG ).show();
+							int a = adapter.getPosition(selectedTask);
+							adapter.getItem(a).setVoted();
+							adapter.notifyDataSetChanged();
+						}
+						
+						
 						dialog.dismiss();
 					} 
 					
 					if(!FragmentOldTasks.this.vote&&FragmentOldTasks.this.remove) {
-						new VoteTask(selectedTask.getId(),FragmentOldTasks.this).execute();
-						new RemoveSth(selectedTask.getId(), "Zadanie");
-						adapter.remove(selectedTask);
-						adapter.notifyDataSetChanged();
-						Toast.makeText(context, "Zadanie usunięte", Toast.LENGTH_LONG ).show();
+						
+						if (selectedTask.getForWho().equals("0")) {
+							dialog.dismiss();
+							Toast.makeText(
+									context,
+									"Nie mozesz usunąć zadania przeznaczonego dla Ciebie!",
+									Toast.LENGTH_LONG).show();
+									
+						} else if (selectedTask.ifVoted()) {
+							dialog.dismiss();
+							Toast.makeText(
+									context,
+									"Nie mozesz usunąć ocenionego zadania",
+									Toast.LENGTH_LONG).show();
+							
+						} else {
+							
+							new VoteTask(selectedTask.getId(),FragmentOldTasks.this).execute();
+							new RemoveSth(selectedTask.getId(), "Zadanie");
+							adapter.remove(selectedTask);
+							adapter.notifyDataSetChanged();
+							Toast.makeText(context, "Zadanie usunięte", Toast.LENGTH_LONG ).show();
+						}
+						
+						
 						/*TasksActivity.getInstance().finish();
 						startActivity(new Intent(context, TasksActivity.class));*/
 						dialog.dismiss();

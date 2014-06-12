@@ -11,6 +11,13 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.AddFamilyActivity;
 
+/**
+ * AsyncTask pozwalajacy na wywoalnie metody odpowiedzialnej
+ * za pobieranie danych z serwera. Wywoluje metode, ktora 
+ * pozwala dodawać nowe rodziny do bazy danych 
+ * @author kwachu
+ *
+ */
 public class AddFamily extends AsyncTask<Void, Void, Void> {
 
 	private AddFamilyActivity callingActivity;

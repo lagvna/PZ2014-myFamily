@@ -486,11 +486,12 @@ public class JSONParser {
 		JSONObject jSonObject = jSonArray.getJSONObject(0);
 		String errorCode = jSonObject.getString("success");
 		String message = jSonObject.getString("message");
+		String newTaskMessage = jSonObject.getString("new_tasks_success");
 
 		JSONArray tasks;
 
 		try {
-			if (!errorCode.equals("0")) { // sukces
+			if (!errorCode.equals("0")&&!newTaskMessage.equals("0")) { // sukces
 
 				tasks = (JSONArray) jSonObject.get("tasks");
 				for (int i = 0; i < tasks.length(); i++) {

@@ -24,6 +24,13 @@ import android.os.AsyncTask;
 import com.classes.DataHolder;
 import com.myfamily.PhotosManagementActivity;
 
+/**
+ * AsyncTask pozwalajacy na wywoalnie metody odpowiedzialnej
+ * za pobieranie danych z serwera. Wywoluje metode, ktora 
+ * pozwala pobierac zdjecia z serwera
+ * @author kwachu
+ *
+ */
 public class GetPicture extends AsyncTask<HttpResponse, Integer, String>{
 
 	private PhotosManagementActivity callingActivity;

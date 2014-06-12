@@ -11,6 +11,13 @@ import com.http.HttpHandler;
 import com.http.JSONParser;
 import com.myfamily.LoginActivity;
 
+/**
+ * AsyncTask pozwalajacy na wywoalnie metody odpowiedzialnej
+ * za pobieranie danych z serwera. Wywoluje metode, ktora 
+ * pozwala sprawdzic poprawnosc zalogowania do systemu 
+ * @author kwachu
+ *
+ */
 public class CheckLogin extends AsyncTask<Void, Void, Void> {
 
 	private LoginActivity callingActivity;

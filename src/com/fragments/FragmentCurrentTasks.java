@@ -26,8 +26,14 @@ import com.async.VoteTask;
 import com.classes.Task;
 import com.myfamily.AddTaskActivity;
 import com.myfamily.R;
-import com.myfamily.TasksActivity;
 
+/**
+ * Fragment przypiety do aktywnosci z zadaniami, wyswietlajacy zadania, ktore
+ * nie zostaly jeszcze zakonczone i ocenione.
+ * 
+ * @author kwachu
+ * 
+ */
 public class FragmentCurrentTasks extends Fragment {
 
 	private static final String TAG = "ConfirmDialogSample.MainActivity";
@@ -88,11 +94,22 @@ public class FragmentCurrentTasks extends Fragment {
 		return rootView;
 	}
 
+
+	/**
+	 * Metoda aktualizujaca liste wybranych zadan
+	 * 
+	 * @param selectedItems
+	 *            wybrane zadania
+	 */
 	public void updateList(boolean[] selectedItems) {
 		this.selectedItems = selectedItems;
 		initializedList();
 	}
 
+
+	/**
+	 * Metoda inicjalizujaca widok listy z zadaniami
+	 */
 	public void initializedList() {
 
 		ArrayList<Task> tempList = ifShouldBeSelect(tasksList);
@@ -189,6 +206,7 @@ public class FragmentCurrentTasks extends Fragment {
 			public void onClick(View v) {
 				if (FragmentCurrentTasks.this.vote
 						&& !FragmentCurrentTasks.this.remove) {
+
 					//System.out.println("DLA KOGO???:::: "+selectedTask.getForWho());;
 					if (selectedTask.getForWho().equals("0")) {
 						dialog.dismiss();
@@ -210,12 +228,23 @@ public class FragmentCurrentTasks extends Fragment {
 						adapter.notifyDataSetChanged();
 					}
 
+
+					new VoteTask(selectedTask.getId(),
+							FragmentCurrentTasks.this).execute();
+					Toast.makeText(context, "Zadanie ocenione :)",
+							Toast.LENGTH_LONG).show();
+					// TasksActivity.getInstance().finish();
+					int a = adapter.getPosition(selectedTask);
+					adapter.getItem(a).setVoted();
+					adapter.notifyDataSetChanged();
+
 					/* startActivity(new Intent(context, TasksActivity.class)); */
 					dialog.dismiss();
 				}
 
 				if (!FragmentCurrentTasks.this.vote
 						&& FragmentCurrentTasks.this.remove) {
+
 
 					if (selectedTask.getForWho().equals("0")) {
 						dialog.dismiss();
@@ -239,6 +268,13 @@ public class FragmentCurrentTasks extends Fragment {
 						adapter.remove(selectedTask);
 						adapter.notifyDataSetChanged();
 					}
+
+
+					new VoteTask(selectedTask.getId(),
+							FragmentCurrentTasks.this).execute();
+					new RemoveSth(selectedTask.getId(), "Zadanie");
+					adapter.remove(selectedTask);
+					adapter.notifyDataSetChanged();
 
 					// Toast.makeText(context, "Zadanie usunięte",
 					// Toast.LENGTH_LONG ).show();
@@ -269,8 +305,14 @@ public class FragmentCurrentTasks extends Fragment {
 		dialog.show();
 	}
 
+
+	/**
+	 * Metoda pokazujaca toast z odpowiedzia od serwera
+	 * 
+	 * @param text
+	 *            odpowiedz od serwera
+	 */
 	public void showToast(String text) {
 		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 	}
-
 }

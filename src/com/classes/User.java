@@ -1,14 +1,19 @@
 package com.classes;
 
+/**
+ * @author kwachu
+ * Klasa reprezentujaca uzytkownika w systemie
+ */
 public class User {
 
 	private String userName = null;
 	private String role = null;
 	
-	public User() {
-		
-	}
-	
+	/**
+	 * glowny konstruktor klasy
+	 * @param userName
+	 * @param role
+	 */
 	public User(String userName, String role) {
 		this.userName = userName;
 		this.role = role;

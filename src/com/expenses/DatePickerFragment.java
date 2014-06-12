@@ -11,6 +11,11 @@ import android.widget.DatePicker;
 
 import com.myfamily.R;
 
+/**
+ * Interfejs komponentu wyboru daty. Ustala date w odpowiednim formacie i ustala ja w komponencie.
+ * @author lagvna
+ *
+ */
 public class DatePickerFragment extends DialogFragment implements
 		DatePickerDialog.OnDateSetListener {
 

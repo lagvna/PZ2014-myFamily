@@ -17,7 +17,10 @@ import com.classes.Task;
 import com.myfamily.R;
 
 
-
+/**
+ * Klasa adapter do zarządzania listą zadań
+ * @author KMACIAZE
+ */
 public class TasksListAdapter extends ArrayAdapter<Task> {
 
 	private Context context;    
@@ -25,7 +28,12 @@ public class TasksListAdapter extends ArrayAdapter<Task> {
     private Calendar calendar;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String currentDate;
-    
+    /**
+     * Główny konstruktor klasy
+     * @param context context aktywności
+     * @param tasks lista z zadaniami
+     * @param selectedItem tablica z wartościami logicznymi mówiąca które typy zadań są wybrane
+     */
     public TasksListAdapter(Context context, ArrayList<Task> tasks,boolean[] selectedItem) {
         super(context,R.layout.task_row, tasks);
         this.context = context;
@@ -58,7 +66,7 @@ public class TasksListAdapter extends ArrayAdapter<Task> {
 					if(taskNameTextView != null) {
 						taskNameTextView.setText(task.getName());
 					}
-					if(!(taskNameTextView != null && taskNameTextView.getText().equals("Brak zadań"))) {
+					if(!(taskNameTextView != null && taskNameTextView.getText().equals("Brak zadaÅ„"))) {
 						
 						TextView deadlineTextView = (TextView) rowView.findViewById(R.id.deadlineTextView);
 						if(deadlineTextView != null) {
@@ -90,7 +98,11 @@ public class TasksListAdapter extends ArrayAdapter<Task> {
 		
 		return rowView;	
 	}	
-    
+    /**
+     * Metoda zwracająca ocenione już zadania
+     * @param tasks lista z zadaniami
+     * @return lista z ocenionymi już zadaniami
+     */
     private ArrayList<Task> getOldTask(ArrayList<Task> tasks) {
     	
     	ArrayList<Task> tmp = new ArrayList<Task>();
@@ -105,7 +117,11 @@ public class TasksListAdapter extends ArrayAdapter<Task> {
     	
     	return tmp;
     }
-    
+    /**
+     * Metoda sprawdzająca czy zadanie jest aktualne, tzn. czy jego termin nie przekracza zadanej daty
+     * @param d data 
+     * @return true jeżeli d jest przed, false w przeciwnym przypadku
+     */
     private boolean ifActualTask(Date d) {
     	
     	 try {

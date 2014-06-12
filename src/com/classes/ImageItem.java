@@ -3,13 +3,19 @@ package com.classes;
 import android.graphics.Bitmap;
  
 /**
- * @author javatechig {@link http://javatechig.com}
- * 
+ * Klasa reprezentująca zdjęcie
+ * @author KMACIAZE
+ *
  */
 public class ImageItem {
     private Bitmap image;
     private String title;
  
+    /**
+     * Główny konstruktor klasy
+     * @param image bitmapa obrazek
+     * @param title tytuł obrazku
+     */
     public ImageItem(Bitmap image, String title) {
         super();
         this.image = image;

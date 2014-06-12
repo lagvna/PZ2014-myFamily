@@ -7,6 +7,11 @@ import android.os.AsyncTask;
 import com.http.HttpHandler;
 import com.myfamily.GalleryActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za wyslanie zdjecia na serwer
+ * @author lagvna
+ *
+ */
 public class SendPicture1 extends AsyncTask<String, Integer, String>{
 
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;

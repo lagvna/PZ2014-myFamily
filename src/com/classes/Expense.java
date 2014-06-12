@@ -2,6 +2,11 @@ package com.classes;
 
 import java.io.Serializable;
 
+/**
+ * Klasa reprezentująca wydatek.
+ * @author KMACIAZE
+ *
+ */
 public class Expense implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +20,15 @@ public class Expense implements Serializable {
 	public Expense() {
 
 	}
-
+	/**
+	 * Główny konstruktor klasy
+	 * @param id id wydatku
+	 * @param name nazwa wydatku
+	 * @param note notatka do wydatku
+	 * @param owner wystawiający wydatek
+	 * @param price cena wydatku
+	 * @param date data wykonania wydatku
+	 */
 	public Expense(int id, String name, String note, String owner,
 			String price, String date) {
 		this.setId(id);

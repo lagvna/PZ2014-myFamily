@@ -29,19 +29,37 @@ import com.async.RemoveSth;
 import com.classes.Product;
 import com.classes.ShoppingList;
 
+/**
+ * Aktywnosc sluzaca administracji opcji zakupow.
+ * 
+ * @author lagvna
+ * 
+ */
 public class ShoppingActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 
 	private String f1 = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/currShoppingList.dat";
 	private ViewPager viewPager;
+	/**
+	 * Adapter przypinajacy fragmenty do aktywnosci.
+	 */
 	public TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	private String[] tabs = { "Archiwum", "Lista zakupów", "Produkty" };
 	private ProgressDialog progressDialog;
 
+	/**
+	 * Lista produktow
+	 */
 	public ArrayList<Product> products;
+	/**
+	 * Aktualna lista zakupow
+	 */
 	public ArrayList<Product> shoppingList;
+	/**
+	 * Lista archiwalnych list zakupow
+	 */
 	public ArrayList<ShoppingList> shoppingLists;
 
 	@Override
@@ -94,11 +112,21 @@ public class ShoppingActivity extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * Metoda wywolujaca async tast pobierajacy liste zakupow z serwera
+	 * 
+	 * @param id
+	 *            id pobieranej listy
+	 */
 	public void getShoppingList(int id) {
 		new GetShoppingList(Integer.toString(id), ShoppingActivity.this)
 				.execute();
 	}
 
+	/**
+	 * Metoda sluzaca odswiezeniu widoku listy zakupowej. Wywolywana po
+	 * zakonczeniu zakupow
+	 */
 	public void beginNewList() {
 		shoppingList.clear();
 		mAdapter.slf.listAdapter.notifyDataSetChanged();
@@ -108,6 +136,9 @@ public class ShoppingActivity extends FragmentActivity implements
 		mAdapter.slf.listName = "";
 	}
 
+	/**
+	 * Metoda sluzaca zakonczeniu aktualnych zakupow
+	 */
 	public void endShopping() {
 		String products = "";
 		String totalCost;
@@ -147,25 +178,48 @@ public class ShoppingActivity extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * Metoda sluzaca wywolaniu okienka popup z pobrana lista zakupow
+	 * 
+	 * @param sl
+	 *            lista zakupow, ktora chcemy pobrac
+	 */
 	public void showPopup(ShoppingList sl) {
 		mAdapter.af.preShowPopup(sl);
 	}
 
+	/**
+	 * Metoda sluzaca pobraniu listy produktow
+	 */
 	public void getProducts() {
 		new GetProducts(ShoppingActivity.this, "0").execute();
 	}
 
+	/**
+	 * Metoda sluzaca usunieciu produktu z serwera i aplikacji
+	 * 
+	 * @param id
+	 */
 	public void deleteProduct(String id) {
 		new RemoveSth(id, "Produkt").execute();
 		getProducts();
 	}
 
+	/**
+	 * Metoda sluzaca usunieciu listy zakupow
+	 * 
+	 * @param id
+	 *            identyfikator listy zakupow
+	 */
 	public void deleteShoppingList(String id) {
 		new RemoveSth(id, "ListaZakupow").execute();
 		beginNewList();
 		getShoppingLists();
 	}
 
+	/**
+	 * Metoda sluzaca pobraniu wszystkich list zakupow
+	 */
 	public void getShoppingLists() {
 		new GetShoppingLists(ShoppingActivity.this, "0").execute();
 	}
@@ -175,6 +229,12 @@ public class ShoppingActivity extends FragmentActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * Metoda przypisujaca listy zakupowe do widoku
+	 * 
+	 * @param sl
+	 *            lista list zakupow
+	 */
 	public void assignLists(ArrayList<ShoppingList> sl) {
 		int len = sl.size();
 		shoppingLists.clear();
@@ -187,6 +247,11 @@ public class ShoppingActivity extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * Metoda przypisujaca produkty do listy produktow
+	 * 
+	 * @param p
+	 */
 	public void assignProducts(ArrayList<Product> p) {
 		int len = p.size();
 		products.clear();
@@ -198,6 +263,9 @@ public class ShoppingActivity extends FragmentActivity implements
 		getShoppingLists();
 	}
 
+	/**
+	 * Metoda wyswietlajaca okienko oczekiwania na odpowiedz z serwera
+	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage("Łączenie z serwerem");
@@ -205,14 +273,17 @@ public class ShoppingActivity extends FragmentActivity implements
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * Metoda chowajaca okienko oczekiwania na odpowiedz z serwera
 	 */
 	public void hideProgressDial() {
 		progressDialog.dismiss();
 	}
 
 	/**
+	 * Metoda wyswietlajaca odpowiedz z serwera
+	 * 
 	 * @param responseText
+	 *            odpowiedz z serwera
 	 */
 	public void showToast(String responseText) {
 		System.err.println(responseText);
@@ -234,6 +305,10 @@ public class ShoppingActivity extends FragmentActivity implements
 
 	}
 
+	/**
+	 * Metoda zapisujaca aktualna liste zakupow do pliku, aby pozniej mozna ja
+	 * bylo z powrotem wywolac
+	 */
 	private void writeToFile() {
 		FileOutputStream fos;
 		File f = new File(f1);
@@ -255,6 +330,9 @@ public class ShoppingActivity extends FragmentActivity implements
 
 	}
 
+	/**
+	 * Metoda usuwajaca plik z zapisana lista zakupow
+	 */
 	private void deleteFile() {
 		File file = new File(f1);
 		file.delete();
@@ -283,6 +361,10 @@ public class ShoppingActivity extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * Metoda wywolywana po kliknieciu "wstecz". Wywoluje zapisanie listy do
+	 * pliku.
+	 */
 	public void onBackPressed() {
 		writeToFile();
 		ShoppingActivity.this.finish();

@@ -16,7 +16,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.classes.DataHolder;
-
+/**
+ * Klasa służąca do pobierania danych jako JSON z serwera. Adres serwera przekazywany jest w konstruktorze.
+ * @author KMACIAZE
+ *
+ */
 public class HttpHandler2 {
 
 	private String url = null;
@@ -26,17 +30,20 @@ public class HttpHandler2 {
 	private HttpEntity entity;
 
 	/**
-	 * @param url
-	 *            - url address of web server
-	 * @param dataArray
-	 *            - String array to collect all data needed to connect to the
-	 *            web server
+	 * Główny konstruktor klasy
+	 * @param url String określający adres serwera
+	 * @param dataArray tablica przechowująca parametry, która mają być wysłane w parametrze
 	 */
 	public HttpHandler2(String url, String[] dataArray) {
 		this.url = url;
 		this.dataArray = dataArray;
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania wydatków
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataGetExpenses() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -57,7 +64,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania wydatków
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataAddExpense() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -94,7 +106,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję ustawniania ceny
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataSetPrice() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -113,7 +130,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania produktu
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataAddProduct() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -133,7 +155,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję dodawania listy zakupów
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataAddShoppingList() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -154,7 +181,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania list zakupów
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataGetShoppingLists() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -172,7 +204,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania list zakupów
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataGetShoppingList() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -191,7 +228,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania notatek
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataGetNotes() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);
@@ -208,7 +250,12 @@ public class HttpHandler2 {
 
 		return EntityUtils.toString(entity);
 	}
-
+	/**
+	 * Metoda służąca do pobierania danych wywoływana na akcję pobierania produktów
+	 * @return Obiekt JSON 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public String postDataGetProducts() throws ClientProtocolException,
 			IOException {
 		HttpPost post = new HttpPost(url);

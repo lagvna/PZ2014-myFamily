@@ -28,6 +28,26 @@ import com.classes.Photo;
 import com.http.HttpHandler;
 import com.http.JSONParser;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedziana za wyswietlanie list zdjeci oraz pobieranie i wysylanie ich na serwer 
+ */
+/**
+ * @author kwachu
+ *
+ */
+/**
+ * @author kwachu
+ *
+ */
+/**
+ * @author kwachu
+ *
+ */
+/**
+ * @author kwachu
+ *
+ */
 public class PhotosManagementActivity extends Activity {
 
 	private ListView photosListView;
@@ -106,6 +126,10 @@ public class PhotosManagementActivity extends Activity {
 		photosListView.setAdapter(adapter);
 	}
 
+	/**
+	 * @author kwachu
+	 * AsyncTask odpowiedzialny za laczenie sie s serwerem oraz pobieranie zdjec z tego serwera 
+	 */
 	class GetPhotos extends AsyncTask<Void, Void, Void> {
 
 		private String responseText;
@@ -162,6 +186,9 @@ public class PhotosManagementActivity extends Activity {
 
 	}
 
+	/**
+	 * Metoda odpowiedzialna za wyswietlanie paska postepu
+	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage("Sprawdzanie danych");
@@ -169,13 +196,14 @@ public class PhotosManagementActivity extends Activity {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * metoda odpowiedzialna za ukrywanie paska postepu 
 	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
 
 	/**
+	 * Metoda odpowiedzialna za wyswietlanie tosta ne ekranie 
 	 * @param responseText
 	 */
 	public void showToast(String responseText) {

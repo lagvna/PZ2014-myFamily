@@ -28,14 +28,32 @@ import com.myfamily.ShoppingActivity;
 import com.shopping.CustomRow;
 import com.shopping.ListViewAdapter;
 
+/**
+ * Fragment przypiety do aktywnosci administracji zakupow.
+ * 
+ * @author lagvna
+ *
+ */
 public class ShoppingListFragment extends Fragment {
 	private ArrayList<CustomRow> CustomRow_data;
+	/**
+	 * Adapter widoku listowego
+	 */
 	public ListViewAdapter listAdapter;
 	ShoppingActivity sa;
+	/**
+	 * Komponent odpowiadajacy za wyswietlanie sumy za produkty z listy
+	 */
 	public TextView sumList;
+	/**
+	 * Komponent wyswietlajacy sume za produkty podana przez uzytkownika
+	 */
 	public TextView sumUser;
 	private Button editShopping;
 	private Button endShopping;
+	/**
+	 * Nazwa listy
+	 */
 	public String listName;
 
 	@Override
@@ -169,6 +187,9 @@ public class ShoppingListFragment extends Fragment {
 		alert.show();
 	}
 
+	/**
+	 * Metoda tworzaca liste i przypisujaca ja pod widok
+	 */
 	public void createList() {
 		
 		int len = sa.shoppingList.size();

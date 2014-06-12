@@ -1,7 +1,11 @@
 package com.classes;
 
 import java.io.Serializable;
-
+/**
+ * Klasa służąca do reprezentowania rodziny
+ * @author KMACIAZE
+ *
+ */
 public class Family implements Serializable {
 
 	/**
@@ -11,7 +15,12 @@ public class Family implements Serializable {
 	private int id = 0;
 	private String familyName = "";
 	private int role = -1;
-
+	/**
+	 * Główny konstruktor klasy
+	 * @param id id rodziny
+	 * @param familyName nazwa rodziny
+	 * @param role rola w rodzinie
+	 */
 	public Family(int id, String familyName, int role) {
 
 		this.id = id;

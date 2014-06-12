@@ -10,7 +10,11 @@ import com.classes.Expense;
 import com.classes.Note;
 import com.classes.Product;
 import com.classes.ShoppingList;
-
+/**
+ * Klasa służąca do parsowania obiektu JSON zapisanego w formacie String. 
+ * @author KMACIAZE
+ *
+ */
 public class JSONParser2 {
 
 	private String inputStream;
@@ -21,11 +25,17 @@ public class JSONParser2 {
 	private ArrayList<String> stringArray = new ArrayList<String>();
 	private ArrayList<Expense> expensesArray = null;
 	private ShoppingList sl = null;
-
+	/**
+	 * Główny konstruktor klasy.
+	 * @param inputStream obiekt JSON zapisany jako String
+	 */
 	public JSONParser2(String inputStream) {
 		this.inputStream = inputStream;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji usuwania 
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String[] getRemoveSthResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -36,7 +46,10 @@ public class JSONParser2 {
 
 		return data;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania wydatków
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList<Expense> getGetExpensesResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
@@ -57,7 +70,10 @@ public class JSONParser2 {
 
 		return expensesArray;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania list zakupów
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public String getAddShoppingListResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -68,7 +84,10 @@ public class JSONParser2 {
 
 		return errorCode;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania wydatku
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public int getAddExpenseResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -83,7 +102,10 @@ public class JSONParser2 {
 			return 0;
 		}
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji ustawiania cen
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public int getSetPriceResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 
@@ -98,7 +120,10 @@ public class JSONParser2 {
 			return 0;
 		}
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania produktu
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public Product getAddProductResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		Product product;
@@ -126,7 +151,10 @@ public class JSONParser2 {
 
 		return product;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania list zakupów
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ShoppingList getGetShoppingListResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
@@ -160,7 +188,10 @@ public class JSONParser2 {
 
 		return sl;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania list zakupów
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList getGetShoppingListsResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		System.out.println("SHOPPING LISTS: " + inputStream);
@@ -251,7 +282,10 @@ public class JSONParser2 {
 		 */
 
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobiernia produktów
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList<Product> getGetProductsResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);
@@ -272,7 +306,10 @@ public class JSONParser2 {
 
 		return productsArray;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji dodawania notatki
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public Note getAddNoteResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		Note note;
@@ -295,7 +332,10 @@ public class JSONParser2 {
 
 		return note;
 	}
-
+	/**
+	 * Metoda parsująca JSONa zawierającego informacje zwrócone z akcji pobierania notatek
+	 * @return lista z odpowiednimi informacjami z JSONa
+	 */
 	public ArrayList<Note> getGetNotesResult() throws JSONException {
 		JSONArray jSonArray = new JSONArray("[" + inputStream + "]");
 		JSONObject jo = jSonArray.getJSONObject(0);

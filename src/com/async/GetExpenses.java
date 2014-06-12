@@ -13,6 +13,11 @@ import com.http.HttpHandler2;
 import com.http.JSONParser2;
 import com.myfamily.ExpenseActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za pobranie wydatkow za okres z bazy serwera
+ * @author lagvna
+ *
+ */
 public class GetExpenses extends AsyncTask<Void, Void, Void> {
 
 	private ExpenseActivity callingActivity;

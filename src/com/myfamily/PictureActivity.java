@@ -17,6 +17,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * @author kwachu Aktywnosc odpowiedzialna za wyswietlanie galerii zdjeci oraz
+ *         wywolujaca klasy odpowiedzalne za pobieranie oraz wysylanie zdjec do serwera 
+ */
 public class PictureActivity extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -30,7 +34,7 @@ public class PictureActivity extends Activity {
 		setContentView(R.layout.activity_picture);
 
 		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-		
+
 		Button takePicturaButton = (Button) findViewById(R.id.takePictureButton);
 
 		takePicturaButton.setOnClickListener(new OnClickListener() {
@@ -93,7 +97,7 @@ public class PictureActivity extends Activity {
 		// Create a media file name
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
 				.format(new Date());
-		System.out.println("MOJ ZNACZNIK CZASU JEST TUTAJ::::"+timeStamp);
+		System.out.println("MOJ ZNACZNIK CZASU JEST TUTAJ::::" + timeStamp);
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator

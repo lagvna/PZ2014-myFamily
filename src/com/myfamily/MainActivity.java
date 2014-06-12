@@ -25,6 +25,12 @@ import com.classes.JSonReader;
 import com.classes.JSonWriter;
 import com.classes.Utils;
 
+/**
+ * Glowna aktywnosc aplikacji zawierajaca menu.
+ * 
+ * @author lagvna
+ * 
+ */
 public class MainActivity extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -71,46 +77,100 @@ public class MainActivity extends Activity {
 				this.getApplicationContext()));
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji notatek
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void notesButton(View v) {
 		Intent i = new Intent(MainActivity.this, NotesActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji dodania uzytkownika
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void addUserButton(View v) {
 		Intent i = new Intent(MainActivity.this, AddUserActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji zakupow
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void shoppingButton(View v) {
 		Intent i = new Intent(MainActivity.this, ShoppingActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji kalendarza
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void calendarButton(View v) {
 		Intent i = new Intent(MainActivity.this, CalendarActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji przydzielania nagrod
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void prizesButton(View v) {
 		Intent i = new Intent(MainActivity.this, PrizeActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji administracji wydatkow
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void expensesButton(View v) {
 		Intent i = new Intent(MainActivity.this, ExpenseActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji zadan
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void tasksButton(View v) {
 		Intent i = new Intent(MainActivity.this, TasksActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji przegladania zdjec
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void galleryButton(View v) {
 		Intent i = new Intent(MainActivity.this, GalleryActivity.class);
 		MainActivity.this.startActivity(i);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji zrobienia zdjecia
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void takePhotoButton(View v) {
 		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 		startActivityForResult(new Intent(
@@ -119,6 +179,12 @@ public class MainActivity extends Activity {
 				fileUri), CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 
+	/**
+	 * Metoda obslugujaca przycisk opcji przegladania zdjec na serwerze
+	 * 
+	 * @param v
+	 *            aktualny widok aplikacji
+	 */
 	public void photosOnServerButton(View v) {
 		Intent i = new Intent(MainActivity.this, PhotosManagementActivity.class);
 		MainActivity.this.startActivity(i);
@@ -237,5 +303,4 @@ public class MainActivity extends Activity {
 
 		return mediaFile;
 	}
-
 }

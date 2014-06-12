@@ -8,6 +8,7 @@ import com.fragments.ArchiveFragment;
 import com.fragments.ProductsFragment;
 import com.fragments.ShoppingListFragment;
 
+
 /**
  * PageAdapter uzywany do wyswietlania fragmentow 
  * w aktywnosci TaskActivity
@@ -15,11 +16,22 @@ import com.fragments.ShoppingListFragment;
  *
  */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-
+	/**
+	 * pole przechowujące fragment shopping list
+	 */
 	public ShoppingListFragment slf;
+	/**
+	 * pole przechowujące fragment archive
+	 */
 	public ArchiveFragment af;
+	/**
+	 * pole przechowujące fragment products
+	 */
 	public ProductsFragment pf;
-
+	/**
+	 * Główny adapter klasy
+	 * @param fm fragmentManager
+	 */
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}

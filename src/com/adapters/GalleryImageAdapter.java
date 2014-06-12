@@ -36,7 +36,10 @@ public class GalleryImageAdapter extends BaseAdapter
             R.drawable.eye,
             R.drawable.background,
     };
-
+    /**
+     * Główny konstruktor klasy
+     * @param context kontekst aktywności
+     */
     public GalleryImageAdapter(Context context) 
     {
         mContext = context;
@@ -52,7 +55,6 @@ public class GalleryImageAdapter extends BaseAdapter
     public Object getItem(int position) {
         return position;
     }
-
     public long getItemId(int position) {
         return position;
     }
@@ -85,6 +87,7 @@ public class GalleryImageAdapter extends BaseAdapter
         return i;
     }
     
+
     
     /**
      * Metoda odpowiedzialna za dekodowanie plikow do postaci bitmap

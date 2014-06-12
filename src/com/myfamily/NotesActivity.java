@@ -88,6 +88,9 @@ public class NotesActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Metoda sluzaca usunieciu notatki z serwera i aplikacji.
+	 */
 	public void delete() {
 		notes.remove(current);
 
@@ -158,6 +161,12 @@ public class NotesActivity extends Activity {
 		alert.show();
 	}
 
+	/**
+	 * Metoda sluzaca przypisaniu nowej notatki.
+	 * 
+	 * @param n
+	 *            notatka zwrocona przez serwer.
+	 */
 	public void setNewNote(Note n) {
 		notes.add(n);
 		current = notes.size() - 1;
@@ -167,6 +176,9 @@ public class NotesActivity extends Activity {
 		date.setText(notes.get(current).getDate());
 	}
 
+	/**
+	 * Metoda sluzaca wyswietleniu okienka czekania na odpowiedz z serwera
+	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage("Łączenie z serwerem");
@@ -174,14 +186,17 @@ public class NotesActivity extends Activity {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * Metoda sluzaca schowaniu okienka czekania na odpowiedz z serwera
 	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
 
 	/**
+	 * Metoda sluzaca wyswietleniu odpowiedzi z serwera
+	 * 
 	 * @param responseText
+	 *            tekst odpowiedzi serwera
 	 */
 	public void showToast(String responseText) {
 		System.err.println(responseText);

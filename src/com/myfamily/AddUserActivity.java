@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.async.AddUser;
 import com.classes.DataHolder;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedzilna za dodawanie nowego uzytkownika do systemu aplikacji 
+ */
 public class AddUserActivity extends Activity {
 
 	private AddUserActivity context;
@@ -72,7 +76,7 @@ public class AddUserActivity extends Activity {
 	 */
 
 	/**
-	 * method which show Progress dialog when login is checking
+	 * Metoda odpowiedzialna za wyswietlanie paska postepu na ekranie 
 	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
@@ -81,7 +85,7 @@ public class AddUserActivity extends Activity {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * matoda odpowiedzalna za ukrywanie paska postepu 
 	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
@@ -89,6 +93,8 @@ public class AddUserActivity extends Activity {
 
 	/**
 	 * @param responseText
+	 * 
+	 * metoda odpowiedzialna ze pokazywanie tosta na ekranie 
 	 */
 	public void showToast(String responseText) {
 
@@ -96,10 +102,17 @@ public class AddUserActivity extends Activity {
 				.show();
 	}
 
+	/**
+	 * @param rt
+	 * metoda odpowiedzialna za ustawianie tekstu odebranego od serwra 
+	 */
 	public void setResponseText(String rt) {
 		this.responseText = rt;
 	}
 
+	/**
+	 * Metoda odpowiedzialna ze uruchomienie aktywnosci zawierajacej liste uzytkownikow 
+	 */
 	public void userListShow() {
 		finish();
 		startActivity(new Intent(this.getApplicationContext(),

@@ -4,15 +4,28 @@ import java.io.File;
 import java.io.FileWriter;
 
 import android.content.Context;
-
+/**
+ * Klasa służąca do zapisywania JSONa do pliku
+ * @author KMACIAZE
+ *
+ */
 public class JSonWriter {
 
 	public static JSonWriter jSonWriter = new JSonWriter();
-
+	/**
+	 * Metoda zwracająca instancje klasy.
+	 * @return
+	 */
 	public static JSonWriter getInstance() {
 		return jSonWriter;
 	}
-
+	/**
+	 * Metoda dodająca do JSON kolejne informacje
+	 * @param fileName nazwa pliku, w którym przechowywany jest JSON
+	 * @param text dodajemy
+	 * @param writeMode czy zapisujemy
+	 * @param context kontekst aktywności
+	 */
 	public void appendToFile(String fileName, String text, int writeMode,
 			Context context) {
 
@@ -41,12 +54,21 @@ public class JSonWriter {
 
 		}
 	}
-
+	/**
+	 * Metoda usuwająca danych plik
+	 * @param fileName nazwa pliku do usunięcia
+	 * @param context context aktywności
+	 */
 	public void deleteFile(String fileName, Context context) {
 		File file = new File(context.getFilesDir(), fileName);
 		file.delete();
 	}
-
+	/**
+	 * Metoda sprawdzająca czy plik istnieje
+	 * @param fileName nazwa pliku do sprawdzenia
+	 * @param context conext aktywności
+	 * @return true, jeżeli istnieje, false wpp
+	 */
 	public boolean ifExist(String fileName, Context context) {
 
 		File file = new File(context.getFilesDir(), fileName);

@@ -11,16 +11,29 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
  
+/**
+ * @author kwachu
+ * Klasa odpowiedzialna prawidlowe obslugiwanie plikow zdjec. 
+ * Pozwala na pobieranie sciezek dostepu oraz miesc zapisu zdjec
+ */
 public class Utils {
  
     private Context _context;
  
     // constructor
+    /**
+     * @param context
+     * glowny konstruktor klasy 
+     */
     public Utils(Context context) {
         this._context = context;
     }
  
-    // Reading file paths from SDCard
+    
+    /**
+     * @return
+     * Metoda odpowiedzialna za pobieranie katalogow dostepu dla zdjec 
+     */
     public ArrayList<String> getFilePaths() {
         ArrayList<String> filePaths = new ArrayList<String>();
  
@@ -69,7 +82,12 @@ public class Utils {
         return filePaths;
     }
  
-    // Check supported file extensions
+    
+    /**
+     * Metoda sprawdzajaca czy dany plik jest obslugiwany
+     * @param filePath
+     * @return
+     */
     private boolean IsSupportedFile(String filePath) {
         String ext = filePath.substring((filePath.lastIndexOf(".") + 1),
                 filePath.length());

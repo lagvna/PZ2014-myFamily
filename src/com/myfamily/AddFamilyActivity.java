@@ -18,6 +18,10 @@ import android.widget.Toast;
 
 import com.async.AddFamily;
 
+/**
+ * @author kwachu
+ * Aktywnosc odpowiedzalna za dodawanie nowych rodzin. 
+ */
 public class AddFamilyActivity extends Activity {
 
 	private boolean correctData = false;
@@ -69,10 +73,19 @@ public class AddFamilyActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * metoda odpowiedzialan za koswanie bledow z loginEditText 
+	 */
 	public void removeErrors() {
 		loginEditText.setError(null);
 	}
 
+	/**
+	 * 
+	 * Metoda odpowiedzialna za sprawdzanie czy danie pole tekstowe jest puste. 
+	 * @param et - pole tekstowe 
+	 * @return zwraca true jesli pole jest puste oraz false w przeciwnym przypadku 
+	 */
 	public boolean isEmpty(EditText et) {
 		if (et.getText().toString().equals("")) {
 			return true;
@@ -92,7 +105,7 @@ public class AddFamilyActivity extends Activity {
 	}
 
 	/**
-	 * this method show Progress Dialog
+	 * metoda odpowiedzialna ze pokazywanie paska postepu na ekranie 
 	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(this);
@@ -101,15 +114,15 @@ public class AddFamilyActivity extends Activity {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * metoda odpowiedzialna ze uktywaie paska postepu 
 	 */
 	public void hideProgressDial() {
 		progressDialog.hide();
 	}
 
 	/**
-	 * This method is call from CreateAccount.class inform user that new account
-	 * is available then open LoginActivity
+	 * 
+	 * Metoda informajaca uzytkownika o utworeniu rodziny oraz uruchamiajaca LoginActivity
 	 */
 	public void familyCreated() {
 
@@ -123,6 +136,10 @@ public class AddFamilyActivity extends Activity {
 		startActivity(intent);
 	}
 
+	/**
+	 * @param responseText
+	 * metoda odpowiedzialna za pokazywanie Tosta na ekranie 
+	 */
 	public void showToast(String responseText) {
 
 		Toast.makeText(getApplicationContext(), responseText, Toast.LENGTH_LONG)
@@ -130,7 +147,7 @@ public class AddFamilyActivity extends Activity {
 	}
 
 	/**
-	 * this method set the response text
+	 * metoda odpowiedzialna za ustawianie responseText.
 	 * 
 	 * @param rt
 	 *            response text

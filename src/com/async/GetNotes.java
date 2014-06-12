@@ -13,6 +13,11 @@ import com.http.HttpHandler;
 import com.http.JSONParser2;
 import com.myfamily.NotesActivity;
 
+/**
+ * Klasa wywolujaca zdarzenie asynchroniczne odpowiadajace za pobranie notatek z bazy serwera
+ * @author lagvna
+ *
+ */
 public class GetNotes extends AsyncTask<Void, Void, Void> {
 
 	private NotesActivity callingActivity;

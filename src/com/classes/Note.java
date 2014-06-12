@@ -2,6 +2,11 @@ package com.classes;
 
 import java.io.Serializable;
 
+/**
+ * Klasa reprezentująca notatkę
+ * @author KMACIAZE
+ *
+ */
 public class Note implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -13,7 +18,13 @@ public class Note implements Serializable {
 	public Note()	{
 		
 	}
-	
+	/**
+	 * Główny konstruktor klasy
+	 * @param id id notatki
+	 * @param owner właściciel notatki
+	 * @param content zawartość notatki
+	 * @param date data stworzenia notatki
+	 */
 	public Note(int id, String owner, String content, String date)	{
 		this.id = id;
 		this.owner = owner;

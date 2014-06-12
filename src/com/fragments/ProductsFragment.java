@@ -29,12 +29,25 @@ import com.myfamily.R;
 import com.myfamily.ShoppingActivity;
 import com.shopping.ImageAdapter;
 
+/**
+ * Fragment przypiety do aktywnosci zakupow wyswietlajacy liste dostepnych
+ * produktow.
+ * 
+ * @author lagvna
+ * 
+ */
 public class ProductsFragment extends Fragment {
 
+	/**
+	 * Widok kafelkow w ktorych wyswietlane sa produkty
+	 */
 	public GridView gv;
 	private ShoppingActivity sa;
 	private View rootView;
 	private Button addProduct;
+	/**
+	 * Adapter przypinajacy kafelki produktow do widoku
+	 */
 	public ImageAdapter ia;
 	private ProgressDialog progressDialog;
 
@@ -146,6 +159,9 @@ public class ProductsFragment extends Fragment {
 		gv.setAdapter(ia);
 	}
 
+	/**
+	 * Metoda wyswietlajaca okienko oczekiwania na odpowiedz z serwera
+	 */
 	public void showProgressDial() {
 		progressDialog = new ProgressDialog(getActivity());
 		progressDialog.setMessage("Ustawianie nowej ceny");
@@ -153,19 +169,24 @@ public class ProductsFragment extends Fragment {
 	}
 
 	/**
-	 * method which hide Progress dialog
+	 * Metoda chowajaca okienko oczekiwania na odpowiedz z serwera
 	 */
 	public void hideProgressDial() {
 		progressDialog.dismiss();
 	}
 
 	/**
-	 * @param responseText
+	 * Metoda pokazujaca toast z odpowiedzia od serwera
+	 * @param responseText odpowiedz od serwera
 	 */
 	public void showToast(String responseText) {
 		System.err.println(responseText);
 	}
-
+	
+	/**
+	 * Metoda wywolywana jako wynik wywolania aktywnosci dodania produktu.
+	 * Dodaje produkt do listy i odswieza widok.
+	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

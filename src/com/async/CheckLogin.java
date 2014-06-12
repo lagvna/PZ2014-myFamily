@@ -16,7 +16,6 @@ import com.myfamily.LoginActivity;
  * za pobieranie danych z serwera. Wywoluje metode, ktora 
  * pozwala sprawdzic poprawnosc zalogowania do systemu 
  * @author kwachu
- *
  */
 public class CheckLogin extends AsyncTask<Void, Void, Void> {
 

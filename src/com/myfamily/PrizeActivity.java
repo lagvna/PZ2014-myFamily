@@ -284,7 +284,7 @@ public class PrizeActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
-			showToast(responseText);
+			//showToast(responseText);
 			JSONParser jp = new JSONParser(responseText);
 			try {
 				ArrayList resultSet = jp.getGainedPrizesResult();

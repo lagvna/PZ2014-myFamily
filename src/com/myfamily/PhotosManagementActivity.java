@@ -32,22 +32,7 @@ import com.http.JSONParser;
  * @author kwachu
  * Aktywnosc odpowiedziana za wyswietlanie list zdjeci oraz pobieranie i wysylanie ich na serwer 
  */
-/**
- * @author kwachu
- *
- */
-/**
- * @author kwachu
- *
- */
-/**
- * @author kwachu
- *
- */
-/**
- * @author kwachu
- *
- */
+
 public class PhotosManagementActivity extends Activity {
 
 	private ListView photosListView;
@@ -167,7 +152,7 @@ public class PhotosManagementActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
-			showToast(responseText);
+			//showToast(responseText);
 			JSONParser jp = new JSONParser(responseText);
 			try {
 				ArrayList resultSet = jp.getPhotosResult();

@@ -252,7 +252,7 @@ public class CalendarActivity extends Activity {
 		Uri uri = getContentResolver().insert(CalendarProvider.CONTENT_URI,
 				values);
 		if (type == 1) {
-			showToast("dodalem do kle");
+			//showToast("dodalem do kle");
 			calendar.refreshCalendar();
 			calendar.refreshDrawableState();
 		}
@@ -341,7 +341,7 @@ public class CalendarActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
-			showToast(responseText);
+			//showToast(responseText);
 			JSONParser jp = new JSONParser(responseText);
 
 			try {
@@ -481,12 +481,12 @@ public class CalendarActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			hideProgressDial();
-			showToast(responseText);
+			//showToast(responseText);
 			JSONParser jp = new JSONParser(responseText);
 
 			try {
 				ArrayList eventResult = jp.getEventsResult(context);
-				showToast(eventResult.size() + "");
+				//showToast(eventResult.size() + "");
 				MyEvent tempEvent;
 
 				if (eventResult.size() == 1) {
